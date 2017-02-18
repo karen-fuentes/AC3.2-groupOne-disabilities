@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profileVc = ProfileFavoritesViewController()
         let buttonViewController = ButtonViewController()
         
-        let firstNav = UINavigationController(rootViewController: buttonViewController)
+        let firstNav = UINavigationController(rootViewController: mapVC)
         let secondNav = UINavigationController(rootViewController: eventsVC)
         let thirdNav = UINavigationController(rootViewController: resourcesTVC)
         let fourthNav = UINavigationController(rootViewController: profileVc)
@@ -68,9 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fourthNav.tabBarItem = tab4ItemInfo
         
         UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
-
-
-        
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = tabVC
