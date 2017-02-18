@@ -22,6 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         //view.backgroundColor = .cyan
         
         setupViewHierarchy()
@@ -37,6 +38,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         self.edgesForExtendedLayout = []
         
         view.addSubview(mapView)
+
+
+        // Do any additional setup after loading the view.
+
+        view.backgroundColor = .cyan
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+
+        self.view.backgroundColor = .blue
+
+        // Dispose of any resources that can be recreated.
     }
     
     func setupView() {
