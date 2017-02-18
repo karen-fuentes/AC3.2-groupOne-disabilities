@@ -8,12 +8,11 @@
 
 import UIKit
 
-open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
+open class SideMenuTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     
     fileprivate var presenting = false
     fileprivate var interactive = false
     fileprivate static weak var originalSuperview: UIView?
-    fileprivate static weak var activeGesture: UIGestureRecognizer?
     fileprivate static var switchMenus = false
     
     internal static let singleton = SideMenuTransition()
@@ -86,14 +85,6 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
     }
     
     internal class func handlePresentMenuPan(_ pan: UIPanGestureRecognizer) {
-        if activeGesture == nil {
-            activeGesture = pan
-        } else if pan != activeGesture {
-            pan.isEnabled = false
-            pan.isEnabled = true
-            return
-        }
-        
         // how much distance have we panned in reference to the parent view?
         guard let view = viewControllerForPresentedMenu != nil ? viewControllerForPresentedMenu?.view : pan.view else {
             return
@@ -118,8 +109,6 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
                 let visibleViewController = visibleViewController {
                 singleton.interactive = true
                 visibleViewController.present(menuViewController, animated: true, completion: nil)
-            } else {
-                return
             }
         }
         
@@ -152,23 +141,13 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
                     singleton.update(0.9999)
                 }
                 singleton.finish()
-                activeGesture = nil
             } else {
                 singleton.cancel()
-                activeGesture = nil
             }
         }
     }
     
     internal class func handleHideMenuPan(_ pan: UIPanGestureRecognizer) {
-        if activeGesture == nil {
-            activeGesture = pan
-        } else if pan != activeGesture {
-            pan.isEnabled = false
-            pan.isEnabled = true
-            return
-        }
-        
         let translation = pan.translation(in: pan.view!)
         let direction:CGFloat = SideMenuTransition.presentDirection == .left ? -1 : 1
         let distance = translation.x / SideMenuManager.menuWidth * direction
@@ -189,10 +168,8 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
                     singleton.update(0.9999)
                 }
                 singleton.finish()
-                activeGesture = nil
             } else {
                 singleton.cancel()
-                activeGesture = nil
             }
         }
     }
@@ -337,35 +314,36 @@ open class SideMenuTransition: UIPercentDrivenInteractiveTransition {
         }
     }
     
-}
-
-extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
+    // MARK: UIViewControllerAnimatedTransitioning protocol methods
     
     // animate a change from one viewcontroller to another
     open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         // get reference to our fromView, toView and the container view that we should perform the transition in
         let container = transitionContext.containerView
-        // prevent any other menu gestures from firing
-        container.isUserInteractionEnabled = false
-        
         if let menuBackgroundColor = SideMenuManager.menuAnimationBackgroundColor {
             container.backgroundColor = menuBackgroundColor
         }
         
-        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        // create a tuple of our screens
+        let screens : (from:UIViewController, to:UIViewController) = (transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!, transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!)
         
         // assign references to our menu view controller and the 'bottom' view controller from the tuple
         // remember that our menuViewController will alternate between the from and to view controller depending if we're presenting or dismissing
-        let menuViewController = presenting ? toViewController : fromViewController
-        let topViewController = presenting ? fromViewController : toViewController
+        let menuViewController = (!presenting ? screens.from : screens.to)
+        let topViewController = !presenting ? screens.to : screens.from
         
         let menuView = menuViewController.view!
         let topView = topViewController.view!
         
         // prepare menu items to slide in
         if presenting {
+            var tapView: UIView?
+            if !SideMenuManager.menuPresentingViewControllerUserInteractionEnabled {
+                tapView = UIView()
+                SideMenuTransition.tapView = tapView
+            }
+            
             SideMenuTransition.originalSuperview = topView.superview
             
             // add the both views to our view controller
@@ -373,11 +351,17 @@ extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
             case .viewSlideOut, .viewSlideInOut:
                 container.addSubview(menuView)
                 container.addSubview(topView)
+                if let tapView = tapView {
+                    topView.addSubview(tapView)
+                }
             case .menuSlideIn, .menuDissolveIn:
                 container.addSubview(topView)
+                if let tapView = tapView {
+                    container.addSubview(tapView)
+                }
                 container.addSubview(menuView)
             }
-
+            
             if SideMenuManager.menuFadeStatusBar {
                 let statusBarView = UIView()
                 SideMenuTransition.statusBarView = statusBarView
@@ -387,16 +371,28 @@ extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
             SideMenuTransition.hideMenuStart()
         }
         
-        let animate = {
+        let enableTapViewGestures = { (enable: Bool) in
+            guard let gestures = SideMenuTransition.tapView?.gestureRecognizers else {
+                return
+            }
+            
+            for gesture in gestures {
+                gesture.isEnabled = enable
+            }
+        }
+        
+        // perform the animation!
+        let duration = transitionDuration(using: transitionContext)
+        let options: UIViewAnimationOptions = interactive ? .curveLinear : UIViewAnimationOptions()
+        UIView.animate(withDuration: duration, delay: 0, options: options, animations: { () -> Void in
             if self.presenting {
                 SideMenuTransition.presentMenuStart()
             } else {
                 SideMenuTransition.hideMenuStart()
             }
-        }
-        
-        let complete = {
-            container.isUserInteractionEnabled = true
+            menuView.isUserInteractionEnabled = false
+            enableTapViewGestures(false)
+        }) { (finished) -> Void in
             
             // tell our transitionContext object that we've finished animating
             if transitionContext.transitionWasCancelled {
@@ -407,6 +403,8 @@ extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
                 } else {
                     SideMenuTransition.presentMenuComplete()
                 }
+                menuView.isUserInteractionEnabled = true
+                enableTapViewGestures(true)
                 
                 transitionContext.completeTransition(false)
                 
@@ -420,12 +418,8 @@ extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
             
             if self.presenting {
                 SideMenuTransition.presentMenuComplete()
-                if !SideMenuManager.menuPresentingViewControllerUserInteractionEnabled {
-                    let tapView = UIView()
-                    topView.addSubview(tapView)
-                    tapView.frame = topView.bounds
-                    SideMenuTransition.tapView = tapView
-                }
+                menuView.isUserInteractionEnabled = true
+                enableTapViewGestures(true)
                 transitionContext.completeTransition(true)
                 switch SideMenuManager.menuPresentMode {
                 case .viewSlideOut, .viewSlideInOut:
@@ -444,43 +438,14 @@ extension SideMenuTransition: UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(true)
             menuView.removeFromSuperview()
         }
-        
-        // perform the animation!
-        let duration = transitionDuration(using: transitionContext)
-        if interactive {
-            UIView.animate(withDuration: duration,
-                           delay: 0,
-                           options: .curveLinear,
-                           animations: {
-                            animate()
-            }, completion: { (finished) in
-                complete()
-            })
-        } else {
-            UIView.animate(withDuration: duration,
-                           delay: 0,
-                           usingSpringWithDamping: SideMenuManager.menuAnimationUsingSpringWithDamping,
-                           initialSpringVelocity: SideMenuManager.menuAnimationInitialSpringVelocity,
-                           options: SideMenuManager.menuAnimationOptions,
-                           animations: {
-                            animate()
-            }) { (finished) -> Void in
-                complete()
-            }
-        }
     }
     
     // return how many seconds the transiton animation will take
     open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        if interactive {
-            return SideMenuManager.menuAnimationCompleteGestureDuration
-        }
         return presenting ? SideMenuManager.menuAnimationPresentDuration : SideMenuManager.menuAnimationDismissDuration
     }
     
-}
-
-extension SideMenuTransition: UIViewControllerTransitioningDelegate {
+    // MARK: UIViewControllerTransitioningDelegate protocol methods
     
     // return the animator when presenting a viewcontroller
     // rememeber that an animator (or animation controller) is any object that aheres to the UIViewControllerAnimatedTransitioning protocol
