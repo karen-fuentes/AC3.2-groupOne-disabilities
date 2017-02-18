@@ -19,23 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         
-        let nv = UINavigationController(rootViewController: SocialServicesTableViewController())
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = nv
-        self.window?.makeKeyAndVisible()
+//        let nv = UINavigationController(rootViewController: SocialServicesTableViewController())
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = nv
+//        self.window?.makeKeyAndVisible()
         
         // Override point for customization after application launch.
-        let rootSlideVC = ViewController()
-        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
-        menuLeftNavigationController.leftSide = true
+//        let rootSlideVC = ViewController()
+//        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
+//        menuLeftNavigationController.leftSide = true
         
-        let rootVC = MapViewController()
-        let navController = UINavigationController(rootViewController: rootVC)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navController
-        self.window?.makeKeyAndVisible()
-        
-        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
+//        let rootVC = MapViewController()
+//        let navController = UINavigationController(rootViewController: rootVC)
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = navController
+//        self.window?.makeKeyAndVisible()
+//        
+//        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
         
         let tabVC: UITabBarController = UITabBarController()
         

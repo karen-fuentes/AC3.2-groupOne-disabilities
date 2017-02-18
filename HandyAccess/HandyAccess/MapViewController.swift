@@ -2,46 +2,68 @@
 //  MapViewController.swift
 //  HandyAccess
 //
-<<<<<<< HEAD
-//  Created by Miti Shah on 2/17/17.
-=======
 //  Created by Karen Fuentes on 2/17/17.
->>>>>>> develop
 //  Copyright © 2017 NYCHandyAccess. All rights reserved.
 //
 
 import UIKit
+import Mapbox
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapViewDelegate {
+    
+    var annotations = [MGLAnnotation]()
+    let locationManager: CLLocationManager = {
+        let locMan: CLLocationManager = CLLocationManager()
+        locMan.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locMan.distanceFilter = 50.0
+        return locMan
+    }()
+    let geocoder: CLGeocoder = CLGeocoder()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
+
+        //view.backgroundColor = .cyan
+        
+        setupViewHierarchy()
+        setupView()
+        
+        locationManager.delegate = self
+        mapView.delegate = self
+    }
+    
+    
+    
+    func setupViewHierarchy() {
+        self.edgesForExtendedLayout = []
+        
+        view.addSubview(mapView)
+
 
         // Do any additional setup after loading the view.
-=======
+
         view.backgroundColor = .cyan
->>>>>>> develop
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-<<<<<<< HEAD
+
         self.view.backgroundColor = .blue
-=======
+
         // Dispose of any resources that can be recreated.
->>>>>>> develop
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setupView() {
+        mapView = MGLMapView(frame: view.bounds)
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.setCenter(CLLocationCoordinate2D(latitude: 59.31, longitude: 18.06), zoomLevel: 9, animated: false)
+        mapView.styleURL = MGLStyle.lightStyleURL(withVersion: 9)
+        mapView.tintColor = UIColor.blue
     }
-    */
+
+    internal var mapView: MGLMapView = {
+        let mapView = MGLMapView()
+        return mapView
+    }()
 
 }
