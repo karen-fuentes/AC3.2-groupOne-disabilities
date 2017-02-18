@@ -48,6 +48,4 @@ class Style {
     static let selectedButtonTextColor = Colors.primaryText
 }
 
-struct Categories {
-    static let array = ["Animals", "Outdoors", "Flowers & Plants"]
-}
+

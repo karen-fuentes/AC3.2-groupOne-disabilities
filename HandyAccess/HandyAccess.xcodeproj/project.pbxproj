@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52C8663C1E57ACB900F0F7CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C8663B1E57ACB900F0F7CE /* Users.swift */; };
+		52C8663E1E57ADD700F0F7CE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C8663D1E57ADD700F0F7CE /* Utilities.swift */; };
+		52C866401E57AFB100F0F7CE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C8663F1E57AFB100F0F7CE /* MapViewController.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
-		9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794D1E579BD600634BD6 /* ViewController.swift */; };
+		9CB2794E1E579BD600634BD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794D1E579BD600634BD6 /* LoginViewController.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
 		9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
@@ -17,10 +20,13 @@
 
 /* Begin PBXFileReference section */
 		20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandyAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52C8663B1E57ACB900F0F7CE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		52C8663D1E57ADD700F0F7CE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		52C8663F1E57AFB100F0F7CE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB279481E579BD600634BD6 /* HandyAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandyAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9CB2794D1E579BD600634BD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9CB2794D1E579BD600634BD6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9CB279521E579BD600634BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CB279571E579BD600634BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,7 +85,10 @@
 			isa = PBXGroup;
 			children = (
 				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
-				9CB2794D1E579BD600634BD6 /* ViewController.swift */,
+				9CB2794D1E579BD600634BD6 /* LoginViewController.swift */,
+				52C8663F1E57AFB100F0F7CE /* MapViewController.swift */,
+				52C8663D1E57ADD700F0F7CE /* Utilities.swift */,
+				52C8663B1E57ACB900F0F7CE /* Users.swift */,
 				9CB279521E579BD600634BD6 /* Assets.xcassets */,
 				9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */,
 				9CB279571E579BD600634BD6 /* Info.plist */,
@@ -211,7 +220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */,
+				9CB2794E1E579BD600634BD6 /* LoginViewController.swift in Sources */,
+				52C8663C1E57ACB900F0F7CE /* Users.swift in Sources */,
+				52C8663E1E57ADD700F0F7CE /* Utilities.swift in Sources */,
+				52C866401E57AFB100F0F7CE /* MapViewController.swift in Sources */,
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

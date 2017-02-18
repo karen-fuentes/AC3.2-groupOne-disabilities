@@ -12,7 +12,7 @@ import Firebase
 import FirebaseAuth
 
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let databaseReference = FIRDatabase.database().reference().child("Users")
     var databaseObserver:FIRDatabaseHandle?
@@ -22,12 +22,83 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.navigationItem.title = "LOGIN/REGISTER"
+        self.view.backgroundColor = .white
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
+        setupViewHierarchy()
+        configureConstraints()
+        
+        let mapVC = MapViewController()
+        if FIRAuth.auth()?.currentUser != nil {
+            self.navigationController?.pushViewController(mapVC, animated: true)
+
+        }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailTextField:
+            emailTextField.resignFirstResponder()
+        case passwordTextField:
+            passwordTextField.resignFirstResponder()
+        default:
+            break
+        }
+        return true
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        configureConstraints()
+        resetButtonColors()
+        
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        _ = [logoImageView, emailLineView, passwordLineView, passwordTextField, emailTextField, loginButton, registerButton].map{ $0.isHidden = false }
+        
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        resetButtonColors()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.resetViews()
+        //self.removeBehaviors()
+        self.removeConstraints()
+    }
+
+    // MARK: - Tear Down
+    
+//    internal func removeBehaviors() {
+//        self.propertyAnimator = nil
+//    }
+    
+    internal func resetViews() {
+        _ = [logoImageView, emailLineView, passwordLineView, passwordTextField, emailTextField, loginButton, registerButton].map{ $0.isHidden = true }
+    }
+    
+    private func removeConstraints() {
+        _ = [logoImageView, emailLineView, passwordLineView, passwordTextField, emailTextField, loginButton, registerButton].map { $0.snp.removeConstraints() }
+    }
+
     
     func setupViewHierarchy() {
         self.edgesForExtendedLayout = []
-     
+        
+       // self.view.addSubview(cover)
         self.view.addSubview(logoImageView)
         self.view.addSubview(emailTextField)
         self.view.addSubview(emailLineView)
@@ -42,9 +113,16 @@ class ViewController: UIViewController {
     
     func configureConstraints() {
         
+//        cover.snp.makeConstraints{ (view) in
+//            view.width.equalToSuperview()
+//            view.top.equalTo(emailTextField.snp.top)
+//            view.bottom.equalTo(passwordTextField.snp.bottom)
+//        }
+        
         logoImageView.snp.makeConstraints { (view) in
             view.centerX.equalToSuperview()
             view.top.equalToSuperview().offset(10)
+            view.width.height.equalTo(250.0)
         }
         
         emailTextField.snp.makeConstraints { (view) in
@@ -73,7 +151,7 @@ class ViewController: UIViewController {
         
         registerButton.snp.makeConstraints { (view) in
             view.centerX.equalToSuperview()
-            view.bottom.equalTo(bottomLayoutGuide.snp.top).offset(-25)
+            view.bottom.equalTo(bottomLayoutGuide.snp.top).offset(-55)
             view.leading.equalToSuperview().offset(70)
             view.trailing.equalToSuperview().inset(70)
             view.height.equalTo(50)
@@ -99,7 +177,7 @@ class ViewController: UIViewController {
                 
                 
                 if user != nil {
-                    let newViewController = LogInUserViewController()
+                    let newViewController = MapViewController()
                     if let tabVC =  self.navigationController {
                         tabVC.show(newViewController, sender: nil)
                     }
@@ -136,10 +214,10 @@ class ViewController: UIViewController {
         let userReference = self.databaseReference.child(uid)
         userReference.updateChildValues(values)
         
-//        let newViewController = MAPViewController
-//        if let tabVC =  self.navigationController {
-//            tabVC.show(newViewController, sender: nil)
-//        }
+        let newViewController = MapViewController()
+        if let tabVC =  self.navigationController {
+            tabVC.show(newViewController, sender: nil)
+        }
         
     }
     
@@ -155,9 +233,15 @@ class ViewController: UIViewController {
         registerButton.backgroundColor = Colors.primaryColor
         registerButton.setTitleColor(Colors.text_iconsColor, for: .normal)
     }
-
-
-
+    
+    
+        //MARK: -Lazy Properties
+    
+    lazy var cover: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.primaryColor
+        return view
+    }()
 
     lazy var logoImageView: UIImageView = {
         let view = UIImageView()
