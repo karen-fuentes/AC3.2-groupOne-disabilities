@@ -8,9 +8,10 @@
 
 import UIKit
 
-class EventsViewController: UITableViewController {
+class EventsViewController: UIViewController {
     
     var events = [NYCEventCalendarModel]()
+    var datePicker: UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,28 +24,50 @@ class EventsViewController: UITableViewController {
         
         view.backgroundColor = .gray
         
+        datePicker.timeZone = TimeZone.current
+        datePicker.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 250.0)
+        datePicker.backgroundColor = .white
+        self.view.addSubview(datePicker)
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
     }
+    
+    func datePickerValueChanged(_ sender: UIDatePicker){
+        
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+        let selectedDate: String = dateFormatter.string(from: sender.date)
+        
+        print("Selected value \(selectedDate)")
+    }
+    
+    func configureConstraints() {
+        
+        
+        
+    }
+    
+    
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.events.count
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
-        let event = events[indexPath.row]
-        cell.textLabel?.text = event.name
-        
-        return cell
-    }
-    
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.events.count
+//    }
+//    
+//    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+//        
+//        let event = events[indexPath.row]
+//        cell.textLabel?.text = event.name
+//        
+//        return cell
+//    }
+//    
     
     /*
      // MARK: - Navigation
