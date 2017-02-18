@@ -49,6 +49,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let thirdNav = UINavigationController(rootViewController: resourcesTVC)
         let fourthNav = UINavigationController(rootViewController: profileVc)
         
+        let firstTabItemImage = #imageLiteral(resourceName: "map")
+        let secondTabItemImage = #imageLiteral(resourceName: "events")
+        let thirdTabItemImage = #imageLiteral(resourceName: "resources")
+        let fourthTabItemImage = #imageLiteral(resourceName: "profile")
+    
+        
+        let tab1ItemInfo = UITabBarItem(title: "Map", image: firstTabItemImage, tag: 0)
+        let tab2ItemInfo = UITabBarItem(title: "Events", image: secondTabItemImage, tag: 1)
+        let tab3ItemInfo = UITabBarItem(title: "Resources", image: thirdTabItemImage, tag: 2)
+        let tab4ItemInfo = UITabBarItem(title: "Profile", image: fourthTabItemImage, tag: 3)
+
+    
+        firstNav.tabBarItem = tab1ItemInfo
+        secondNav.tabBarItem = tab2ItemInfo
+        thirdNav.tabBarItem = tab3ItemInfo
+        fourthNav.tabBarItem = tab4ItemInfo
+        
+        UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
+
+
+        
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = tabVC
