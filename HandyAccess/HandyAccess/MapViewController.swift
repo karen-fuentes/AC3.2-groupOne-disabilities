@@ -42,6 +42,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     func setupView() {
         mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.setCenter(CLLocationCoordinate2D(latitude: 59.31, longitude: 18.06), zoomLevel: 9, animated: false)
         mapView.styleURL = MGLStyle.lightStyleURL(withVersion: 9)
         mapView.tintColor = UIColor.blue
     }

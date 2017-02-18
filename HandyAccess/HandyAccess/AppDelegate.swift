@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-<<<<<<< HEAD
 
         // Override point for customization after application launch.
 //        let rootSlideVC = ViewController()
@@ -31,26 +30,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
 
-=======
         
-        let nv = UINavigationController(rootViewController: SocialServicesTableViewController())
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = nv
-        self.window?.makeKeyAndVisible()
+//        let nv = UINavigationController(rootViewController: SocialServicesTableViewController())
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = nv
+//        self.window?.makeKeyAndVisible()
         
         // Override point for customization after application launch.
-        let rootSlideVC = ViewController()
-        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
-        menuLeftNavigationController.leftSide = true
+//        let rootSlideVC = ViewController()
+//        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
+//        menuLeftNavigationController.leftSide = true
         
-        let rootVC = MapViewController()
-        let navController = UINavigationController(rootViewController: rootVC)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navController
-        self.window?.makeKeyAndVisible()
-        
-        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
->>>>>>> 170ea3858407037c6d81a206c913f95e87af2ec2
+//        let rootVC = MapViewController()
+//        let navController = UINavigationController(rootViewController: rootVC)
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = navController
+//        self.window?.makeKeyAndVisible()
+//        
+//        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
         
         let tabVC: UITabBarController = UITabBarController()
         
@@ -70,11 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> 170ea3858407037c6d81a206c913f95e87af2ec2
         return true
     }
 
