@@ -31,7 +31,7 @@ class EventsViewController: UIViewController, UITableViewDelegate {
         datePicker.backgroundColor = .white
         self.view.addSubview(datePicker)
         datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
-
+        
         
         //TableView
         self.eventTableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellIdentifier)
@@ -50,7 +50,7 @@ class EventsViewController: UIViewController, UITableViewDelegate {
         print("Selected value \(selectedDate)")
     }
     
-
+    
     func setUpViewHierarchy() {
         
         
@@ -58,31 +58,21 @@ class EventsViewController: UIViewController, UITableViewDelegate {
     
     func configureConstraints() {
         
-    
+        
     }
     
     
     // MARK: - Table view data source
     
-     func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.events.count
     }
-
-
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        let event = events[indexPath.row]
-        cell.textLabel?.text = event.name
-
-        return cell
-    }
-
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventTableViewCell.cellIdentifier, for: indexPath) as! EventTableViewCell
         
         let event = events[indexPath.row]
@@ -91,7 +81,7 @@ class EventsViewController: UIViewController, UITableViewDelegate {
     }
     
     lazy var eventTableView : UITableView = {
-       let tableView = UITableView()
+        let tableView = UITableView()
         return tableView
     }()
     
