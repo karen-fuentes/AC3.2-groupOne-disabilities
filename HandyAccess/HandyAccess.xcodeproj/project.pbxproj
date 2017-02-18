@@ -7,60 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		578298131E57B23E00957DFE /* NYCEventCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298121E57B23E00957DFE /* NYCEventCalendarModel.swift */; };
-		578298171E58ABF600957DFE /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298161E58ABF600957DFE /* APIRequestManager.swift */; };
-		578298191E58AC0E00957DFE /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298181E58AC0E00957DFE /* EventsViewController.swift */; };
-		5782981B1E58AC1700957DFE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782981A1E58AC1700957DFE /* LoginViewController.swift */; };
-		578298271E58AC4500957DFE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782981C1E58AC4500957DFE /* MainViewController.swift */; };
-		578298281E58AC4500957DFE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782981D1E58AC4500957DFE /* MapViewController.swift */; };
-		578298291E58AC4500957DFE /* Parks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782981E1E58AC4500957DFE /* Parks.swift */; };
-		5782982A1E58AC4500957DFE /* ProfileFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5782981F1E58AC4500957DFE /* ProfileFavoritesViewController.swift */; };
-		5782982B1E58AC4500957DFE /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298201E58AC4500957DFE /* ResourcesTableViewController.swift */; };
-		5782982C1E58AC4500957DFE /* SocialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298211E58AC4500957DFE /* SocialService.swift */; };
-		5782982E1E58AC4500957DFE /* SocialServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298231E58AC4500957DFE /* SocialServicesTableViewController.swift */; };
-		5782982F1E58AC4500957DFE /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298241E58AC4500957DFE /* SocialServiceTableViewCell.swift */; };
-		578298301E58AC4500957DFE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298251E58AC4500957DFE /* Users.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
-		9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794D1E579BD600634BD6 /* ViewController.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
 		9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */; };
-		9CB2795E1E57B45100634BD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2795D1E57B45100634BD6 /* MapViewController.swift */; };
-		9CB279841E58011C00634BD6 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279831E58011C00634BD6 /* EventsViewController.swift */; };
-		9CB279861E58014E00634BD6 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279851E58014E00634BD6 /* ResourcesTableViewController.swift */; };
-		9CB279881E58018800634BD6 /* ProfileFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279871E58018800634BD6 /* ProfileFavoritesViewController.swift */; };
-		9CB2798D1E5801D400634BD6 /* Parks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2798C1E5801D400634BD6 /* Parks.swift */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
+		A78AB7591E58AF600024E9C6 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */; };
+		A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */; };
+		A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */; };
+		A78AB75C1E58AF600024E9C6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74F1E58AF600024E9C6 /* MainViewController.swift */; };
+		A78AB75D1E58AF600024E9C6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7501E58AF600024E9C6 /* MapViewController.swift */; };
+		A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7511E58AF600024E9C6 /* NYCEventCalendarModel.swift */; };
+		A78AB75F1E58AF600024E9C6 /* Parks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7521E58AF600024E9C6 /* Parks.swift */; };
+		A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7531E58AF600024E9C6 /* ProfileFavoritesViewController.swift */; };
+		A78AB7611E58AF600024E9C6 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7541E58AF600024E9C6 /* ResourcesTableViewController.swift */; };
+		A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7551E58AF600024E9C6 /* SocialService.swift */; };
+		A78AB7631E58AF600024E9C6 /* SocialServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */; };
+		A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */; };
+		A78AB7651E58AF600024E9C6 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7581E58AF600024E9C6 /* Users.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandyAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		578298121E57B23E00957DFE /* NYCEventCalendarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYCEventCalendarModel.swift; sourceTree = "<group>"; };
-		578298161E58ABF600957DFE /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
-		578298181E58AC0E00957DFE /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
-		5782981A1E58AC1700957DFE /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5782981C1E58AC4500957DFE /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		5782981D1E58AC4500957DFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		5782981E1E58AC4500957DFE /* Parks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parks.swift; sourceTree = "<group>"; };
-		5782981F1E58AC4500957DFE /* ProfileFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFavoritesViewController.swift; sourceTree = "<group>"; };
-		578298201E58AC4500957DFE /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
-		578298211E58AC4500957DFE /* SocialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialService.swift; sourceTree = "<group>"; };
-		578298231E58AC4500957DFE /* SocialServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesTableViewController.swift; sourceTree = "<group>"; };
-		578298241E58AC4500957DFE /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
-		578298251E58AC4500957DFE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB279481E579BD600634BD6 /* HandyAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandyAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9CB2794D1E579BD600634BD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9CB279521E579BD600634BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CB279571E579BD600634BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CB2795D1E57B45100634BD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		9CB279831E58011C00634BD6 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
-		9CB279851E58014E00634BD6 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
-		9CB279871E58018800634BD6 /* ProfileFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFavoritesViewController.swift; sourceTree = "<group>"; };
-		9CB2798C1E5801D400634BD6 /* Parks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parks.swift; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A78AB74F1E58AF600024E9C6 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A78AB7501E58AF600024E9C6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		A78AB7511E58AF600024E9C6 /* NYCEventCalendarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NYCEventCalendarModel.swift; sourceTree = "<group>"; };
+		A78AB7521E58AF600024E9C6 /* Parks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parks.swift; sourceTree = "<group>"; };
+		A78AB7531E58AF600024E9C6 /* ProfileFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFavoritesViewController.swift; sourceTree = "<group>"; };
+		A78AB7541E58AF600024E9C6 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
+		A78AB7551E58AF600024E9C6 /* SocialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialService.swift; sourceTree = "<group>"; };
+		A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesTableViewController.swift; sourceTree = "<group>"; };
+		A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
+		A78AB7581E58AF600024E9C6 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,60 +71,6 @@
 				D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		578298111E57B01000957DFE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
-				9CB2794D1E579BD600634BD6 /* ViewController.swift */,
-				9CB279521E579BD600634BD6 /* Assets.xcassets */,
-				9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */,
-				9CB279571E579BD600634BD6 /* Info.plist */,
-				A704199D1E579F3600E44C18 /* GoogleService-Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		578298321E58AC4900957DFE /* APIManager */ = {
-			isa = PBXGroup;
-			children = (
-				578298161E58ABF600957DFE /* APIRequestManager.swift */,
-			);
-			name = APIManager;
-			sourceTree = "<group>";
-		};
-		578298331E58AC5F00957DFE /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				578298181E58AC0E00957DFE /* EventsViewController.swift */,
-				5782981A1E58AC1700957DFE /* LoginViewController.swift */,
-				5782981C1E58AC4500957DFE /* MainViewController.swift */,
-				5782981D1E58AC4500957DFE /* MapViewController.swift */,
-				5782981F1E58AC4500957DFE /* ProfileFavoritesViewController.swift */,
-				578298201E58AC4500957DFE /* ResourcesTableViewController.swift */,
-				578298231E58AC4500957DFE /* SocialServicesTableViewController.swift */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		578298341E58ACA500957DFE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				578298121E57B23E00957DFE /* NYCEventCalendarModel.swift */,
-				5782981E1E58AC4500957DFE /* Parks.swift */,
-				578298211E58AC4500957DFE /* SocialService.swift */,
-				578298251E58AC4500957DFE /* Users.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		578298351E58ACAB00957DFE /* View */ = {
-			isa = PBXGroup;
-			children = (
-				578298241E58AC4500957DFE /* SocialServiceTableViewCell.swift */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		7B198433BD89ABEF228EBFEB /* Frameworks */ = {
@@ -168,13 +102,66 @@
 		9CB2794A1E579BD600634BD6 /* HandyAccess */ = {
 			isa = PBXGroup;
 			children = (
-				578298341E58ACA500957DFE /* Model */,
-				578298351E58ACAB00957DFE /* View */,
-				578298331E58AC5F00957DFE /* View Controllers */,
-				578298321E58AC4900957DFE /* APIManager */,
-				578298111E57B01000957DFE /* Supporting Files */,
+				A78AB7671E58B00A0024E9C6 /* APIRequestManager */,
+				A78AB7681E58B01A0024E9C6 /* Models */,
+				A78AB7691E58B0210024E9C6 /* Views */,
+				A78AB7661E58AFFE0024E9C6 /* View Controllers */,
+				A78AB76A1E58B03C0024E9C6 /* Support Files */,
 			);
 			path = HandyAccess;
+			sourceTree = "<group>";
+		};
+		A78AB7661E58AFFE0024E9C6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */,
+				A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */,
+				A78AB74F1E58AF600024E9C6 /* MainViewController.swift */,
+				A78AB7501E58AF600024E9C6 /* MapViewController.swift */,
+				A78AB7531E58AF600024E9C6 /* ProfileFavoritesViewController.swift */,
+				A78AB7541E58AF600024E9C6 /* ResourcesTableViewController.swift */,
+				A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		A78AB7671E58B00A0024E9C6 /* APIRequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */,
+			);
+			name = APIRequestManager;
+			sourceTree = "<group>";
+		};
+		A78AB7681E58B01A0024E9C6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A78AB7511E58AF600024E9C6 /* NYCEventCalendarModel.swift */,
+				A78AB7521E58AF600024E9C6 /* Parks.swift */,
+				A78AB7551E58AF600024E9C6 /* SocialService.swift */,
+				A78AB7581E58AF600024E9C6 /* Users.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A78AB7691E58B0210024E9C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A78AB76A1E58B03C0024E9C6 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
+				9CB279521E579BD600634BD6 /* Assets.xcassets */,
+				9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */,
+				9CB279571E579BD600634BD6 /* Info.plist */,
+				A704199D1E579F3600E44C18 /* GoogleService-Info.plist */,
+			);
+			name = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,26 +287,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				578298131E57B23E00957DFE /* NYCEventCalendarModel.swift in Sources */,
-				9CB279841E58011C00634BD6 /* EventsViewController.swift in Sources */,
-				9CB279881E58018800634BD6 /* ProfileFavoritesViewController.swift in Sources */,
-				5782982E1E58AC4500957DFE /* SocialServicesTableViewController.swift in Sources */,
-				578298271E58AC4500957DFE /* MainViewController.swift in Sources */,
-				578298171E58ABF600957DFE /* APIRequestManager.swift in Sources */,
-				9CB2795E1E57B45100634BD6 /* MapViewController.swift in Sources */,
-				578298281E58AC4500957DFE /* MapViewController.swift in Sources */,
-				9CB2798D1E5801D400634BD6 /* Parks.swift in Sources */,
-				5782982C1E58AC4500957DFE /* SocialService.swift in Sources */,
-				9CB279861E58014E00634BD6 /* ResourcesTableViewController.swift in Sources */,
-				9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */,
+				A78AB7591E58AF600024E9C6 /* APIRequestManager.swift in Sources */,
+				A78AB7631E58AF600024E9C6 /* SocialServicesTableViewController.swift in Sources */,
+				A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */,
+				A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */,
+				A78AB7611E58AF600024E9C6 /* ResourcesTableViewController.swift in Sources */,
+				A78AB75C1E58AF600024E9C6 /* MainViewController.swift in Sources */,
+				A78AB7651E58AF600024E9C6 /* Users.swift in Sources */,
+				A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */,
+				A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */,
+				A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */,
+				A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */,
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
-				578298301E58AC4500957DFE /* Users.swift in Sources */,
-				5782982B1E58AC4500957DFE /* ResourcesTableViewController.swift in Sources */,
-				578298291E58AC4500957DFE /* Parks.swift in Sources */,
-				578298191E58AC0E00957DFE /* EventsViewController.swift in Sources */,
-				5782982F1E58AC4500957DFE /* SocialServiceTableViewCell.swift in Sources */,
-				5782981B1E58AC1700957DFE /* LoginViewController.swift in Sources */,
-				5782982A1E58AC4500957DFE /* ProfileFavoritesViewController.swift in Sources */,
+				A78AB75D1E58AF600024E9C6 /* MapViewController.swift in Sources */,
+				A78AB75F1E58AF600024E9C6 /* Parks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
