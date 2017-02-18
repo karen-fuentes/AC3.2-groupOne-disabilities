@@ -8,6 +8,19 @@
 
 import Foundation
 
+enum NYCEventCalendarModelParseError: Error {
+    case json
+    case eventsArray
+    case date
+    case time
+    case cancelled
+    case link
+    case name
+    case description
+    case address
+    case geo
+}
+
 class NYCEventCalendarModel {
     let date: String?
     let time: String?
@@ -35,16 +48,18 @@ class NYCEventCalendarModel {
             let json = try? JSONSerialization.jsonObject(with: data, options: [])
             
             guard let dictContainingEvents = json as? [String: Any] else {
-                return nil
+                throw NYCEventCalendarModelParseError.json
             }
-            
-            guard let eventsArray = dictContainingEvents["items"] as? [String: Any] else {
-                return nil
+            guard let eventsArray = dictContainingEvents["items"] as? [[String: Any]] else {
+                throw NYCEventCalendarModelParseError.eventsArray
             }
-            
             for eventDict in eventsArray {
-//                events.append(NYCEventCalendarModel(with: eventDict))
+                events.append(NYCEventCalendarModel(with: eventDict))
             }
+        } catch NYCEventCalendarModelParseError.eventsArray {
+            print("NYCEventCalendarModelParseError.eventsArray")
+        } catch NYCEventCalendarModelParseError.json {
+            print("NYCEventCalendarModelParseError.json")
         } catch {
             print(error.localizedDescription)
         }
