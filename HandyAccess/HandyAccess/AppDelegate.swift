@@ -16,15 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-<<<<<<< HEAD
-        FIRApp.configure()
-        
-        let nv = UINavigationController(rootViewController: LoginViewController())
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = nv
-        self.window?.makeKeyAndVisible()
-        
-=======
+
         
         let tabVC: UITabBarController = UITabBarController()
         
@@ -45,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
         
->>>>>>> develop
         return true
     }
 
