@@ -16,12 +16,18 @@ class EventsViewController: UITableViewController {
         super.viewDidLoad()
         APIRequestManager.shared.getData(endPoint: "https://api.cityofnewyork.us/calendar/v1/search.htm?app_id=e40a1f49&app_key=077f86713488d92de18df675a800dcd8") { (data: Data?) in
             guard let validData = data else { return }
-            //dump(validData)
-            self.events = NYCEventCalendarModel.getEvents(from: validData)!
-            dump(self.events)
+            DispatchQueue.main.async {
+                self.events = NYCEventCalendarModel.getEvents(from: validData)!
+                self.tableView.reloadData()
+            }
         }
         
         view.backgroundColor = .gray
+        
+        self.tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellIdentifier)
+        
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableViewAutomaticDimension
         
     }
     
@@ -37,10 +43,11 @@ class EventsViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: EventTableViewCell.cellIdentifier, for: indexPath) as! EventTableViewCell
         
         let event = events[indexPath.row]
-        cell.textLabel?.text = event.name
+        cell.eventNameLabel.text = event.name
+        cell.eventDescriptionLabel.text = event.description
         
         return cell
     }
