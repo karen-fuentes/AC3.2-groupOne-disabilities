@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+<<<<<<< HEAD
+        // Override point for customization after application launch.
+        let rootSlideVC = ViewController()
+        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
+        menuLeftNavigationController.leftSide = true
+        
+        let rootVC = MapViewController()
+        let navController = UINavigationController(rootViewController: rootVC)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navController
+        self.window?.makeKeyAndVisible()
+        
+        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
+=======
         
         let tabVC: UITabBarController = UITabBarController()
         
@@ -34,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+>>>>>>> f509107d292be9a0ef90ad5bf41486f74eb91533
         
         return true
     }
