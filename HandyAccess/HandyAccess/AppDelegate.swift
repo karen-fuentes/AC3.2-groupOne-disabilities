@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+<<<<<<< HEAD
         FIRApp.configure()
         
         let nv = UINavigationController(rootViewController: LoginViewController())
@@ -23,6 +24,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nv
         self.window?.makeKeyAndVisible()
         
+=======
+        
+        let tabVC: UITabBarController = UITabBarController()
+        
+        let eventsVC = EventsViewController()
+        let resourcesTVC = ResourcesTableViewController()
+        let mapVC = MapViewController()
+        let profileVc = ProfileFavoritesViewController()
+        
+        let firstNav = UINavigationController(rootViewController: mapVC)
+        let secondNav = UINavigationController(rootViewController: eventsVC)
+        let thirdNav = UINavigationController(rootViewController: resourcesTVC)
+        let fourthNav = UINavigationController(rootViewController: profileVc)
+        
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = tabVC
+        self.window?.makeKeyAndVisible()
+        
+        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+        
+>>>>>>> develop
         return true
     }
 

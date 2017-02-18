@@ -1,36 +1,25 @@
 //
-//  MapViewController.swift
+//  EventsViewController.swift
 //  HandyAccess
 //
-<<<<<<< HEAD
-//  Created by Miti Shah on 2/17/17.
-=======
 //  Created by Karen Fuentes on 2/17/17.
->>>>>>> develop
 //  Copyright © 2017 NYCHandyAccess. All rights reserved.
 //
 
 import UIKit
 
-class MapViewController: UIViewController {
+class EventsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
+        
+        view.backgroundColor = .gray 
 
-        // Do any additional setup after loading the view.
-=======
-        view.backgroundColor = .cyan
->>>>>>> develop
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-<<<<<<< HEAD
-        self.view.backgroundColor = .blue
-=======
         // Dispose of any resources that can be recreated.
->>>>>>> develop
     }
     
 
