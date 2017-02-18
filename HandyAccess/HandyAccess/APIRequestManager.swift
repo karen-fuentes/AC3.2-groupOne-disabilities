@@ -20,6 +20,7 @@ enum SocialServiceParseError: Error {
 class APIRequestManager {
     
     static let shared = APIRequestManager()
+    static let manager = APIRequestManager()
     private init() {}
     
     func getData(endPoint: String, callback: @escaping (Data?) -> Void) {
@@ -82,6 +83,7 @@ class APIRequestManager {
             callback(metaViews)
             }.resume()
     }
+    
     func getSocialServicesData(endPoint: String, metaViews: [MetaView], callback: @escaping ([SocialService]?) -> Void) {
         guard let myURL = URL(string: endPoint) else { return }
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -117,5 +119,4 @@ class APIRequestManager {
             callback(socialServices)
             }.resume()
     }
-    
 }
