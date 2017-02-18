@@ -1,6 +1,0 @@
-framework module Pods_HandyAccess {
-  umbrella header "Pods-HandyAccess-umbrella.h"
-
-  export *
-  module * { export * }
-}

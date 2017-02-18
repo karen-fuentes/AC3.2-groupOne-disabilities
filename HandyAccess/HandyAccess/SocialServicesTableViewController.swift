@@ -32,6 +32,9 @@ class SocialServicesTableViewController: UITableViewController {
         }
         
         self.tableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
+        
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     // MARK: - Table view data source
@@ -46,10 +49,11 @@ class SocialServicesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SocialServiceTableViewCell.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SocialServiceTableViewCell.cellIdentifier, for: indexPath) as! SocialServiceTableViewCell
         
         let socialService = socialServices[indexPath.row]
-        cell.textLabel?.text = socialService.organizationname
+        cell.organizationNameLabel.text = socialService.organizationname
+        cell.organizationDescriptionLabel.text = socialService.description
         guard let description = socialService.description else { return  cell }
         
         cell.detailTextLabel?.text = description
