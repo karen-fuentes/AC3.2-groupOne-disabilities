@@ -8,9 +8,10 @@
 
 import UIKit
 
-class EventsViewController: UITableViewController {
+class EventsViewController: UIViewController, UITableViewDelegate {
     
     var events = [NYCEventCalendarModel]()
+    var datePicker: UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,34 +25,75 @@ class EventsViewController: UITableViewController {
         
         view.backgroundColor = .gray
         
-        self.tableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellIdentifier)
+        //Date Picker
+        datePicker.timeZone = TimeZone.current
+        datePicker.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 250.0)
+        datePicker.backgroundColor = .white
+        self.view.addSubview(datePicker)
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
+
         
-        tableView.estimatedRowHeight = 150
-        tableView.rowHeight = UITableViewAutomaticDimension
+        //TableView
+        self.eventTableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellIdentifier)
+        self.eventTableView.estimatedRowHeight = 150
+        self.eventTableView.rowHeight = UITableViewAutomaticDimension
+        self.eventTableView.delegate = self
         
     }
+    
+    func datePickerValueChanged(_ sender: UIDatePicker){
+        
+        let dateFormatter: DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+        let selectedDate: String = dateFormatter.string(from: sender.date)
+        
+        print("Selected value \(selectedDate)")
+    }
+    
+
+    func setUpViewHierarchy() {
+        
+        
+    }
+    
+    func configureConstraints() {
+        
+    
+    }
+    
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.events.count
     }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        let event = events[indexPath.row]
+        cell.textLabel?.text = event.name
+
+        return cell
+    }
+
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventTableViewCell.cellIdentifier, for: indexPath) as! EventTableViewCell
         
         let event = events[indexPath.row]
         cell.eventNameLabel.text = event.name
         cell.eventDescriptionLabel.text = event.description
-        
-        return cell
     }
     
+    lazy var eventTableView : UITableView = {
+       let tableView = UITableView()
+        return tableView
+    }()
     
     /*
      // MARK: - Navigation
