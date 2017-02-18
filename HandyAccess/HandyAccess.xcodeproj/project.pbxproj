@@ -7,60 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52C8663C1E57ACB900F0F7CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C8663B1E57ACB900F0F7CE /* Users.swift */; };
-		52C8663E1E57ADD700F0F7CE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C8663D1E57ADD700F0F7CE /* Utilities.swift */; };
-		52C866401E57AFB100F0F7CE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C8663F1E57AFB100F0F7CE /* MapViewController.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
-<<<<<<< HEAD
-		9CB2794E1E579BD600634BD6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794D1E579BD600634BD6 /* LoginViewController.swift */; };
-=======
->>>>>>> develop
+		9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794D1E579BD600634BD6 /* ViewController.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
 		9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */; };
-		9CB2795E1E57B45100634BD6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2795D1E57B45100634BD6 /* MapViewController.swift */; };
-		9CB279841E58011C00634BD6 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279831E58011C00634BD6 /* EventsViewController.swift */; };
-		9CB279861E58014E00634BD6 /* ResourcesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279851E58014E00634BD6 /* ResourcesTableViewController.swift */; };
-		9CB279881E58018800634BD6 /* ProfileFavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279871E58018800634BD6 /* ProfileFavoritesViewController.swift */; };
-		9CB2798B1E5801CC00634BD6 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2798A1E5801CC00634BD6 /* APIRequestManager.swift */; };
-		9CB2798D1E5801D400634BD6 /* Parks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2798C1E5801D400634BD6 /* Parks.swift */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		578298101E57AC7A00957DFE /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandyAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		52C8663B1E57ACB900F0F7CE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
-		52C8663D1E57ADD700F0F7CE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		52C8663F1E57AFB100F0F7CE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB279481E579BD600634BD6 /* HandyAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandyAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		9CB2794D1E579BD600634BD6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-=======
->>>>>>> develop
+		9CB2794D1E579BD600634BD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9CB279521E579BD600634BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CB279571E579BD600634BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9CB2795D1E57B45100634BD6 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		9CB279831E58011C00634BD6 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
-		9CB279851E58014E00634BD6 /* ResourcesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewController.swift; sourceTree = "<group>"; };
-		9CB279871E58018800634BD6 /* ProfileFavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFavoritesViewController.swift; sourceTree = "<group>"; };
-		9CB2798A1E5801CC00634BD6 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
-		9CB2798C1E5801D400634BD6 /* Parks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parks.swift; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,41 +79,13 @@
 			isa = PBXGroup;
 			children = (
 				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
-<<<<<<< HEAD
-				9CB2794D1E579BD600634BD6 /* LoginViewController.swift */,
-				52C8663F1E57AFB100F0F7CE /* MapViewController.swift */,
-				52C8663D1E57ADD700F0F7CE /* Utilities.swift */,
-				52C8663B1E57ACB900F0F7CE /* Users.swift */,
-=======
-				9CB2798E1E5801E300634BD6 /* Models */,
-				9CB279891E58019800634BD6 /* View Controllers */,
->>>>>>> develop
+				9CB2794D1E579BD600634BD6 /* ViewController.swift */,
 				9CB279521E579BD600634BD6 /* Assets.xcassets */,
 				9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */,
 				9CB279571E579BD600634BD6 /* Info.plist */,
 				A704199D1E579F3600E44C18 /* GoogleService-Info.plist */,
 			);
 			path = HandyAccess;
-			sourceTree = "<group>";
-		};
-		9CB279891E58019800634BD6 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				9CB279831E58011C00634BD6 /* EventsViewController.swift */,
-				9CB279851E58014E00634BD6 /* ResourcesTableViewController.swift */,
-				9CB279871E58018800634BD6 /* ProfileFavoritesViewController.swift */,
-				9CB2795D1E57B45100634BD6 /* MapViewController.swift */,
-			);
-			name = "View Controllers";
-			sourceTree = "<group>";
-		};
-		9CB2798E1E5801E300634BD6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				9CB2798A1E5801CC00634BD6 /* APIRequestManager.swift */,
-				9CB2798C1E5801D400634BD6 /* Parks.swift */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +101,6 @@
 				9CB279461E579BD600634BD6 /* Resources */,
 				F4D6E0D506B7D0C9D42B637D /* [CP] Embed Pods Frameworks */,
 				873B85E6F585905EAB5EED0E /* [CP] Copy Pods Resources */,
-				578298101E57AC7A00957DFE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,19 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				9CB2794E1E579BD600634BD6 /* LoginViewController.swift in Sources */,
-				52C8663C1E57ACB900F0F7CE /* Users.swift in Sources */,
-				52C8663E1E57ADD700F0F7CE /* Utilities.swift in Sources */,
-				52C866401E57AFB100F0F7CE /* MapViewController.swift in Sources */,
-=======
-				9CB2798B1E5801CC00634BD6 /* APIRequestManager.swift in Sources */,
-				9CB279841E58011C00634BD6 /* EventsViewController.swift in Sources */,
-				9CB279881E58018800634BD6 /* ProfileFavoritesViewController.swift in Sources */,
-				9CB2795E1E57B45100634BD6 /* MapViewController.swift in Sources */,
-				9CB2798D1E5801D400634BD6 /* Parks.swift in Sources */,
-				9CB279861E58014E00634BD6 /* ResourcesTableViewController.swift in Sources */,
->>>>>>> develop
+				9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */,
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,10 +328,6 @@
 			baseConfigurationReference = 5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = HandyAccess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -424,10 +342,6 @@
 			baseConfigurationReference = D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
 				INFOPLIST_FILE = HandyAccess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
