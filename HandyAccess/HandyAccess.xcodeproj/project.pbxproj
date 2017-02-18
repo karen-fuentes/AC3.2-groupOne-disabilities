@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52C866441E58B5E900F0F7CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C866431E58B5E900F0F7CE /* Users.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
@@ -23,11 +24,11 @@
 		A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7551E58AF600024E9C6 /* SocialService.swift */; };
 		A78AB7631E58AF600024E9C6 /* SocialServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */; };
 		A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */; };
-		A78AB7651E58AF600024E9C6 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7581E58AF600024E9C6 /* Users.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandyAccess.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		52C866431E58B5E900F0F7CE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB279481E579BD600634BD6 /* HandyAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandyAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		A78AB7551E58AF600024E9C6 /* SocialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialService.swift; sourceTree = "<group>"; };
 		A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesTableViewController.swift; sourceTree = "<group>"; };
 		A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
-		A78AB7581E58AF600024E9C6 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,7 +136,7 @@
 				A78AB7511E58AF600024E9C6 /* NYCEventCalendarModel.swift */,
 				A78AB7521E58AF600024E9C6 /* Parks.swift */,
 				A78AB7551E58AF600024E9C6 /* SocialService.swift */,
-				A78AB7581E58AF600024E9C6 /* Users.swift */,
+				52C866431E58B5E900F0F7CE /* Users.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -289,11 +289,11 @@
 				A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */,
 				A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */,
 				A78AB7611E58AF600024E9C6 /* ResourcesTableViewController.swift in Sources */,
-				A78AB7651E58AF600024E9C6 /* Users.swift in Sources */,
 				A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */,
 				A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */,
 				A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */,
 				A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */,
+				52C866441E58B5E900F0F7CE /* Users.swift in Sources */,
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
 				A78AB75D1E58AF600024E9C6 /* MapViewController.swift in Sources */,
 				A78AB75F1E58AF600024E9C6 /* Parks.swift in Sources */,
