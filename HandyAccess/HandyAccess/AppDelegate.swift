@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabVC: UITabBarController = UITabBarController()
         
         let eventsVC = EventsViewController()
-        let resourcesTVC = ResourcesTableViewController()
+        let resourcesTVC = SocialServicesTableViewController()
         let mapVC = MapViewController()
         let profileVc = ProfileFavoritesViewController()
         
