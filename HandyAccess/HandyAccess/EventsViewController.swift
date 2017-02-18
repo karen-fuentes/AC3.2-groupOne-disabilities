@@ -19,7 +19,7 @@ class EventsViewController: UIViewController, UITableViewDelegate {
             guard let validData = data else { return }
             DispatchQueue.main.async {
                 self.events = NYCEventCalendarModel.getEvents(from: validData)!
-                self.tableView.reloadData()
+                self.eventTableView.reloadData()
             }
         }
         
@@ -78,6 +78,7 @@ class EventsViewController: UIViewController, UITableViewDelegate {
         let event = events[indexPath.row]
         cell.eventNameLabel.text = event.name
         cell.eventDescriptionLabel.text = event.description
+        return cell
     }
     
     lazy var eventTableView : UITableView = {
