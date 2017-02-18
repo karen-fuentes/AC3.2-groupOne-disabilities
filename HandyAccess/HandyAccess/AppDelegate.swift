@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+<<<<<<< HEAD
         // Override point for customization after application launch.
         let rootSlideVC = ViewController()
         let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
@@ -28,6 +29,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
+=======
+        
+        let tabVC: UITabBarController = UITabBarController()
+        
+        let eventsVC = EventsViewController()
+        let resourcesTVC = ResourcesTableViewController()
+        let mapVC = MapViewController()
+        let profileVc = ProfileFavoritesViewController()
+        
+        let firstNav = UINavigationController(rootViewController: mapVC)
+        let secondNav = UINavigationController(rootViewController: eventsVC)
+        let thirdNav = UINavigationController(rootViewController: resourcesTVC)
+        let fourthNav = UINavigationController(rootViewController: profileVc)
+        
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = tabVC
+        self.window?.makeKeyAndVisible()
+        
+        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+>>>>>>> f509107d292be9a0ef90ad5bf41486f74eb91533
         
         return true
     }
