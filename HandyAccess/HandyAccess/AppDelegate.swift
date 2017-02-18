@@ -43,8 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let resourcesTVC = SocialServicesTableViewController()
         let mapVC = MapViewController()
         let profileVc = ProfileFavoritesViewController()
+        let buttonViewController = ButtonViewController()
         
-        let firstNav = UINavigationController(rootViewController: mapVC)
+        let firstNav = UINavigationController(rootViewController: buttonViewController)
         let secondNav = UINavigationController(rootViewController: eventsVC)
         let thirdNav = UINavigationController(rootViewController: resourcesTVC)
         let fourthNav = UINavigationController(rootViewController: profileVc)
