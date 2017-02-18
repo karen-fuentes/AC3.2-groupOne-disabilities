@@ -13,6 +13,11 @@
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
 		9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
+		A70419A01E57B1EB00E44C18 /* SocialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A704199F1E57B1EB00E44C18 /* SocialService.swift */; };
+		A70419A21E57B23200E44C18 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70419A11E57B23200E44C18 /* APIRequestManager.swift */; };
+		A70419A41E57D75A00E44C18 /* SocialServiceJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70419A31E57D75A00E44C18 /* SocialServiceJSON.swift */; };
+		A78AB7491E57E6160024E9C6 /* SocialServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7481E57E6160024E9C6 /* SocialServicesTableViewController.swift */; };
+		A78AB74B1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74A1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +30,11 @@
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CB279571E579BD600634BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A704199F1E57B1EB00E44C18 /* SocialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialService.swift; sourceTree = "<group>"; };
+		A70419A11E57B23200E44C18 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		A70419A31E57D75A00E44C18 /* SocialServiceJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceJSON.swift; sourceTree = "<group>"; };
+		A78AB7481E57E6160024E9C6 /* SocialServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesTableViewController.swift; sourceTree = "<group>"; };
+		A78AB74A1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +90,11 @@
 			children = (
 				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
 				9CB2794D1E579BD600634BD6 /* ViewController.swift */,
+				A704199F1E57B1EB00E44C18 /* SocialService.swift */,
+				A78AB7481E57E6160024E9C6 /* SocialServicesTableViewController.swift */,
+				A78AB74A1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift */,
+				A70419A11E57B23200E44C18 /* APIRequestManager.swift */,
+				A70419A31E57D75A00E44C18 /* SocialServiceJSON.swift */,
 				9CB279521E579BD600634BD6 /* Assets.xcassets */,
 				9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */,
 				9CB279571E579BD600634BD6 /* Info.plist */,
@@ -211,6 +226,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A78AB7491E57E6160024E9C6 /* SocialServicesTableViewController.swift in Sources */,
+				A70419A41E57D75A00E44C18 /* SocialServiceJSON.swift in Sources */,
+				A70419A21E57B23200E44C18 /* APIRequestManager.swift in Sources */,
+				A70419A01E57B1EB00E44C18 /* SocialService.swift in Sources */,
+				A78AB74B1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift in Sources */,
 				9CB2794E1E579BD600634BD6 /* ViewController.swift in Sources */,
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
 			);
