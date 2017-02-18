@@ -19,6 +19,11 @@
 		9CB2798B1E5801CC00634BD6 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2798A1E5801CC00634BD6 /* APIRequestManager.swift */; };
 		9CB2798D1E5801D400634BD6 /* Parks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2798C1E5801D400634BD6 /* Parks.swift */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
+		A70419A01E57B1EB00E44C18 /* SocialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A704199F1E57B1EB00E44C18 /* SocialService.swift */; };
+		A70419A21E57B23200E44C18 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70419A11E57B23200E44C18 /* APIRequestManager.swift */; };
+		A70419A41E57D75A00E44C18 /* SocialServiceJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70419A31E57D75A00E44C18 /* SocialServiceJSON.swift */; };
+		A78AB7491E57E6160024E9C6 /* SocialServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7481E57E6160024E9C6 /* SocialServicesTableViewController.swift */; };
+		A78AB74B1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74A1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +55,11 @@
 		9CB2798A1E5801CC00634BD6 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		9CB2798C1E5801D400634BD6 /* Parks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parks.swift; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A704199F1E57B1EB00E44C18 /* SocialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialService.swift; sourceTree = "<group>"; };
+		A70419A11E57B23200E44C18 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
+		A70419A31E57D75A00E44C18 /* SocialServiceJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceJSON.swift; sourceTree = "<group>"; };
+		A78AB7481E57E6160024E9C6 /* SocialServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesTableViewController.swift; sourceTree = "<group>"; };
+		A78AB74A1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +120,14 @@
 		9CB2794A1E579BD600634BD6 /* HandyAccess */ = {
 			isa = PBXGroup;
 			children = (
+				578298141E588F3300957DFE /* MainViewController.swift */,
+				9CB2794D1E579BD600634BD6 /* ViewController.swift */,
+				A704199F1E57B1EB00E44C18 /* SocialService.swift */,
+				A78AB7481E57E6160024E9C6 /* SocialServicesTableViewController.swift */,
+				A78AB74A1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift */,
+				A70419A11E57B23200E44C18 /* APIRequestManager.swift */,
+				A70419A31E57D75A00E44C18 /* SocialServiceJSON.swift */,
+				578298121E57B23E00957DFE /* NYCEventCalendarModel.swift */,
 				578298111E57B01000957DFE /* Supporting Files */,
 				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
 				9CB2798E1E5801E300634BD6 /* Models */,
@@ -267,6 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A78AB7491E57E6160024E9C6 /* SocialServicesTableViewController.swift in Sources */,
+				A70419A41E57D75A00E44C18 /* SocialServiceJSON.swift in Sources */,
+				A70419A21E57B23200E44C18 /* APIRequestManager.swift in Sources */,
+				A70419A01E57B1EB00E44C18 /* SocialService.swift in Sources */,
+				A78AB74B1E580F4C0024E9C6 /* SocialServiceTableViewCell.swift in Sources */,
 				578298131E57B23E00957DFE /* NYCEventCalendarModel.swift in Sources */,
 				9CB2798B1E5801CC00634BD6 /* APIRequestManager.swift in Sources */,
 				9CB279841E58011C00634BD6 /* EventsViewController.swift in Sources */,
