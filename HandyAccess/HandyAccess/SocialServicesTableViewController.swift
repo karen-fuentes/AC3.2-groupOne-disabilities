@@ -10,24 +10,22 @@ import UIKit
 
 class SocialServicesTableViewController: UITableViewController {
 
-    var metaViews = [MetaView]()
-    var socialServices = [SocialService]()
-    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
+    var socialServices1 = [SocialService1]()
+    let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json"
+    //    var metaViews = [MetaView]()
+    //    var socialServices = [SocialService]()
+    //    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
-            guard let validMetaViews = metaViews else { return }
-            DispatchQueue.main.async {
-                self.metaViews = validMetaViews
-            }
-        }
-        APIRequestManager.shared.getSocialServicesData(endPoint: self.endpoint, metaViews: self.metaViews) { (socialServices: [SocialService]?) in
+        
+        APIRequestManager.shared.getSocialServices1(endPoint: self.endpoint) { (socialServices: [SocialService1]?) in
             guard let validSocialServices = socialServices else { return }
             DispatchQueue.main.async {
-                self.socialServices = validSocialServices
+                self.socialServices1 = validSocialServices
                 self.tableView.reloadData()
+                dump(self.socialServices1)
             }
         }
         
@@ -35,23 +33,37 @@ class SocialServicesTableViewController: UITableViewController {
         
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        //        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
+        //            guard let validMetaViews = metaViews else { return }
+        //            DispatchQueue.main.async {
+        //                self.metaViews = validMetaViews
+        //            }
+        //        }
+        //        APIRequestManager.shared.getSocialServicesData(endPoint: self.endpoint, metaViews: self.metaViews) { (socialServices: [SocialService]?) in
+        //            guard let validSocialServices = socialServices else { return }
+        //            DispatchQueue.main.async {
+        //                self.socialServices = validSocialServices
+        //                self.tableView.reloadData()
+        //            }
+        //        }
+        
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.socialServices.count)
-        return self.socialServices.count
+        print(self.socialServices1.count)
+        return self.socialServices1.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SocialServiceTableViewCell.cellIdentifier, for: indexPath) as! SocialServiceTableViewCell
         
-        let socialService = socialServices[indexPath.row]
+        let socialService = socialServices1[indexPath.row]
         cell.organizationNameLabel.text = socialService.organizationname
         cell.organizationDescriptionLabel.text = socialService.description
         guard let description = socialService.description else { return  cell }
@@ -62,8 +74,8 @@ class SocialServicesTableViewController: UITableViewController {
     }
 
     func filter() {
-        var returnArray = [SocialService]()
-        for service in socialServices {
+        var returnArray = [SocialService1]()
+        for service in returnArray {
             if service.disabilities == "Y" {
                 returnArray.append(service)
             }
