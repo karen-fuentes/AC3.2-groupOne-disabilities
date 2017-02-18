@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SnapKit
 
-class SocialServicesTableViewController: UITableViewController {
+class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     var socialServices1 = [SocialService1]()
     let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json"
@@ -18,22 +19,22 @@ class SocialServicesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewHierarchy()
+        configureConstraints()
         self.view.backgroundColor = UIColor.white
         
         APIRequestManager.shared.getSocialServices1(endPoint: self.endpoint) { (socialServices: [SocialService1]?) in
             guard let validSocialServices = socialServices else { return }
             DispatchQueue.main.async {
                 self.socialServices1 = validSocialServices
-                self.tableView.reloadData()
+                self.socialSourceTableView.reloadData()
                 dump(self.socialServices1)
             }
         }
         
-        self.tableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
+        self.socialSourceTableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
         
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
+        self.navigationItem.leftBarButtonItem = self.filterBarButton
         //        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
         //            guard let validMetaViews = metaViews else { return }
         //            DispatchQueue.main.async {
@@ -49,18 +50,34 @@ class SocialServicesTableViewController: UITableViewController {
         //        }
         
     }
+    
+    private func setupViewHierarchy() {
+        self.view.addSubview(self.filterPicker)
+        self.view.addSubview(self.socialSourceTableView)
+    }
+    
+    private func configureConstraints() {
+        self.filterPicker.snp.makeConstraints{ (view) in
+            view.top.leading.trailing.equalToSuperview()
+        }
+        
+        self.socialSourceTableView.snp.makeConstraints { (view) in
+            view.top.equalTo(self.filterPicker.snp.bottom)
+            view.bottom.leading.trailing.equalToSuperview()
+        }
+    }
 
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(self.socialServices1.count)
         return self.socialServices1.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SocialServiceTableViewCell.cellIdentifier, for: indexPath) as! SocialServiceTableViewCell
         
         let socialService = socialServices1[indexPath.row]
@@ -85,7 +102,22 @@ class SocialServicesTableViewController: UITableViewController {
     lazy var filterBarButton: UIBarButtonItem = {
        let barButton = UIBarButtonItem()
         barButton.title = "Filter"
+//        barButton.image =
         return barButton
+    }()
+    
+    lazy var filterPicker: UIPickerView = {
+        let picker = UIPickerView()
+        return picker
+    }()
+    
+    lazy var socialSourceTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
     
     /*
