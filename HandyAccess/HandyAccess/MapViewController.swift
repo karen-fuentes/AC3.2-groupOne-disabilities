@@ -14,6 +14,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     class MyCustomPointAnnotation: MGLPointAnnotation {
         var willUseImage: Bool = false
     }
+    var wheelMapLocationsArr = [WheelMapLocations]()
+    
     var annotations = [MGLAnnotation]()
     let locationManager: CLLocationManager = {
         let locMan: CLLocationManager = CLLocationManager()
@@ -37,18 +39,53 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         setupView()
         showModal()
         
+        annotationPointsMap()
         
-        let pointA = MyCustomPointAnnotation()
-        pointA.coordinate = CLLocationCoordinate2D(latitude: 40.7420, longitude: 73.9354)
-        pointA.title = "Stovepipe Wells"
-        pointA.willUseImage = true
+//        let pointA = MyCustomPointAnnotation()
+//        pointA.coordinate = CLLocationCoordinate2D(latitude: 40.7420, longitude: -73.9354)
+//        pointA.title = "Stovepipe Wells"
+//        pointA.willUseImage = true
+//        
+//        let myPlaces = [pointA]
+//        mapView.addAnnotations(myPlaces)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
-        let myPlaces = [pointA]
-        mapView.addAnnotations(myPlaces)
+    }
+    
+    func annotationPointsMap() -> [MyCustomPointAnnotation] {
+        var arrOfAnnotation = [MyCustomPointAnnotation]()
+        
+        for location in wheelMapLocationsArr {
+            let point = MyCustomPointAnnotation()
+            point.coordinate = CLLocationCoordinate2D(latitude: (location.lat) , longitude: (location.lon))
+            point.title = location.name
+            point.willUseImage = true
+            
+            arrOfAnnotation.append(point)
+            mapView.addAnnotation(point)
+            
+        }
+        
+        return arrOfAnnotation
+
+    }
+    
+    public func refresh(object1: [WheelMapLocations]) {
+        wheelMapLocationsArr = object1
+        annotationPointsMap()
+    }
+
+    public func getmapbounds() -> MGLCoordinateBounds {
+        let c = mapView.convert(CGRect(x:0, y:0, width:500, height:500), toCoordinateBoundsFrom: mapView)
+        return c
     }
     
     func showModal() {
+        
         let modalViewController = ButtonViewController()
+        modalViewController.setMapController(map1: self)
         modalViewController.modalPresentationStyle = .overCurrentContext
         present(modalViewController, animated: true, completion: nil)
     }
@@ -81,7 +118,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         pinAnnotation.subtitle = "Wassup"
         mapView.addAnnotation(pinAnnotation)
         
-
         geocoder.reverseGeocodeLocation(validLocation) { (placemarks: [CLPlacemark]?, error: Error?) in
             //error handling
             if error != nil {
@@ -92,6 +128,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
                 let validPlace: CLPlacemark = validPlaceMarks.last else { return }
             print(validPlace)
         }
+    }
+    
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        
+        if let castAnnotation = annotation as? MyCustomPointAnnotation {
+            if (castAnnotation.willUseImage) {
+                return nil;
+            }
+        }
+        
+        // Assign a reuse identifier to be used by both of the annotation views, taking advantage of their similarities.
+        let reuseIdentifier = "reusableDotView"
+        
+        // For better performance, always try to reuse existing annotations.
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        
+        // If there’s no reusable annotation view available, initialize a new one.
+        if annotationView == nil {
+            annotationView = MGLAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            annotationView?.layer.cornerRadius = (annotationView?.frame.size.width)! / 2
+            annotationView?.layer.borderWidth = 4.0
+            annotationView?.layer.borderColor = UIColor.white.cgColor
+            annotationView!.backgroundColor = UIColor(red:0.03, green:0.80, blue:0.69, alpha:1.0)
+        }
+        
+        return annotationView
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -107,10 +171,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         mapView.setCenter(center, animated: true)
         userLongitude = Float(newlogitude)
         userLatitude = Float(newlatitude)
-    }
-    
-    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
-        return nil
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {

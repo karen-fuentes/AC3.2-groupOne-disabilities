@@ -12,7 +12,7 @@ class WheelMapManager{
     static let manager: WheelMapManager = WheelMapManager()
     private init () {}
     
-    internal func getData(endpoint:String, completion: @escaping([WheelMapLocations]?) -> Void) {
+    internal func getData(endpoint: String, completion: @escaping([WheelMapLocations]?) -> Void) {
         guard let url = URL(string: endpoint) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
