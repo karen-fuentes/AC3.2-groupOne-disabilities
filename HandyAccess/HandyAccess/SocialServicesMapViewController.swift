@@ -19,7 +19,7 @@ class SocialServicesMapViewController: UIViewController, MGLMapViewDelegate/*, C
             
             // Set the map’s center coordinate and zoom level.
             
-            mapView.setCenter(CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long))), zoomLevel: 10, animated: false)
+            mapView.setCenter(CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long))), zoomLevel: 12, animated: false)
             view.addSubview(mapView)
             
             // Set the delegate property of our map view to `self` after instantiating it.
