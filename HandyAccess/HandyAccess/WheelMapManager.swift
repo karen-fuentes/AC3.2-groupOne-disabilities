@@ -44,15 +44,25 @@ class WheelMapManager{
                 let nodes = json["nodes"] as? [[String:Any]] else {return nil}
             
             for node in nodes {
-                guard let name = node["name"] as? [String:Any],
-                    let wheelchair = node["wheelchair"] as? String,
-                    let wheelchair_toilet = node["wheelchair_toilet"] as? String,
-                    let node_type = node["node_type"] as? [String: String],
-                    let nodeIdentifier = node_type["identifier"],
-                    let lat = node["lat"] as? Double,
-                    let lon = node["lon"] as? Double else {return nil}
+                guard let lat = node["lat"] as? Double, let lon = node["lon"] as? Double,
+                let category = node["category"] as? [String: Any],
+                let categoryId = category["id"] as? Int,
+                let categoryIdentifier = category["identifier"] as? String else { return nil}
                 
-                
+                var wheelChairStatus = "Unknown wheelChairStatus"
+                if let wheelchair = node["wheelchair"] as? String {
+                    wheelChairStatus = wheelchair
+                }
+                var nameStatus = "Unknown nameStatus"
+                if let name = node["name"] as? String {
+                    nameStatus = name
+                }
+                var wheelchair_toiletStatus = "Unknown wheelchair_toiletStatus"
+                if let wheelchair_toilet = node["wheelchair_toilet"] as? String {
+                    wheelchair_toiletStatus = wheelchair_toilet
+                }
+                allData.append(WheelMapLocations(name: nameStatus, wheelchair: wheelChairStatus, wheelchair_toilet: wheelchair_toiletStatus, lat: lat, lon: lon, categoryIdentifier: categoryIdentifier, categoryId: categoryId))
+            
             }
             return allData
             

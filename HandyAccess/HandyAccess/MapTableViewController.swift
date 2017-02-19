@@ -20,12 +20,13 @@ class MapTableViewController: UITableViewController {
             guard let allData = allData else {return}
             
             self.data = allData
+            dump(self.data)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
             
         }
-
+         self.tableView.register(MapTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
     }
 
 
@@ -47,7 +48,7 @@ class MapTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MapTableViewCell
 
         var objectChoosen = data[indexPath.row]
-        cell?.mapNameLabel.text = "\(objectChoosen.name): \(objectChoosen.nodeIdentifier)"
+        cell?.mapNameLabel.text = "\(objectChoosen.name): \(objectChoosen.categoryIdentifier)"
         cell?.mapDescriptionLabel.text = "\(objectChoosen.wheelchair), \(objectChoosen.wheelchair_toilet)"
 
         return cell!

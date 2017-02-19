@@ -14,15 +14,17 @@ class WheelMapLocations {
     var wheelchair_toilet: String?
     var lat: Double
     var lon: Double
-    var nodeIdentifier: String
+    var categoryIdentifier: String
+    var categoryId: Int
     
-    init(name: String, wheelchair: String, wheelchair_toilet: String?, lat: Double, lon: Double, nodeIdentifier: String) {
+    init(name: String, wheelchair: String, wheelchair_toilet: String?, lat: Double, lon: Double, categoryIdentifier: String, categoryId: Int) {
         self.name = name
         self.wheelchair = wheelchair
         self.wheelchair_toilet = wheelchair_toilet
         self.lat = lat
         self.lon = lon
-        self.nodeIdentifier = nodeIdentifier
+        self.categoryIdentifier = categoryIdentifier
+        self.categoryId = categoryId
     }
     
     
