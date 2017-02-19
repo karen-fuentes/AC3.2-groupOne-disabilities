@@ -41,9 +41,9 @@ class SocialServicesDetailViewController: UIViewController {
         guard let validCoordinate = socialService1?.location_1 else { return }
         self.coordinates = validCoordinate
         
-        if self.coordinates != nil {
+        if self.coordinates == nil {
             dump(self.coordinates)
-            self.openInMapButton.isHidden = false
+            self.openInMapButton.isHidden = true
         }
 
     }
@@ -52,6 +52,14 @@ class SocialServicesDetailViewController: UIViewController {
         self.view.addSubview(organizationNameLabel)
         self.view.addSubview(descriptionLabel)
         self.view.addSubview(openInMapButton)
+    }
+    
+    func openInMap() {
+        if let validCoordinates = self.coordinates {
+            let socialServicesMapViewController = SocialServicesMapViewController()
+            socialServicesMapViewController.coordinates = validCoordinates
+            self.present(socialServicesMapViewController, animated: true, completion: nil)
+        }
     }
     
     private func configureConstraints() {
@@ -96,6 +104,7 @@ class SocialServicesDetailViewController: UIViewController {
         button.setTitleColor(UIColor.blue, for: .normal)
         //<a href="https://icons8.com/web-app/30563/Map-Marker">
         button.imageView?.image = #imageLiteral(resourceName: "Map Marker-50")
+        button.addTarget(self, action: #selector(openInMap), for: .touchUpInside)
         return button
     }()
     

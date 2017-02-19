@@ -16,10 +16,12 @@
 		578298371E58F91200957DFE /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */; };
 		578298391E58FDD800957DFE /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298381E58FDD800957DFE /* ButtonViewController.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
+		9C44C1411E5A38C3002B1787 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C44C1401E5A38C3002B1787 /* InitialViewController.swift */; };
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
 		9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
+		A70CCD651E5A28BD00CDA655 /* SocialServicesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70CCD641E5A28BD00CDA655 /* SocialServicesMapViewController.swift */; };
 		A78AB7591E58AF600024E9C6 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */; };
 		A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */; };
 		A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */; };
@@ -46,11 +48,13 @@
 		578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		578298381E58FDD800957DFE /* ButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
+		9C44C1401E5A38C3002B1787 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		9CB279481E579BD600634BD6 /* HandyAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandyAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CB279521E579BD600634BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A70CCD641E5A28BD00CDA655 /* SocialServicesMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesMapViewController.swift; sourceTree = "<group>"; };
 		A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -135,9 +139,11 @@
 				520FA81D1E5903D700AE4441 /* MapTableViewController.swift */,
 				578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */,
 				A78AB7531E58AF600024E9C6 /* ProfileFavoritesViewController.swift */,
+				9C44C1401E5A38C3002B1787 /* InitialViewController.swift */,
 				A78AB7541E58AF600024E9C6 /* ResourcesTableViewController.swift */,
 				A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */,
 				A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */,
+				A70CCD641E5A28BD00CDA655 /* SocialServicesMapViewController.swift */,
 				578298381E58FDD800957DFE /* ButtonViewController.swift */,
 			);
 			name = "View Controllers";
@@ -221,7 +227,6 @@
 				TargetAttributes = {
 					9CB279471E579BD600634BD6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = G33WGC6L8H;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -311,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A70CCD651E5A28BD00CDA655 /* SocialServicesMapViewController.swift in Sources */,
 				578298391E58FDD800957DFE /* ButtonViewController.swift in Sources */,
 				A78AB7591E58AF600024E9C6 /* APIRequestManager.swift in Sources */,
 				A78AB7631E58AF600024E9C6 /* SocialServicesTableViewController.swift in Sources */,
@@ -323,6 +329,7 @@
 				A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */,
 				A78AB76E1E5968250024E9C6 /* SocialServicesDetailViewController.swift in Sources */,
 				A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */,
+				9C44C1411E5A38C3002B1787 /* InitialViewController.swift in Sources */,
 				A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */,
 				A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */,
 				520FA81E1E5903D700AE4441 /* MapTableViewController.swift in Sources */,
@@ -447,11 +454,11 @@
 			baseConfigurationReference = 5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = G33WGC6L8H;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HandyAccess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = c4q.HandyAccess;
+				PRODUCT_BUNDLE_IDENTIFIER = c4q.HandyAccessPlease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -462,11 +469,11 @@
 			baseConfigurationReference = D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = G33WGC6L8H;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HandyAccess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = c4q.HandyAccess;
+				PRODUCT_BUNDLE_IDENTIFIER = c4q.HandyAccessPlease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
