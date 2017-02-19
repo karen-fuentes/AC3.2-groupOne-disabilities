@@ -22,6 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     var userLatitude = Float()/* = 40.776104*/
     var userLongitude = Float() /*= -73.920822*/
     let cellIdentifier = "ButtonCell"
+    var filterString = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
