@@ -251,27 +251,27 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
           
         } else if button == button2 {
             print("button 2")
-            categoryName = "food"
+            categoryName = "PublicTransport"
             
         } else if button == button3 {
             print("button 3")
-            categoryName = "food"
+            categoryName = "Health"
             
         } else if button == button4 {
             print("button 4")
-            categoryName = "food"
+            categoryName = "Government"
             
         } else if button == button5 {
             print("button 5")
-            categoryName = "food"
+            categoryName = "Bank/PostOffice"
             
         } else if button == button6 {
             print("button 6")
-            categoryName = "food"
+            categoryName = "Education"
             
         } else if button == button7 {
             print("button 7")
-            categoryName = "food"
+            categoryName = "Leisure"
             
         } else if button == button8 {
             print("button 8")
@@ -289,15 +289,23 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         //var endpoint = "http://wheelmap.org/api/categories/\(categoryNum)/node_types?&per_page=6"
         let c = self.mapView!.getmapbounds() as MGLCoordinateBounds
         
-        var endpoint = "http://wheelmap.org/en/api/nodes/search?q=\(categoryName)&bbox=\(c.ne.longitude),\(c.ne.latitude),\(c.sw.longitude),\(c.sw.latitude)&per_page=6"
+        var endpoint = "http://wheelmap.org/en/api/nodes/search?q=\(categoryName)&bbox=\(c.ne.longitude),\(c.ne.latitude),\(c.sw.longitude),\(c.sw.latitude)&per_page=10"
+        print(endpoint)
         
         //make api call with endpoint
         //update an array for objects
         WheelMapManager.manager.getData(endpoint: endpoint) {(allData: [WheelMapLocations]?) in
             //guard let allData = allData else {return}
             
-            self.mapView!.refresh(object1: (allData)!)
-            self.dismiss(animated: true, completion: nil)
+            if allData != nil {
+                self.mapView!.refresh(object1: (allData)!)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                print("None There")
+            }
+            
+            
+            
 
 //            dump(allData)
 //            DispatchQueue.main.async {
