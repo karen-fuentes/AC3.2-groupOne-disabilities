@@ -18,7 +18,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     private let audioEngine = AVAudioEngine()
     
     var textSpoken = String()
-    
+    let data = [WheelMapLocations]()
     var effect: UIVisualEffect!
 
     override func viewDidLoad() {
@@ -138,6 +138,11 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         view.addSubview(button3)
         view.addSubview(button4)
         view.addSubview(button5)
+        view.addSubview(button6)
+        view.addSubview(button7)
+        view.addSubview(button8)
+        view.addSubview(button9)
+        view.addSubview(button10)
         view.addSubview(speechButton)
     }
     
@@ -148,41 +153,76 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         button1.snp.makeConstraints({ (view) in
             view.top.equalToSuperview().offset(50)
-            view.centerX.equalToSuperview()
-            view.width.equalToSuperview().multipliedBy(0.5)
+            view.width.equalTo(150)
+            view.leading.equalTo(20)
             view.height.equalTo(70)
         })
         
         button2.snp.makeConstraints({ (view) in
-            view.top.equalTo(button1.snp.bottom).offset(30)
-            view.centerX.equalToSuperview()
-            view.width.equalToSuperview().multipliedBy(0.5)
+            view.top.equalToSuperview().offset(50)
+            view.trailing.equalToSuperview().inset(20)
+            view.width.equalTo(150)
             view.height.equalTo(70)
         })
         
         button3.snp.makeConstraints({ (view) in
-            view.top.equalTo(button2.snp.bottom).offset(30)
-            view.centerX.equalToSuperview()
-            view.width.equalToSuperview().multipliedBy(0.5)
+            view.top.equalTo(button1.snp.bottom).offset(30)
+            view.width.equalTo(150)
+            view.leading.equalTo(20)
             view.height.equalTo(70)
         })
         
         button4.snp.makeConstraints({ (view) in
-            view.top.equalTo(button3.snp.bottom).offset(30)
-            view.centerX.equalToSuperview()
-            view.width.equalToSuperview().multipliedBy(0.5)
+            view.top.equalTo(button2.snp.bottom).offset(30)
+            view.trailing.equalToSuperview().inset(20)
+            view.width.equalTo(150)
             view.height.equalTo(70)
         })
         
         button5.snp.makeConstraints({ (view) in
+            view.top.equalTo(button3.snp.bottom).offset(30)
+            view.width.equalTo(150)
+            view.leading.equalTo(20)
+            view.height.equalTo(70)
+        })
+        
+        button6.snp.makeConstraints({ (view) in
             view.top.equalTo(button4.snp.bottom).offset(30)
-            view.centerX.equalToSuperview()
-            view.width.equalToSuperview().multipliedBy(0.5)
+            view.trailing.equalToSuperview().inset(20)
+            view.width.equalTo(150)
+            view.height.equalTo(70)
+        })
+        
+        button7.snp.makeConstraints({ (view) in
+            view.top.equalTo(button5.snp.bottom).offset(30)
+            view.leading.equalTo(20)
+            view.width.equalTo(150)
+            view.height.equalTo(70)
+        })
+        
+        button8.snp.makeConstraints({ (view) in
+            view.top.equalTo(button6.snp.bottom).offset(30)
+            view.trailing.equalToSuperview().inset(20)
+            view.width.equalTo(150)
+            view.height.equalTo(70)
+        })
+        
+        button9.snp.makeConstraints({ (view) in
+            view.top.equalTo(button7.snp.bottom).offset(30)
+            view.leading.equalTo(20)
+            view.width.equalTo(150)
+            view.height.equalTo(70)
+        })
+        
+        button10.snp.makeConstraints({ (view) in
+            view.top.equalTo(button8.snp.bottom).offset(30)
+            view.trailing.equalToSuperview().inset(20)
+            view.width.equalTo(150)
             view.height.equalTo(70)
         })
         
         speechButton.snp.makeConstraints({ (view) in
-            view.top.equalTo(button5.snp.bottom).offset(30)
+            view.bottom.equalToSuperview().inset(60)
             view.centerX.equalToSuperview()
             view.width.equalToSuperview().multipliedBy(0.2)
             view.height.equalTo(70)
@@ -190,22 +230,65 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func buttonPressed(button: UIButton) {
+        
+        var categoryNum = 0
+        
         if button == button1 {
             print("button 1")
-            dismiss(animated: true, completion: nil)
+           categoryNum = 2
+          
         } else if button == button2 {
             print("button 2")
-            dismiss(animated: true, completion: nil)
+            categoryNum = 1
+            
         } else if button == button3 {
             print("button 3")
-            dismiss(animated: true, completion: nil)
+            categoryNum = 12
+            
         } else if button == button4 {
             print("button 4")
-            dismiss(animated: true, completion: nil)
+            categoryNum = 11
+            
         } else if button == button5 {
             print("button 5")
-            dismiss(animated: true, completion: nil)
+            categoryNum = 4
+            
+        } else if button == button6 {
+            print("button 6")
+            categoryNum = 5
+            
+        } else if button == button7 {
+            print("button 7")
+            categoryNum = 3
+            
+        } else if button == button8 {
+            print("button 8")
+            categoryNum = 6
+            
+        } else if button == button9 {
+            print("button 9")
+            categoryNum = 7
+            
+        } else if button == button10 {
+            print("button 10")
+            categoryNum = 8
         }
+        //baseendpoint
+        var endpoint = "http://wheelmap.org/api/categories/\(categoryNum)/node_types?&per_page=6"
+        //make api call with endpoint
+        //update an array for objects
+        WheelMapManager.manager.getData(endpoint: endpoint) {(allData: [WheelMapLocations]?) in
+            guard let allData = allData else {return}
+            
+            var data = allData
+            dump(data)
+            DispatchQueue.main.async {
+                MapViewController().loadView()
+            }
+            
+        }
+        //dismiss after
+        dismiss(animated: true, completion: nil)
     }
     
     func speachButtonPressed() {
@@ -220,7 +303,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
 
     internal lazy var button1: UIButton = {
         let button = UIButton()
-        button.setTitle("button", for: .normal)
+        button.setTitle("Food", for: .normal)
         button.backgroundColor = UIColor.gray
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
@@ -228,7 +311,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     internal lazy var button2: UIButton = {
         let button = UIButton()
-        button.setTitle("button", for: .normal)
+        button.setTitle("Public Transport", for: .normal)
         button.backgroundColor = UIColor.gray
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
@@ -236,7 +319,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     internal lazy var button3: UIButton = {
         let button = UIButton()
-        button.setTitle("button", for: .normal)
+        button.setTitle("Health", for: .normal)
         button.backgroundColor = UIColor.gray
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
@@ -244,7 +327,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     internal lazy var button4: UIButton = {
         let button = UIButton()
-        button.setTitle("button", for: .normal)
+        button.setTitle("Government", for: .normal)
         button.backgroundColor = UIColor.gray
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
@@ -252,9 +335,49 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     internal lazy var button5: UIButton = {
         let button = UIButton()
-        button.setTitle("button", for: .normal)
+        button.setTitle("Bank/Post Office", for: .normal)
         button.backgroundColor = UIColor.gray
 //        button.backgroundColor?.withAlphaComponent(0.5)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var button6: UIButton = {
+        let button = UIButton()
+        button.setTitle("Education", for: .normal)
+        button.backgroundColor = UIColor.gray
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var button7: UIButton = {
+        let button = UIButton()
+        button.setTitle("Leisure", for: .normal)
+        button.backgroundColor = UIColor.gray
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var button8: UIButton = {
+        let button = UIButton()
+        button.setTitle("Shopping", for: .normal)
+        button.backgroundColor = UIColor.gray
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var button9: UIButton = {
+        let button = UIButton()
+        button.setTitle("Sport", for: .normal)
+        button.backgroundColor = UIColor.gray
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var button10: UIButton = {
+        let button = UIButton()
+        button.setTitle("Tourism", for: .normal)
+        button.backgroundColor = UIColor.gray
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
