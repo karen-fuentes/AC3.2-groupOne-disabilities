@@ -17,18 +17,28 @@ class SocialServiceTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         self.addSubview(organizationNameLabel)
         self.addSubview(organizationDescriptionLabel)
+        self.addSubview(openWebPageImageView)
         
         self.selectionStyle = .none
         
         self.organizationNameLabel.snp.makeConstraints { (view) in
             view.leading.top.equalToSuperview().offset(8)
-            view.trailing.equalToSuperview().inset(-8)
+            view.trailing.equalToSuperview().inset(8)
         }
         
         self.organizationDescriptionLabel.snp.makeConstraints { (view) in
             view.top.equalTo(self.organizationNameLabel.snp.bottom).offset(8)
             view.leading.equalToSuperview().offset(8)
-            view.trailing.bottom.equalToSuperview().inset(-8)
+            view.trailing.equalTo(openWebPageImageView.snp.leading).inset(8)
+            view.bottom.equalToSuperview()
+        }
+        
+        self.openWebPageImageView.snp.makeConstraints { (view) in
+            view.centerY.equalToSuperview()
+            view.trailing.equalToSuperview().inset(8)
+            view.height.equalTo(60)
+            view.width.equalTo(60)
+            
         }
     }
     
@@ -47,6 +57,11 @@ class SocialServiceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        self.openWebPageImageView.isHidden = true
+        self.openWebPageImageView.image = nil
+    }
+    
     let organizationNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Organization Name"
@@ -61,6 +76,14 @@ class SocialServiceTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 16, weight: 6)
         label.numberOfLines = 0
         return label
+    }()
+    
+    let openWebPageImageView: UIImageView = {
+        let imageView = UIImageView()
+        //<a href="https://icons8.com/web-app/13450/Open-in-Browser">
+        imageView.image = #imageLiteral(resourceName: "Open in Browser-48")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
 }
