@@ -23,19 +23,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     var userLatitude = Float()/* = 40.776104*/
     var userLongitude = Float() /*= -73.920822*/
     let cellIdentifier = "ButtonCell"
+    var filterString = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViewHierarchy()
-        setupView()
-        
         locationManager.delegate = self
         mapView.delegate = self
-        
-//        let initialLocation = CLLocation(latitude: CLLocationDegrees(userLatitude), longitude: CLLocationDegrees(userLongitude))
-//        centerMapOnLocation(initialLocation)
-        
+
+        setupViewHierarchy()
+        setupView()
         showModal()
     }
     
@@ -48,20 +45,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
-            print("Authorized")
-            manager.stopUpdatingLocation()
+            print("All good!")
+            manager.startUpdatingLocation()
         case .denied, .restricted:
-            print("Authorization denied or restricted")
+            print("NOPE")
         case .notDetermined:
-            print("Authorization undetermined")
+            print("IDK")
             locationManager.requestAlwaysAuthorization()
         }
     }
-    
-//    func centerMapOnLocation(_ location: CLLocation) {
-//        let coordinateRegion = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//        mapView.setCenter(coordinateRegion, zoomLevel: 13, animated: true)
-//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let validLocation: CLLocation = locations.last else { return }
@@ -69,7 +61,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         userLatitude =  Float(locationValue.latitude)
         userLongitude = Float(locationValue.longitude)
         
-        mapView.setCenter(locationValue, animated: true)
+        let coordinateRegion = CLLocationCoordinate2D(latitude: validLocation.coordinate.latitude, longitude: validLocation.coordinate.longitude)
+        mapView.setCenter(coordinateRegion, zoomLevel: 14, animated: true)
+        
+        let pinAnnotation: MGLPointAnnotation = MGLPointAnnotation()
+        pinAnnotation.title = "Hey, Title"
+        pinAnnotation.coordinate = validLocation.coordinate
+        pinAnnotation.subtitle = "Wassup"
+        mapView.addAnnotation(pinAnnotation)
+        
 
         geocoder.reverseGeocodeLocation(validLocation) { (placemarks: [CLPlacemark]?, error: Error?) in
             //error handling
@@ -93,8 +93,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         let newlogitude = center.longitude
         let newlatitude = center.latitude
         print("log = \(newlogitude), lat = \(newlatitude)")
-//        userLongitude = Float(newlogitude)
-//        userLatitude = Float(newlatitude)
+        mapView.setCenter(center, animated: true)
+        userLongitude = Float(newlogitude)
+        userLatitude = Float(newlatitude)
+    }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        return nil
+    }
+    
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
     }
     
 //    func numberOfSections(in collectionView: UICollectionView) -> Int {
