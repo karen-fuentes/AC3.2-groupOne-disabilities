@@ -12,6 +12,8 @@ import SnapKit
 class SocialServicesDetailViewController: UIViewController {
     
     var socialService1: SocialService1?
+    var borough: String?
+    var coordinates: Coordinates?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +23,43 @@ class SocialServicesDetailViewController: UIViewController {
         
         self.organizationNameLabel.text = socialService1?.organizationname
         self.descriptionLabel.text = socialService1?.description
+        
+//        APIRequestManager.shared.getDataForCoordinates(address: "31-00 47th Ave", borough: "queens") { (coordinates: [Coordinates]?) in
+//            guard let validCoordinates = coordinates else { return }
+//            dump(validCoordinates)
+//        }
+        
+//        guard let validAddress = socialService1?.location_1_location else { return }
+//        guard let validBorough = self.borough else { return }
+//        
+//        APIRequestManager.shared.getDataForCoordinates(address: validAddress, borough: validBorough) { (coordinatesArr: [Coordinates]?) in
+//            guard let validCoordinatesArr = coordinatesArr else { return }
+//            self.coordinates = validCoordinatesArr[0]
+//            dump(validCoordinatesArr)
+//        }
+        
+        guard let validCoordinate = socialService1?.location_1 else { return }
+        self.coordinates = validCoordinate
+        
+        if self.coordinates != nil {
+            dump(self.coordinates)
+            self.openInMapButton.isHidden = false
+        }
+
     }
     
     private func setupViewHierarchy() {
         self.view.addSubview(organizationNameLabel)
         self.view.addSubview(descriptionLabel)
         self.view.addSubview(openInMapButton)
+    }
+    
+    func openInMap() {
+        if let validCoordinates = self.coordinates {
+            let socialServicesMapViewController = SocialServicesMapViewController()
+            socialServicesMapViewController.coordinates = validCoordinates
+            self.navigationController?.present(socialServicesMapViewController, animated: true, completion: nil)
+        }
     }
     
     private func configureConstraints() {
@@ -47,6 +80,7 @@ class SocialServicesDetailViewController: UIViewController {
             button.centerX.equalToSuperview()
         }
     }
+    
     
     lazy var organizationNameLabel: UILabel = {
         let label = UILabel()
@@ -70,6 +104,7 @@ class SocialServicesDetailViewController: UIViewController {
         button.setTitleColor(UIColor.blue, for: .normal)
         //<a href="https://icons8.com/web-app/30563/Map-Marker">
         button.imageView?.image = #imageLiteral(resourceName: "Map Marker-50")
+        button.addTarget(self, action: #selector(openInMap), for: .touchUpInside)
         return button
     }()
     
