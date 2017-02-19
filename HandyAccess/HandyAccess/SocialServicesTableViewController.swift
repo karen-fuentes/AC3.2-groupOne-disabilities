@@ -10,14 +10,44 @@ import UIKit
 import SnapKit
 
 class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     var socialServices1 = [SocialService1]()
-    let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json"
+    let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json?Queens=Y&aging=Y"
     //    var metaViews = [MetaView]()
     //    var socialServices = [SocialService]()
     //    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
     
-   var catagories = ["disabilities", "aging"]
+    var pickerSelections = [[String]]()
+    let boroughs = ["Queens", "Brooklyn", "Bronx", "Manhattan", "Staten_island", "All" ]
+    let catagories = ["aging",
+                      "anti_discrimination_human_rights",
+                      "arts_culture",
+                      "business",
+                      "child_care_parent_information",
+                      "community_service_volunteerism",
+                      "counseling_support_groups",
+                      "disabilities",
+                      "domestic_violence",
+                      "education",
+                      "employment_job_training",
+                      "health",
+                      "homelessness",
+                      "housing",
+                      "immigration",
+                      "legal_services",
+                      "lesbian_gay_bisexual_and_or_transgender",
+                      "new_york_city_agency",
+                      "none_of_the_above",
+                      "nonprofit",
+                      //??"nourl",
+                      "other_government_organization",
+                      "outsideloc",
+                      "personal_finance_financial_education",
+                      "professional_association",
+                      "veterans_military_families",
+                      "victim_services",
+                      "youth_services"]
+    var urlComponents = ["borough": "Queens", "category": "aging"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +66,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         
         self.socialSourceTableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
         
-        self.navigationItem.leftBarButtonItem = self.filterBarButton
+        pickerSelections = [self.boroughs, self.catagories]
         //        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
         //            guard let validMetaViews = metaViews else { return }
         //            DispatchQueue.main.async {
@@ -50,7 +80,6 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         //                self.tableView.reloadData()
         //            }
         //        }
-        
     }
     
     private func setupViewHierarchy() {
@@ -68,38 +97,45 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
             view.bottom.leading.trailing.equalToSuperview()
         }
     }
-
+    
     // MARK: - TableView data source
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(self.socialServices1.count)
         return self.socialServices1.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SocialServiceTableViewCell.cellIdentifier, for: indexPath) as! SocialServiceTableViewCell
         
         let socialService = socialServices1[indexPath.row]
         cell.organizationNameLabel.text = socialService.organizationname
         cell.organizationDescriptionLabel.text = socialService.description
-        guard let description = socialService.description else { return  cell }
         
-        cell.detailTextLabel?.text = description
-
+        if let urlString = socialService.url,
+            let url = URL(string: urlString) {
+            cell.openWebPageImageView.isHidden = false
+        }
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let socialServicesDetailViewController = SocialServicesDetailViewController()
+        socialServicesDetailViewController.socialService1 = socialServices1[indexPath.row]
+        self.navigationController?.pushViewController(socialServicesDetailViewController, animated: true)
+    }
+    
     // MARK: - PickerView Delegate
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+        return self.pickerSelections.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.catagories.count
+        return self.pickerSelections[component].count
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -110,29 +146,47 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
             pickerLabel = UILabel()
             
             pickerLabel?.font = UIFont.systemFont(ofSize: 16)
+            pickerLabel?.numberOfLines = 0
             pickerLabel?.textAlignment = NSTextAlignment.center
         }
         
-        pickerLabel?.text = catagories[component]
+        pickerLabel?.text = pickerSelections[component][row]
         
         return pickerLabel!
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-    }
-    
-    func filter() {
-        var returnArray = [SocialService1]()
-        for service in returnArray {
-            if service.disabilities == "Y" {
-                returnArray.append(service)
+        switch component {
+        case 0:
+            self.urlComponents["borough"] = self.boroughs[row]
+        case 1:
+            self.urlComponents["category"] = self.catagories[row]
+        default:
+            break
+        }
+        let url = buildUrlWithComponent(self.urlComponents)
+        APIRequestManager.shared.getSocialServices1(endPoint: url) { (socialServices1: [SocialService1]?) in
+            guard let validSocialServices1 = socialServices1 else { return }
+            DispatchQueue.main.async {
+                self.socialServices1 = validSocialServices1
+                self.socialSourceTableView.reloadData()
             }
         }
     }
     
+    func buildUrlWithComponent(_ dict: [String: String]) -> String {
+        var base = "https://data.cityofnewyork.us/resource/386y-9exk.json?"
+        for value in dict.values {
+            if value != "All" {
+                base += "\(value)=Y&"
+            }
+        }
+        print(base)
+        return base
+    }
+    
     lazy var filterBarButton: UIBarButtonItem = {
-       let barButton = UIBarButtonItem()
+        let barButton = UIBarButtonItem()
         barButton.title = "Filter"
         return barButton
     }()
@@ -154,48 +208,48 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
     }()
     
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -8,7 +8,11 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location</string>
+	<string>Need Permission</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Need Microphone</string>
 	<key>MGLMapboxAccessToken</key>
 	<string>pk.eyJ1IjoibnljaGFuZHlhY2Nlc3MiLCJhIjoiY2l6YWNpMnh0MDF4aDJ3cG9sZG1iMjQ1MCJ9.Ynaqak7QUD73WTQAgqLG1g</string>
 	<key>CFBundleDevelopmentRegion</key>

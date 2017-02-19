@@ -21,13 +21,13 @@ class EventTableViewCell: UITableViewCell {
         
         self.eventNameLabel.snp.makeConstraints { (view) in
             view.leading.top.equalToSuperview().offset(8)
-            view.trailing.equalToSuperview().inset(-8)
+            view.trailing.equalToSuperview().inset(8)
         }
         
         self.eventDescriptionLabel.snp.makeConstraints { (view) in
             view.top.equalTo(self.eventNameLabel.snp.bottom).offset(8)
             view.leading.equalToSuperview().offset(8)
-            view.trailing.bottom.equalToSuperview().inset(-8)
+            view.trailing.bottom.equalToSuperview().inset(8)
         }
     }
     

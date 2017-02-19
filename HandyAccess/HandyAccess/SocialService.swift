@@ -8,6 +8,21 @@
 
 import Foundation
 
+class Coordinates {
+    var lat: Double
+    var long: Double
+    init(lat: Double, long: Double ) {
+        self.lat = lat
+        self.long = long
+    }
+    convenience init? (_ withArray : [Double]?) {
+        guard let validArray = withArray else { return nil }
+        guard validArray.count == 2 else { return nil }
+        self.init(lat: validArray[0], long: validArray[1])
+    }
+
+}
+
 //https://data.cityofnewyork.us/resource/386y-9exk.json
 class SocialService1 {
     var aging: String?
@@ -34,6 +49,14 @@ class SocialService1 {
     var is_registered_with_the_attorney_general_s_office: String?
     var legal_services: String?
     var lesbian_gay_bisexual_and_or_transgender: String?
+    var location_1: Coordinates?
+    var location_1_location: String?
+    var location_1_zip: String?
+    var location_2: Coordinates?
+    var location_2_city: String?
+    var location_2_location: String?
+    var location_2_state: String?
+    var location_2_zip: String?
     var manhattan: String?
     var new_york_city_agency: String?
     var none_of_the_above: String?
@@ -77,6 +100,14 @@ class SocialService1 {
          is_registered_with_the_attorney_general_s_office: String?,
          legal_services: String?,
          lesbian_gay_bisexual_and_or_transgender: String?,
+         location_1: Coordinates?,
+         location_1_location: String?,
+         location_1_zip: String?,
+         location_2: Coordinates?,
+         location_2_city: String?,
+         location_2_location: String?,
+         location_2_state: String?,
+         location_2_zip: String?,
          manhattan: String?,
          new_york_city_agency: String?,
          none_of_the_above: String?,
@@ -120,6 +151,14 @@ class SocialService1 {
         self.is_registered_with_the_attorney_general_s_office = is_registered_with_the_attorney_general_s_office
         self.legal_services = legal_services
         self.lesbian_gay_bisexual_and_or_transgender = lesbian_gay_bisexual_and_or_transgender
+        self.location_1 = location_1
+        self.location_1_location = location_1_location
+        self.location_1_zip = location_1_zip
+        self.location_2 = location_2
+        self.location_2_city = location_2_city
+        self.location_2_location = location_2_location
+        self.location_2_state = location_2_state
+        self.location_2_zip = location_2_zip
         self.manhattan = manhattan
         self.new_york_city_agency = new_york_city_agency
         self.none_of_the_above = none_of_the_above
@@ -141,91 +180,116 @@ class SocialService1 {
     }
     
     convenience init? (withDict dictionary: [String: Any]) {
-        if let aging = dictionary["aging"] as? String,
-            let anti_discrimination_human_rights = dictionary["anti_discrimination_human_rights"] as? String,
-            let arts_culture = dictionary["arts_culture"] as? String,
-            let bronx = dictionary["bronx"] as? String,
-            let brooklyn = dictionary["brooklyn"] as? String,
-            let business = dictionary["business"] as? String,
-            let child_care_parent_information = dictionary["child_care_parent_information"] as? String,
-            let community_service_volunteerism = dictionary["community_service_volunteerism"] as? String,
-            let counseling_support_groups = dictionary["counseling_support_groups"] as? String,
-            let description = dictionary["description"] as? String,
-            let disabilities = dictionary["disabilities"] as? String,
-            let domestic_violence = dictionary["domestic_violence"] as? String,
-            let education = dictionary["education"] as? String,
-            let employment_job_training = dictionary["employment_job_training"] as? String,
-            let faith_based_organization = dictionary["faith_based_organization"] as? String,
-            let fax = dictionary["fax"] as? String,
-            let foundation = dictionary["foundation"] as? String,
-            let health = dictionary["health"] as? String,
-            let homelessness = dictionary["homelessness"] as? String,
-            let housing = dictionary["housing"] as? String,
-            let immigration = dictionary["immigration"] as? String,
-            let is_registered_with_the_attorney_general_s_office = dictionary["is_registered_with_the_attorney_general_s_office"] as? String,
-            let legal_services = dictionary["legal_services"] as? String,
-            let lesbian_gay_bisexual_and_or_transgender = dictionary["lesbian_gay_bisexual_and_or_transgender"] as? String,
-            let manhattan = dictionary["manhattan"] as? String,
-            let new_york_city_agency = dictionary["new_york_city_agency"] as? String,
-            let none_of_the_above = dictionary["none_of_the_above"] as? String,
-            let nonprofit = dictionary["nonprofit"] as? String,
-            let nourl = dictionary["nourl"] as? String,
-            let organizationname = dictionary["organizationname"] as? String,
-            let other_government_organization = dictionary["other_government_organization"] as? String,
-            let outsideloc = dictionary["outsideloc"] as? String,
-            let personal_finance_financial_education = dictionary["personal_finance_financial_education"] as? String,
-            let phone = dictionary["phone"] as? String,
-            let professional_association = dictionary["professional_association"] as? String,
-            let published = dictionary["published"] as? String,
-            let queens = dictionary["queens"] as? String,
-            let staten_island = dictionary["staten_island"] as? String,
-            let url = dictionary["url"] as? String,
-            let veterans_military_families = dictionary["veterans_military_families"] as? String,
-            let victim_services = dictionary["victim_services"] as? String,
-            let youth_services = dictionary["youth_services"] as? String {
+        if let organizationname = dictionary["organizationname"] as? String {
+                let aging = dictionary["aging"] as? String
+                let anti_discrimination_human_rights = dictionary["anti_discrimination_human_rights"] as? String
+                let arts_culture = dictionary["arts_culture"] as? String
+                let bronx = dictionary["bronx"] as? String
+                let brooklyn = dictionary["brooklyn"] as? String
+                let business = dictionary["business"] as? String
+                let child_care_parent_information = dictionary["child_care_parent_information"] as? String
+                let community_service_volunteerism = dictionary["community_service_volunteerism"] as? String
+                let counseling_support_groups = dictionary["counseling_support_groups"] as? String
+                let description = dictionary["description"] as? String
+                let disabilities = dictionary["disabilities"] as? String
+                let domestic_violence = dictionary["domestic_violence"] as? String
+                let education = dictionary["education"] as? String
+                let employment_job_training = dictionary["employment_job_training"] as? String
+                let faith_based_organization = dictionary["faith_based_organization"] as? String
+                let fax = dictionary["fax"] as? String
+                let foundation = dictionary["foundation"] as? String
+                let health = dictionary["health"] as? String
+                let homelessness = dictionary["homelessness"] as? String
+                let housing = dictionary["housing"] as? String
+                let immigration = dictionary["immigration"] as? String
+                let is_registered_with_the_attorney_general_s_office = dictionary["is_registered_with_the_attorney_general_s_office"] as? String
+                let legal_services = dictionary["legal_services"] as? String
+                let lesbian_gay_bisexual_and_or_transgender = dictionary["lesbian_gay_bisexual_and_or_transgender"] as? String
             
+                // location_1
+                let location_1 = dictionary["location_1"] as? [String: Any]
+                let location_1_coordinate_doubles = location_1?["coordinates"] as? [Double]
+                let location_1_location = dictionary["location_1_location"] as? String
+                let location_1_zip = dictionary["location_1_zip"] as? String
+                // location_2
+                let location_2 = dictionary["location_2"] as? [String: Any]
+                let location_2_coordinate_doubles = location_2?["coordinates"] as? [Double]
+                let location_2_city = dictionary["location_2_city"] as? String
+                let location_2_location = dictionary["location_2_location"] as? String
+                let location_2_state = dictionary["location_2_state"] as? String
+                let location_2_zip = dictionary["location_2_zip"] as? String
+            
+                let manhattan = dictionary["manhattan"] as? String
+                let new_york_city_agency = dictionary["new_york_city_agency"] as? String
+                let none_of_the_above = dictionary["none_of_the_above"] as? String
+                let nonprofit = dictionary["nonprofit"] as? String
+                let nourl = dictionary["nourl"] as? String
+                let other_government_organization = dictionary["other_government_organization"] as? String
+                let outsideloc = dictionary["outsideloc"] as? String
+                let personal_finance_financial_education = dictionary["personal_finance_financial_education"] as? String
+                let phone = dictionary["phone"] as? String
+                let professional_association = dictionary["professional_association"] as? String
+                let published = dictionary["published"] as? String
+                let queens = dictionary["queens"] as? String
+                let staten_island = dictionary["staten_island"] as? String
+                let url = dictionary["url"] as? String
+                let veterans_military_families = dictionary["veterans_military_families"] as? String
+                let victim_services = dictionary["victim_services"] as? String
+                let youth_services = dictionary["youth_services"] as? String
+            
+                let location_1_coordinate_object = Coordinates.init(location_1_coordinate_doubles)
+                let location_2_coordinate_object = Coordinates.init(location_2_coordinate_doubles)
+
             self.init(aging: aging,
-             anti_discrimination_human_rights: anti_discrimination_human_rights,
-             arts_culture: arts_culture,
-             bronx: bronx,
-             brooklyn: brooklyn,
-             business: business,
-             child_care_parent_information: child_care_parent_information,
-             community_service_volunteerism: community_service_volunteerism,
-             counseling_support_groups: counseling_support_groups,
-             description: description,
-             disabilities: disabilities,
-             domestic_violence: domestic_violence,
-             education: education,
-             employment_job_training: employment_job_training,
-             faith_based_organization: faith_based_organization,
-             fax: fax,
-             foundation: foundation,
-             health: health,
-             homelessness: homelessness,
-             housing: housing,
-             immigration: immigration,
-             is_registered_with_the_attorney_general_s_office: is_registered_with_the_attorney_general_s_office,
-             legal_services: legal_services,
-             lesbian_gay_bisexual_and_or_transgender: lesbian_gay_bisexual_and_or_transgender,
-             manhattan: manhattan,
-             new_york_city_agency: new_york_city_agency,
-             none_of_the_above: none_of_the_above,
-             nonprofit: nonprofit,
-             nourl: nourl,
-             organizationname: organizationname,
-             other_government_organization: other_government_organization,
-             outsideloc: outsideloc,
-             personal_finance_financial_education: personal_finance_financial_education,
-             phone: phone,
-             professional_association: professional_association,
-             published: published,
-             queens: queens,
-             staten_island: staten_island,
-             url: url,
-             veterans_military_families: veterans_military_families,
-             victim_services: victim_services,
-             youth_services: youth_services
+                      anti_discrimination_human_rights: anti_discrimination_human_rights,
+                      arts_culture: arts_culture,
+                      bronx: bronx,
+                      brooklyn: brooklyn,
+                      business: business,
+                      child_care_parent_information: child_care_parent_information,
+                      community_service_volunteerism: community_service_volunteerism,
+                      counseling_support_groups: counseling_support_groups,
+                      description: description,
+                      disabilities: disabilities,
+                      domestic_violence: domestic_violence,
+                      education: education,
+                      employment_job_training: employment_job_training,
+                      faith_based_organization: faith_based_organization,
+                      fax: fax,
+                      foundation: foundation,
+                      health: health,
+                      homelessness: homelessness,
+                      housing: housing,
+                      immigration: immigration,
+                      is_registered_with_the_attorney_general_s_office: is_registered_with_the_attorney_general_s_office,
+                      legal_services: legal_services,
+                      lesbian_gay_bisexual_and_or_transgender: lesbian_gay_bisexual_and_or_transgender,
+                      location_1: location_1_coordinate_object,
+                      location_1_location: location_1_location,
+                      location_1_zip: location_1_zip,
+                      location_2: location_2_coordinate_object,
+                      location_2_city: location_2_city,
+                      location_2_location: location_2_location,
+                      location_2_state: location_2_state,
+                      location_2_zip: location_2_zip,
+                      manhattan: manhattan,
+                      new_york_city_agency: new_york_city_agency,
+                      none_of_the_above: none_of_the_above,
+                      nonprofit: nonprofit,
+                      nourl: nourl,
+                      organizationname: organizationname,
+                      other_government_organization: other_government_organization,
+                      outsideloc: outsideloc,
+                      personal_finance_financial_education: personal_finance_financial_education,
+                      phone: phone,
+                      professional_association: professional_association,
+                      published: published,
+                      queens: queens,
+                      staten_island: staten_island,
+                      url: url,
+                      veterans_military_families: veterans_military_families,
+                      victim_services: victim_services,
+                      youth_services: youth_services
             )
         }
         else {
