@@ -8,6 +8,7 @@
 
 import UIKit
 import Mapbox
+import SnapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapViewDelegate/*UICollectionViewDelegate, UICollectionViewDataSource*/ {
     

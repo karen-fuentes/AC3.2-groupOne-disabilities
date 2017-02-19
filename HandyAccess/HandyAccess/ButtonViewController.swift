@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ButtonViewController: UIViewController {
 
@@ -33,7 +34,7 @@ class ButtonViewController: UIViewController {
     
     func setupView() {
         button1.snp.makeConstraints({ (view) in
-            view.top.equalTo(self.view.snp.top).offset(85)
+            view.top.equalToSuperview().offset(85)
             view.centerX.equalToSuperview()
             view.width.equalToSuperview().multipliedBy(0.5)
             view.height.equalTo(70)
@@ -87,7 +88,7 @@ class ButtonViewController: UIViewController {
         }
     }
 
-    internal var button1: UIButton = {
+    internal lazy var button1: UIButton = {
         let button = UIButton()
         button.setTitle("button", for: .normal)
         button.backgroundColor = UIColor.darkGray
@@ -95,7 +96,7 @@ class ButtonViewController: UIViewController {
         return button
     }()
     
-    internal var button2: UIButton = {
+    internal lazy var button2: UIButton = {
         let button = UIButton()
         button.setTitle("button", for: .normal)
         button.backgroundColor = UIColor.darkGray
@@ -103,7 +104,7 @@ class ButtonViewController: UIViewController {
         return button
     }()
     
-    internal var button3: UIButton = {
+    internal lazy var button3: UIButton = {
         let button = UIButton()
         button.setTitle("button", for: .normal)
         button.backgroundColor = UIColor.darkGray
@@ -111,7 +112,7 @@ class ButtonViewController: UIViewController {
         return button
     }()
     
-    internal var button4: UIButton = {
+    internal lazy var button4: UIButton = {
         let button = UIButton()
         button.setTitle("button", for: .normal)
         button.backgroundColor = UIColor.darkGray
@@ -119,7 +120,7 @@ class ButtonViewController: UIViewController {
         return button
     }()
     
-    internal var button5: UIButton = {
+    internal lazy var button5: UIButton = {
         let button = UIButton()
         button.setTitle("button", for: .normal)
         button.backgroundColor = UIColor.darkGray
