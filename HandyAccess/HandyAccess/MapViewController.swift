@@ -31,10 +31,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
 
         setupViewHierarchy()
         setupView()
-        
-//        let initialLocation = CLLocation(latitude: CLLocationDegrees(userLatitude), longitude: CLLocationDegrees(userLongitude))
-//        centerMapOnLocation(initialLocation)
-        
         showModal()
     }
     
@@ -56,11 +52,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
             locationManager.requestAlwaysAuthorization()
         }
     }
-    
-//    func centerMapOnLocation(_ location: CLLocation) {
-//        let coordinateRegion = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//        mapView.setCenter(coordinateRegion, zoomLevel: 13, animated: true)
-//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let validLocation: CLLocation = locations.last else { return }
@@ -100,7 +91,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         let newlogitude = center.longitude
         let newlatitude = center.latitude
         print("log = \(newlogitude), lat = \(newlatitude)")
-        //mapView.setCenter(center, animated: true)
+        mapView.setCenter(center, animated: true)
         userLongitude = Float(newlogitude)
         userLatitude = Float(newlatitude)
     }
