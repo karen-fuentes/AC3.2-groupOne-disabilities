@@ -8,20 +8,16 @@
 
 import UIKit
 
-class EventsViewController: UIViewController, UITableViewDelegate {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var events = [NYCEventCalendarModel]()
     var datePicker: UIDatePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        APIRequestManager.shared.getData(endPoint: "https://api.cityofnewyork.us/calendar/v1/search.htm?app_id=e40a1f49&app_key=077f86713488d92de18df675a800dcd8") { (data: Data?) in
-            guard let validData = data else { return }
-            DispatchQueue.main.async {
-                self.events = NYCEventCalendarModel.getEvents(from: validData)!
-                self.eventTableView.reloadData()
-            }
-        }
+        self.title = "Events"
+        setUpViewHierarchy()
+        configureConstraints()
         
         view.backgroundColor = .gray
         
@@ -29,16 +25,19 @@ class EventsViewController: UIViewController, UITableViewDelegate {
         datePicker.timeZone = TimeZone.current
         datePicker.frame = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 250.0)
         datePicker.backgroundColor = .white
-        self.view.addSubview(datePicker)
-        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
         
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
         
         //TableView
         self.eventTableView.register(EventTableViewCell.self, forCellReuseIdentifier: EventTableViewCell.cellIdentifier)
-        self.eventTableView.estimatedRowHeight = 150
-        self.eventTableView.rowHeight = UITableViewAutomaticDimension
-        self.eventTableView.delegate = self
         
+        APIRequestManager.shared.getData(endPoint: "https://api.cityofnewyork.us/calendar/v1/search.htm?app_id=e40a1f49&app_key=077f86713488d92de18df675a800dcd8") { (data: Data?) in
+            guard let validData = data else { return }
+            DispatchQueue.main.async {
+                self.events = NYCEventCalendarModel.getEvents(from: validData)!
+                self.eventTableView.reloadData()
+            }
+        }
     }
     
     func datePickerValueChanged(_ sender: UIDatePicker){
@@ -52,12 +51,15 @@ class EventsViewController: UIViewController, UITableViewDelegate {
     
     
     func setUpViewHierarchy() {
-        
-        
+        self.view.addSubview(datePicker)
+        self.view.addSubview(eventTableView)
     }
     
     func configureConstraints() {
-        
+        eventTableView.snp.makeConstraints { (view) in
+            view.top.equalTo(datePicker.snp.bottom)
+            view.width.bottom.equalToSuperview()
+        }
         
     }
     
@@ -83,6 +85,10 @@ class EventsViewController: UIViewController, UITableViewDelegate {
     
     lazy var eventTableView : UITableView = {
         let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableViewAutomaticDimension
         return tableView
     }()
     
