@@ -7,51 +7,82 @@
 //
 
 import UIKit
+import SnapKit
 
-class SocialServicesTableViewController: UITableViewController {
+class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    var metaViews = [MetaView]()
-    var socialServices = [SocialService]()
-    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
+    var socialServices1 = [SocialService1]()
+    let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json"
+    //    var metaViews = [MetaView]()
+    //    var socialServices = [SocialService]()
+    //    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
+    
+   var catagories = ["disabilities", "aging"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewHierarchy()
+        configureConstraints()
         self.view.backgroundColor = UIColor.white
-        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
-            guard let validMetaViews = metaViews else { return }
-            DispatchQueue.main.async {
-                self.metaViews = validMetaViews
-            }
-        }
-        APIRequestManager.shared.getSocialServicesData(endPoint: self.endpoint, metaViews: self.metaViews) { (socialServices: [SocialService]?) in
+        
+        APIRequestManager.shared.getSocialServices1(endPoint: self.endpoint) { (socialServices: [SocialService1]?) in
             guard let validSocialServices = socialServices else { return }
             DispatchQueue.main.async {
-                self.socialServices = validSocialServices
-                self.tableView.reloadData()
+                self.socialServices1 = validSocialServices
+                self.socialSourceTableView.reloadData()
+                dump(self.socialServices1)
             }
         }
         
-        self.tableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
+        self.socialSourceTableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
         
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableViewAutomaticDimension
+        self.navigationItem.leftBarButtonItem = self.filterBarButton
+        //        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
+        //            guard let validMetaViews = metaViews else { return }
+        //            DispatchQueue.main.async {
+        //                self.metaViews = validMetaViews
+        //            }
+        //        }
+        //        APIRequestManager.shared.getSocialServicesData(endPoint: self.endpoint, metaViews: self.metaViews) { (socialServices: [SocialService]?) in
+        //            guard let validSocialServices = socialServices else { return }
+        //            DispatchQueue.main.async {
+        //                self.socialServices = validSocialServices
+        //                self.tableView.reloadData()
+        //            }
+        //        }
+        
+    }
+    
+    private func setupViewHierarchy() {
+        self.view.addSubview(self.filterPicker)
+        self.view.addSubview(self.socialSourceTableView)
+    }
+    
+    private func configureConstraints() {
+        self.filterPicker.snp.makeConstraints{ (view) in
+            view.top.leading.trailing.equalToSuperview()
+        }
+        
+        self.socialSourceTableView.snp.makeConstraints { (view) in
+            view.top.equalTo(self.filterPicker.snp.bottom)
+            view.bottom.leading.trailing.equalToSuperview()
+        }
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    // MARK: - TableView data source
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.socialServices.count)
-        return self.socialServices.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(self.socialServices1.count)
+        return self.socialServices1.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SocialServiceTableViewCell.cellIdentifier, for: indexPath) as! SocialServiceTableViewCell
         
-        let socialService = socialServices[indexPath.row]
+        let socialService = socialServices1[indexPath.row]
         cell.organizationNameLabel.text = socialService.organizationname
         cell.organizationDescriptionLabel.text = socialService.description
         guard let description = socialService.description else { return  cell }
@@ -61,14 +92,67 @@ class SocialServicesTableViewController: UITableViewController {
         return cell
     }
 
+    // MARK: - PickerView Delegate
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.catagories.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var pickerLabel = view as? UILabel
+        
+        if (pickerLabel == nil) {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont.systemFont(ofSize: 8)
+            pickerLabel?.textAlignment = NSTextAlignment.center
+        }
+        
+        pickerLabel?.text = catagories[component]
+        
+        return pickerLabel!
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
+    
     func filter() {
-        var returnArray = [SocialService]()
-        for service in socialServices {
+        var returnArray = [SocialService1]()
+        for service in returnArray {
             if service.disabilities == "Y" {
                 returnArray.append(service)
             }
         }
     }
+    
+    lazy var filterBarButton: UIBarButtonItem = {
+       let barButton = UIBarButtonItem()
+        barButton.title = "Filter"
+        return barButton
+    }()
+    
+    lazy var filterPicker: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        return pickerView
+    }()
+    
+    lazy var socialSourceTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

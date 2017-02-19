@@ -15,6 +15,7 @@ enum SocialServiceParseError: Error {
     case columns
     case data
     case resource0
+    case socialServices1
 }
 
 class APIRequestManager {
@@ -32,6 +33,45 @@ class APIRequestManager {
             }
             guard let validData = data else { return }
             callback(validData)
+            }.resume()
+    }
+    
+    func getSocialServices1(endPoint: String, callback: @escaping([SocialService1]?) -> Void) {
+        guard let myURL = URL(string: endPoint) else { return }
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: myURL) { (data: Data?, response: URLResponse?, error: Error?) in
+            if error != nil {
+                print("Error durring session: \(error)")
+            }
+            guard let validData = data else { return }
+            
+            dump(validData)
+            
+            var socialServices1 = [SocialService1]()
+            do {
+                guard let jsonArray = try JSONSerialization.jsonObject(with: validData, options: []) as? [[String: Any]] else {
+                    throw SocialServiceParseError.json
+                }
+                
+                for resource in jsonArray{
+                    guard let s = SocialService1(withDict: resource) else {
+                        continue
+                    }
+                    socialServices1.append(s)
+                }
+                dump(socialServices1)
+            }                
+            catch SocialServiceParseError.json {
+                print("SocialServiceParseError.json")
+            }
+            catch SocialServiceParseError.socialServices1 {
+                print("SocialServiceParseError.socialServices1")
+            }
+            catch {
+                print(error)
+            }
+            
+            callback(socialServices1)
             }.resume()
     }
     
