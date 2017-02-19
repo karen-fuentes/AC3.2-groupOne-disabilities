@@ -14,6 +14,7 @@
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
 		9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */; };
+		9CB279CE1E591DF900634BD6 /* SpeechViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB279CD1E591DF900634BD6 /* SpeechViewController.swift */; };
 		A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A704199D1E579F3600E44C18 /* GoogleService-Info.plist */; };
 		A78AB7591E58AF600024E9C6 /* APIRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */; };
 		A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */; };
@@ -40,6 +41,7 @@
 		9CB279521E579BD600634BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CB279571E579BD600634BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CB279CD1E591DF900634BD6 /* SpeechViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechViewController.swift; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		A78AB7661E58AFFE0024E9C6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9CB279CD1E591DF900634BD6 /* SpeechViewController.swift */,
 				A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */,
 				A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */,
 				A78AB7501E58AF600024E9C6 /* MapViewController.swift */,
@@ -308,6 +311,7 @@
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
 				A78AB75D1E58AF600024E9C6 /* MapViewController.swift in Sources */,
 				578298371E58F91200957DFE /* ButtonCollectionViewCell.swift in Sources */,
+				9CB279CE1E591DF900634BD6 /* SpeechViewController.swift in Sources */,
 				A78AB75F1E58AF600024E9C6 /* Parks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
