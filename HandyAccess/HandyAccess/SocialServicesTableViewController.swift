@@ -60,7 +60,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
             DispatchQueue.main.async {
                 self.socialServices1 = validSocialServices
                 self.socialSourceTableView.reloadData()
-                dump(self.socialServices1)
+                //dump(self.socialServices1)
             }
         }
         
@@ -117,7 +117,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         
         if let urlString = socialService.url,
             let url = URL(string: urlString) {
-            cell.openWebPageImageView.isHidden = false
+            //Do Stuff
         }
         return cell
     }
@@ -125,6 +125,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let socialServicesDetailViewController = SocialServicesDetailViewController()
         socialServicesDetailViewController.socialService1 = socialServices1[indexPath.row]
+        socialServicesDetailViewController.borough = self.urlComponents["borough"]
         self.navigationController?.pushViewController(socialServicesDetailViewController, animated: true)
     }
     
