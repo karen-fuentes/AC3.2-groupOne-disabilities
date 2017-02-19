@@ -4,6 +4,7 @@
 
 # Mac OS X Finder
 .DS_Store
+HandyAccess.xcworkspace/
 
 ## Build generated
 build/
