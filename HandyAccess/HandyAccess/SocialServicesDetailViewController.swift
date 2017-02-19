@@ -54,6 +54,14 @@ class SocialServicesDetailViewController: UIViewController {
         self.view.addSubview(openInMapButton)
     }
     
+    func openInMap() {
+        if let validCoordinates = self.coordinates {
+            let socialServicesMapViewController = SocialServicesMapViewController()
+            socialServicesMapViewController.coordinates = validCoordinates
+            self.navigationController?.present(socialServicesMapViewController, animated: true, completion: nil)
+        }
+    }
+    
     private func configureConstraints() {
         organizationNameLabel.snp.makeConstraints { (label) in
             label.top.equalTo(self.topLayoutGuide.snp.bottom).offset(16)
@@ -96,6 +104,7 @@ class SocialServicesDetailViewController: UIViewController {
         button.setTitleColor(UIColor.blue, for: .normal)
         //<a href="https://icons8.com/web-app/30563/Map-Marker">
         button.imageView?.image = #imageLiteral(resourceName: "Map Marker-50")
+        button.addTarget(self, action: #selector(openInMap), for: .touchUpInside)
         return button
     }()
     
