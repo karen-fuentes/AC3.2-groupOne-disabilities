@@ -12,6 +12,8 @@
 		520FA81E1E5903D700AE4441 /* MapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA81D1E5903D700AE4441 /* MapTableViewController.swift */; };
 		520FA8201E59047D00AE4441 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA81F1E59047D00AE4441 /* MapTableViewCell.swift */; };
 		52C866441E58B5E900F0F7CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C866431E58B5E900F0F7CE /* Users.swift */; };
+		578298371E58F91200957DFE /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */; };
+		578298391E58FDD800957DFE /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298381E58FDD800957DFE /* ButtonViewController.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
 		9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2794B1E579BD600634BD6 /* AppDelegate.swift */; };
 		9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CB279521E579BD600634BD6 /* Assets.xcassets */; };
@@ -38,6 +40,8 @@
 		520FA81D1E5903D700AE4441 /* MapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewController.swift; sourceTree = "<group>"; };
 		520FA81F1E59047D00AE4441 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		52C866431E58B5E900F0F7CE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		578298381E58FDD800957DFE /* ButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
 		9CB279481E579BD600634BD6 /* HandyAccess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandyAccess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,9 +129,11 @@
 				A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */,
 				A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */,
 				A78AB7501E58AF600024E9C6 /* MapViewController.swift */,
+				578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */,
 				A78AB7531E58AF600024E9C6 /* ProfileFavoritesViewController.swift */,
 				A78AB7541E58AF600024E9C6 /* ResourcesTableViewController.swift */,
 				A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */,
+				578298381E58FDD800957DFE /* ButtonViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				578298391E58FDD800957DFE /* ButtonViewController.swift in Sources */,
 				A78AB7591E58AF600024E9C6 /* APIRequestManager.swift in Sources */,
 				A78AB7631E58AF600024E9C6 /* SocialServicesTableViewController.swift in Sources */,
 				520FA8201E59047D00AE4441 /* MapTableViewCell.swift in Sources */,
@@ -316,6 +323,7 @@
 				520FA81A1E58F7E100AE4441 /* WheelMapManager.swift in Sources */,
 				9CB2794C1E579BD600634BD6 /* AppDelegate.swift in Sources */,
 				A78AB75D1E58AF600024E9C6 /* MapViewController.swift in Sources */,
+				578298371E58F91200957DFE /* ButtonCollectionViewCell.swift in Sources */,
 				A78AB75F1E58AF600024E9C6 /* Parks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

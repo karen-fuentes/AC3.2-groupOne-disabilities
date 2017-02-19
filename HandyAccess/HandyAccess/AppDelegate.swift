@@ -67,9 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fourthNav.tabBarItem = tab4ItemInfo
         
         UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
-
-
-        
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = tabVC
