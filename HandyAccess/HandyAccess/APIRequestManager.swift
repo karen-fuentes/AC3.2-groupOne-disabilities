@@ -52,7 +52,7 @@ class APIRequestManager {
             }
             guard let validData = data else { return }
             
-            dump(validData)
+            //dump(validData)
             
             var socialServices1 = [SocialService1]()
             do {
@@ -66,7 +66,7 @@ class APIRequestManager {
                     }
                     socialServices1.append(s)
                 }
-                dump(socialServices1)
+                //dump(socialServices1)
             }                
             catch SocialServiceParseError.json {
                 print("SocialServiceParseError.json")
@@ -223,7 +223,7 @@ class APIRequestManager {
                 print(error)
             }
             
-            dump(coordinatesArray)
+            //dump(coordinatesArray)
             
             callback(coordinatesArray)
             

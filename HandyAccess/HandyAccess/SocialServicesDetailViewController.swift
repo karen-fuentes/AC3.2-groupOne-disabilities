@@ -12,6 +12,8 @@ import SnapKit
 class SocialServicesDetailViewController: UIViewController {
     
     var socialService1: SocialService1?
+    var borough: String?
+    var coordinates: Coordinates?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +24,28 @@ class SocialServicesDetailViewController: UIViewController {
         self.organizationNameLabel.text = socialService1?.organizationname
         self.descriptionLabel.text = socialService1?.description
         
-        APIRequestManager.shared.getDataForCoordinates(address: "31-00 47th Ave", borough: "queens") { (coordinates: [Coordinates]?) in
-            guard let validCoordinates = coordinates else { return }
-            dump(validCoordinates)
-        }
+//        APIRequestManager.shared.getDataForCoordinates(address: "31-00 47th Ave", borough: "queens") { (coordinates: [Coordinates]?) in
+//            guard let validCoordinates = coordinates else { return }
+//            dump(validCoordinates)
+//        }
         
+//        guard let validAddress = socialService1?.location_1_location else { return }
+//        guard let validBorough = self.borough else { return }
+//        
+//        APIRequestManager.shared.getDataForCoordinates(address: validAddress, borough: validBorough) { (coordinatesArr: [Coordinates]?) in
+//            guard let validCoordinatesArr = coordinatesArr else { return }
+//            self.coordinates = validCoordinatesArr[0]
+//            dump(validCoordinatesArr)
+//        }
+        
+        guard let validCoordinate = socialService1?.location_1 else { return }
+        self.coordinates = validCoordinate
+        
+        if self.coordinates != nil {
+            dump(self.coordinates)
+            self.openInMapButton.isHidden = false
+        }
+
     }
     
     private func setupViewHierarchy() {
@@ -53,6 +72,7 @@ class SocialServicesDetailViewController: UIViewController {
             button.centerX.equalToSuperview()
         }
     }
+    
     
     lazy var organizationNameLabel: UILabel = {
         let label = UILabel()
