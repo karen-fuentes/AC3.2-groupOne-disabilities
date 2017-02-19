@@ -18,13 +18,18 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     private let audioEngine = AVAudioEngine()
     
     var textSpoken = String()
+    
+    var effect: UIVisualEffect!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.black
-        view.alpha = 0.2
+//        view.backgroundColor = UIColor.black
+//        view.alpha = 0.2
+        
+        effect = self.blur.effect
+        blur.effect = self.effect
         
         //view.isOpaque = false
         setupViewHierarchy()
@@ -127,6 +132,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     func setupViewHierarchy() {
         self.edgesForExtendedLayout = []
         
+        view.addSubview(blur)
         view.addSubview(button1)
         view.addSubview(button2)
         view.addSubview(button3)
@@ -136,6 +142,10 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func setupView() {
+        blur.snp.makeConstraints({ (view) in
+            view.top.bottom.trailing.leading.equalToSuperview()
+        })
+        
         button1.snp.makeConstraints({ (view) in
             view.top.equalToSuperview().offset(50)
             view.centerX.equalToSuperview()
@@ -255,5 +265,11 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         button.backgroundColor = UIColor.red
         button.addTarget(self, action: #selector(speachButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    internal lazy var blur: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        var blurEffectView = UIVisualEffectView(effect: blur)
+        return blurEffectView
     }()
 }

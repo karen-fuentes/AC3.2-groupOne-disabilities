@@ -12,6 +12,7 @@
 		520FA81E1E5903D700AE4441 /* MapTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA81D1E5903D700AE4441 /* MapTableViewController.swift */; };
 		520FA8201E59047D00AE4441 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA81F1E59047D00AE4441 /* MapTableViewCell.swift */; };
 		52C866441E58B5E900F0F7CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C866431E58B5E900F0F7CE /* Users.swift */; };
+		571B77591E596C870064EA76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 571B77581E596C870064EA76 /* Info.plist */; };
 		578298371E58F91200957DFE /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */; };
 		578298391E58FDD800957DFE /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298381E58FDD800957DFE /* ButtonViewController.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
@@ -40,6 +41,7 @@
 		520FA81D1E5903D700AE4441 /* MapTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewController.swift; sourceTree = "<group>"; };
 		520FA81F1E59047D00AE4441 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		52C866431E58B5E900F0F7CE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		571B77581E596C870064EA76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		578298381E58FDD800957DFE /* ButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
@@ -47,7 +49,6 @@
 		9CB2794B1E579BD600634BD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CB279521E579BD600634BD6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CB279551E579BD600634BD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9CB279571E579BD600634BD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A704199D1E579F3600E44C18 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestManager.swift; sourceTree = "<group>"; };
 		A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +177,7 @@
 				9CB2794B1E579BD600634BD6 /* AppDelegate.swift */,
 				9CB279521E579BD600634BD6 /* Assets.xcassets */,
 				9CB279541E579BD600634BD6 /* LaunchScreen.storyboard */,
-				9CB279571E579BD600634BD6 /* Info.plist */,
+				571B77581E596C870064EA76 /* Info.plist */,
 				A704199D1E579F3600E44C18 /* GoogleService-Info.plist */,
 			);
 			name = "Support Files";
@@ -245,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				571B77591E596C870064EA76 /* Info.plist in Resources */,
 				9CB279561E579BD600634BD6 /* LaunchScreen.storyboard in Resources */,
 				A704199E1E579F3600E44C18 /* GoogleService-Info.plist in Resources */,
 				9CB279531E579BD600634BD6 /* Assets.xcassets in Resources */,

@@ -2,20 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<<<<<<< HEAD
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Need permission.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Can we use your microphone?</string>
-=======
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
->>>>>>> 4c380e38019b5ba209926505f4c67f773acd2502
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location</string>
+	<string>Need Permission</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Need Microphone</string>
 	<key>MGLMapboxAccessToken</key>
 	<string>pk.eyJ1IjoibnljaGFuZHlhY2Nlc3MiLCJhIjoiY2l6YWNpMnh0MDF4aDJ3cG9sZG1iMjQ1MCJ9.Ynaqak7QUD73WTQAgqLG1g</string>
 	<key>CFBundleDevelopmentRegion</key>
