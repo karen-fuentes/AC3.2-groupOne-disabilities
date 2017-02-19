@@ -21,6 +21,12 @@ class SocialServicesDetailViewController: UIViewController {
         
         self.organizationNameLabel.text = socialService1?.organizationname
         self.descriptionLabel.text = socialService1?.description
+        
+        APIRequestManager.shared.getDataForCoordinates(address: "31-00 47th Ave", borough: "queens") { (coordinates: [Coordinates]?) in
+            guard let validCoordinates = coordinates else { return }
+            dump(validCoordinates)
+        }
+        
     }
     
     private func setupViewHierarchy() {
