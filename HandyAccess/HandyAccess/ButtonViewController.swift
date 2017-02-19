@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Speech
+import Mapbox
 
 class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -16,6 +17,17 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+    private var mapView:MapViewController?
+
+    public func setMapController(map1: MapViewController) {
+        mapView = map1
+    }
+    
+    class MyCustomPointAnnotation: MGLPointAnnotation {
+        var willUseImage: Bool = false
+    }
+    var wheelMapLocationsArr = [WheelMapLocations]()
+
     
     var textSpoken = String()
     let data = [WheelMapLocations]()
@@ -231,65 +243,74 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     func buttonPressed(button: UIButton) {
         
-        var categoryNum = 0
+        var categoryName = ""
         
         if button == button1 {
             print("button 1")
-           categoryNum = 2
+           categoryName = "food"
           
         } else if button == button2 {
             print("button 2")
-            categoryNum = 1
+            categoryName = "food"
             
         } else if button == button3 {
             print("button 3")
-            categoryNum = 12
+            categoryName = "food"
             
         } else if button == button4 {
             print("button 4")
-            categoryNum = 11
+            categoryName = "food"
             
         } else if button == button5 {
             print("button 5")
-            categoryNum = 4
+            categoryName = "food"
             
         } else if button == button6 {
             print("button 6")
-            categoryNum = 5
+            categoryName = "food"
             
         } else if button == button7 {
             print("button 7")
-            categoryNum = 3
+            categoryName = "food"
             
         } else if button == button8 {
             print("button 8")
-            categoryNum = 6
+            categoryName = "food"
             
         } else if button == button9 {
             print("button 9")
-            categoryNum = 7
+            categoryName = "food"
             
         } else if button == button10 {
             print("button 10")
-            categoryNum = 8
+            categoryName = "food"
         }
         //baseendpoint
-        var endpoint = "http://wheelmap.org/api/categories/\(categoryNum)/node_types?&per_page=6"
+        //var endpoint = "http://wheelmap.org/api/categories/\(categoryNum)/node_types?&per_page=6"
+        let c = self.mapView!.getmapbounds() as MGLCoordinateBounds
+        
+        var endpoint = "http://wheelmap.org/en/api/nodes/search?q=\(categoryName)&bbox=\(c.ne.longitude),\(c.ne.latitude),\(c.sw.longitude),\(c.sw.latitude)&per_page=6"
+        
         //make api call with endpoint
         //update an array for objects
         WheelMapManager.manager.getData(endpoint: endpoint) {(allData: [WheelMapLocations]?) in
-            guard let allData = allData else {return}
+            //guard let allData = allData else {return}
             
-            var data = allData
-            dump(data)
-            DispatchQueue.main.async {
-                MapViewController().loadView()
-            }
+            self.mapView!.refresh(object1: (allData)!)
+            self.dismiss(animated: true, completion: nil)
+
+//            dump(allData)
+//            DispatchQueue.main.async {
+//                MapViewController().reloadInputViews()
+//            }
             
         }
         //dismiss after
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
     }
+    
+  
+    
     
     func speachButtonPressed() {
         if audioEngine.isRunning {
