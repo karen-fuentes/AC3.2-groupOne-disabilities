@@ -49,19 +49,12 @@ class WheelMapManager{
                 let categoryId = category["id"] as? Int,
                 let categoryIdentifier = category["identifier"] as? String else { return nil}
                 
-                var wheelChairStatus = "Unknown wheelChairStatus"
-                if let wheelchair = node["wheelchair"] as? String {
-                    wheelChairStatus = wheelchair
-                }
-                var nameStatus = "Unknown nameStatus"
-                if let name = node["name"] as? String {
-                    nameStatus = name
-                }
-                var wheelchair_toiletStatus = "Unknown wheelchair_toiletStatus"
-                if let wheelchair_toilet = node["wheelchair_toilet"] as? String {
-                    wheelchair_toiletStatus = wheelchair_toilet
-                }
-                allData.append(WheelMapLocations(name: nameStatus, wheelchair: wheelChairStatus, wheelchair_toilet: wheelchair_toiletStatus, lat: lat, lon: lon, categoryIdentifier: categoryIdentifier, categoryId: categoryId))
+                
+                let wheelchair = node["wheelchair"] as? String ?? "Unknown wheelChair status"
+                let name = node["name"] as? String ?? "Unknown name status "
+                let wheelchair_toilet = node["wheelchair_toilet"] as? String ?? "Unknown wheelchair_toilet status"
+                
+                allData.append(WheelMapLocations(name: name, wheelchair: wheelchair, wheelchair_toilet: wheelchair_toilet, lat: lat, lon: lon, categoryIdentifier: categoryIdentifier, categoryId: categoryId))
             
             }
             return allData
