@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let resourcesTVC = SocialServicesTableViewController()
         let mapVC = MapViewController()
         let profileVc = ProfileFavoritesViewController()
-        let buttonViewController = ButtonViewController()
         
         let firstNav = UINavigationController(rootViewController: mapVC)
         let secondNav = UINavigationController(rootViewController: eventsVC)
