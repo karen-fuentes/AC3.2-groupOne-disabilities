@@ -22,13 +22,13 @@ class MapTableViewCell: UITableViewCell {
             
             self.mapNameLabel.snp.makeConstraints { (view) in
                 view.leading.top.equalToSuperview().offset(8)
-                view.trailing.equalToSuperview().inset(-8)
+                view.trailing.equalToSuperview().inset(8)
             }
             
             self.mapDescriptionLabel.snp.makeConstraints { (view) in
                 view.top.equalTo(self.mapNameLabel.snp.bottom).offset(8)
                 view.leading.equalToSuperview().offset(8)
-                view.trailing.bottom.equalToSuperview().inset(-8)
+                view.trailing.bottom.equalToSuperview().inset(8)
             }
         }
         
