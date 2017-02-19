@@ -15,12 +15,20 @@ class Coordinates {
         self.lat = lat
         self.long = long
     }
-    convenience init? (_ withArray : [Double]?) {
-        guard let validArray = withArray else { return nil }
+    convenience init? (with array : [Double]?) {
+        guard let validArray = array else { return nil }
         guard validArray.count == 2 else { return nil }
         self.init(lat: validArray[0], long: validArray[1])
     }
-
+    
+    convenience init? (with dict: [String: Any]) {
+        if let lat = dict["latitude"] as? Double,
+            let long = dict["longitude"] as? Double {
+            self.init(lat: lat, long: long)
+        } else {
+            return nil
+        }
+    }
 }
 
 //https://data.cityofnewyork.us/resource/386y-9exk.json
@@ -237,8 +245,8 @@ class SocialService1 {
                 let victim_services = dictionary["victim_services"] as? String
                 let youth_services = dictionary["youth_services"] as? String
             
-                let location_1_coordinate_object = Coordinates.init(location_1_coordinate_doubles)
-                let location_2_coordinate_object = Coordinates.init(location_2_coordinate_doubles)
+                let location_1_coordinate_object = Coordinates.init(with: location_1_coordinate_doubles)
+                let location_2_coordinate_object = Coordinates.init(with: location_2_coordinate_doubles)
 
             self.init(aging: aging,
                       anti_discrimination_human_rights: anti_discrimination_human_rights,

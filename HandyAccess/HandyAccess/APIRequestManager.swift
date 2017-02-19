@@ -18,6 +18,13 @@ enum SocialServiceParseError: Error {
     case socialServices1
 }
 
+enum CoordinatesParseError: Error {
+    case json
+    case results
+    case response
+    case coordinates
+}
+
 class APIRequestManager {
     
     static let shared = APIRequestManager()
@@ -45,7 +52,7 @@ class APIRequestManager {
             }
             guard let validData = data else { return }
             
-            dump(validData)
+            //dump(validData)
             
             var socialServices1 = [SocialService1]()
             do {
@@ -59,7 +66,7 @@ class APIRequestManager {
                     }
                     socialServices1.append(s)
                 }
-                dump(socialServices1)
+                //dump(socialServices1)
             }                
             catch SocialServiceParseError.json {
                 print("SocialServiceParseError.json")
@@ -159,4 +166,68 @@ class APIRequestManager {
             callback(socialServices)
             }.resume()
     }
+    
+    internal func getDataForCoordinates(address:String, borough: String, callback: @escaping([Coordinates]?) -> Void) {
+        //https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=1a4ac0f9&app_key=f6ecb3c64c54ece79b4667cae7ed96ad&input=%2031-00%2047th%20Ave%20queens
+        //guard let urlBase = URL(string: "https://api.cityofnewyork.us/geoclient/v1/search.json?") else { return }
+//        guard let urlBaseString = ("https://api.cityofnewyork.us/geoclient/v1/search.json?" + "input=" + address + " " + borough).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
+//        guard let validBaseURL = URL(string: urlBaseString) else { return }
+//        var request = URLRequest(url: validBaseURL)
+//        request.httpMethod = "GET"
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
+//        request.addValue("1a4ac0f9", forHTTPHeaderField: "app_id")
+//        request.addValue("f6ecb3c64c54ece79b4667cae7ed96ad", forHTTPHeaderField: "app_key")
+//        //request.addValue(urlExtension, forHTTPHeaderField: "input")
+//        
+//        print(request)
+        
+        guard let validURL = URL(string: "https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=1a4ac0f9&app_key=f6ecb3c64c54ece79b4667cae7ed96ad&input=%2031-00%2047th%20Ave%20queens") else { return }
+        
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: validURL) { (data:Data?, response: URLResponse?, error: Error?) in
+            if error != nil {
+                print(error)
+            }
+            guard let validData = data else { return }
+            
+            var coordinatesArray = [Coordinates]()
+            
+            do {
+                guard let validJson = try JSONSerialization.jsonObject(with: validData, options: []) as? [String: Any] else {
+                    throw CoordinatesParseError.json
+                }
+//                let json = try JSONSerialization.jsonObject(with: validData, options: []) as? Any
+//                guard let validJson = json as? [String: Any] else {
+//                    throw CoordinatesParseError.json
+//                }
+                
+                guard let resultsDict = validJson["results"] as? [[String: Any]] else {
+                    throw CoordinatesParseError.results
+                }
+                
+                for result in resultsDict{
+                    guard let response = result["response"] as? [String: Any] else {
+                        throw CoordinatesParseError.response
+                    }
+                    guard let c = Coordinates(with: response) else { continue }
+                    coordinatesArray.append(c)
+                }
+            }
+            catch CoordinatesParseError.json {
+                print("CoordinatesParseError.json")
+            }
+            catch CoordinatesParseError.results {
+                print("CoordinatesParseError.results")
+            }
+            catch {
+                print(error)
+            }
+            
+            //dump(coordinatesArray)
+            
+            callback(coordinatesArray)
+            
+            }.resume()
+    }
+
 }

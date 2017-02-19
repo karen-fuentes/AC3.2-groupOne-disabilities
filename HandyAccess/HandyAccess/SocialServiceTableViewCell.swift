@@ -17,7 +17,7 @@ class SocialServiceTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         self.addSubview(organizationNameLabel)
         self.addSubview(organizationDescriptionLabel)
-        self.addSubview(openWebPageImageView)
+        //self.addSubview(openWebPageImageView)
         
         self.selectionStyle = .none
         
@@ -33,13 +33,12 @@ class SocialServiceTableViewCell: UITableViewCell {
             view.bottom.equalToSuperview()
         }
         
-        self.openWebPageImageView.snp.makeConstraints { (view) in
-            view.centerY.equalToSuperview()
-            view.trailing.equalToSuperview().inset(8)
-            view.height.equalTo(60)
-            view.width.equalTo(60)
-            
-        }
+        //self.openWebPageImageView.snp.makeConstraints { (view) in
+        //    view.centerY.equalToSuperview()
+        //    view.trailing.equalToSuperview().inset(8)
+        //    view.height.equalTo(60)
+        //    view.width.equalTo(60)
+        //}
     }
     
     required init?(coder aDecoder: NSCoder) {
