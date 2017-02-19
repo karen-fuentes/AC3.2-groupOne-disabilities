@@ -109,7 +109,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         if (pickerLabel == nil) {
             pickerLabel = UILabel()
             
-            pickerLabel?.font = UIFont.systemFont(ofSize: 8)
+            pickerLabel?.font = UIFont.systemFont(ofSize: 16)
             pickerLabel?.textAlignment = NSTextAlignment.center
         }
         
