@@ -9,13 +9,15 @@
 import UIKit
 import SnapKit
 
-class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
 
     var socialServices1 = [SocialService1]()
     let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json"
     //    var metaViews = [MetaView]()
     //    var socialServices = [SocialService]()
     //    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
+    
+   var catagories = ["disabilities", "aging"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +69,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         }
     }
 
-    // MARK: - Table view data source
+    // MARK: - TableView data source
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -90,6 +92,36 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         return cell
     }
 
+    // MARK: - PickerView Delegate
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.catagories.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var pickerLabel = view as? UILabel
+        
+        if (pickerLabel == nil) {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont.systemFont(ofSize: 8)
+            pickerLabel?.textAlignment = NSTextAlignment.center
+        }
+        
+        pickerLabel?.text = catagories[component]
+        
+        return pickerLabel!
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+    }
+    
     func filter() {
         var returnArray = [SocialService1]()
         for service in returnArray {
@@ -102,13 +134,14 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
     lazy var filterBarButton: UIBarButtonItem = {
        let barButton = UIBarButtonItem()
         barButton.title = "Filter"
-//        barButton.image =
         return barButton
     }()
     
     lazy var filterPicker: UIPickerView = {
-        let picker = UIPickerView()
-        return picker
+        let pickerView = UIPickerView()
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        return pickerView
     }()
     
     lazy var socialSourceTableView: UITableView = {
