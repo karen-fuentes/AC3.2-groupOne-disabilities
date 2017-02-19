@@ -11,7 +11,9 @@ import Mapbox
 import SnapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapViewDelegate/*UICollectionViewDelegate, UICollectionViewDataSource*/ {
-    
+    class MyCustomPointAnnotation: MGLPointAnnotation {
+        var willUseImage: Bool = false
+    }
     var annotations = [MGLAnnotation]()
     let locationManager: CLLocationManager = {
         let locMan: CLLocationManager = CLLocationManager()
@@ -34,6 +36,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         setupViewHierarchy()
         setupView()
         showModal()
+        
+        
+        let pointA = MyCustomPointAnnotation()
+        pointA.coordinate = CLLocationCoordinate2D(latitude: 40.7420, longitude: 73.9354)
+        pointA.title = "Stovepipe Wells"
+        pointA.willUseImage = true
+        
+        let myPlaces = [pointA]
+        mapView.addAnnotations(myPlaces)
     }
     
     func showModal() {

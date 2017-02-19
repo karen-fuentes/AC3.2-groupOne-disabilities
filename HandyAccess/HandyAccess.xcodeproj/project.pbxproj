@@ -32,6 +32,7 @@
 		A78AB7631E58AF600024E9C6 /* SocialServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */; };
 		A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */; };
 		A78AB76C1E58D90D0024E9C6 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB76B1E58D90D0024E9C6 /* EventTableViewCell.swift */; };
+		A78AB76E1E5968250024E9C6 /* SocialServicesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesTableViewController.swift; sourceTree = "<group>"; };
 		A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
 		A78AB76B1E58D90D0024E9C6 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
+		A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesDetailViewController.swift; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,14 +129,16 @@
 		A78AB7661E58AFFE0024E9C6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				578298381E58FDD800957DFE /* ButtonViewController.swift */,
 				A78AB7501E58AF600024E9C6 /* MapViewController.swift */,
 				A78AB74D1E58AF600024E9C6 /* EventsViewController.swift */,
 				A78AB74E1E58AF600024E9C6 /* LoginViewController.swift */,
+				520FA81D1E5903D700AE4441 /* MapTableViewController.swift */,
 				578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */,
 				A78AB7531E58AF600024E9C6 /* ProfileFavoritesViewController.swift */,
 				A78AB7541E58AF600024E9C6 /* ResourcesTableViewController.swift */,
 				A78AB7561E58AF600024E9C6 /* SocialServicesTableViewController.swift */,
+				A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */,
+				578298381E58FDD800957DFE /* ButtonViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -143,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				A78AB74C1E58AF600024E9C6 /* APIRequestManager.swift */,
+				520FA8191E58F7E100AE4441 /* WheelMapManager.swift */,
 			);
 			name = APIRequestManager;
 			sourceTree = "<group>";
@@ -151,9 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A78AB7511E58AF600024E9C6 /* NYCEventCalendarModel.swift */,
-				520FA8191E58F7E100AE4441 /* WheelMapManager.swift */,
 				520FA81B1E58FDFF00AE4441 /* WheelMapLocations.swift */,
-				520FA81D1E5903D700AE4441 /* MapTableViewController.swift */,
 				A78AB7521E58AF600024E9C6 /* Parks.swift */,
 				A78AB7551E58AF600024E9C6 /* SocialService.swift */,
 				52C866431E58B5E900F0F7CE /* Users.swift */,
@@ -318,6 +321,7 @@
 				520FA81C1E58FDFF00AE4441 /* WheelMapLocations.swift in Sources */,
 				A78AB7611E58AF600024E9C6 /* ResourcesTableViewController.swift in Sources */,
 				A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */,
+				A78AB76E1E5968250024E9C6 /* SocialServicesDetailViewController.swift in Sources */,
 				A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */,
 				A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */,
 				A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */,
