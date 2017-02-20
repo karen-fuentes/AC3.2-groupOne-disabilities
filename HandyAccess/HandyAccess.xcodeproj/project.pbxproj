@@ -36,6 +36,7 @@
 		A78AB76C1E58D90D0024E9C6 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB76B1E58D90D0024E9C6 /* EventTableViewCell.swift */; };
 		A78AB76E1E5968250024E9C6 /* SocialServicesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */; };
 		A7E478261E5A9E9F00CEA88B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E478251E5A9E9F00CEA88B /* ColorScheme.swift */; };
+		A7E478291E5AC43100CEA88B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E478281E5AC43100CEA88B /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		A78AB76B1E58D90D0024E9C6 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesDetailViewController.swift; sourceTree = "<group>"; };
 		A7E478251E5A9E9F00CEA88B /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
+		A7E478281E5AC43100CEA88B /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 		9CB2794A1E579BD600634BD6 /* HandyAccess */ = {
 			isa = PBXGroup;
 			children = (
+				A7E478271E5AC40900CEA88B /* Extensions */,
 				A78AB7671E58B00A0024E9C6 /* APIRequestManager */,
 				A78AB7681E58B01A0024E9C6 /* Models */,
 				A78AB7691E58B0210024E9C6 /* Views */,
@@ -193,6 +196,14 @@
 				A704199D1E579F3600E44C18 /* GoogleService-Info.plist */,
 			);
 			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		A7E478271E5AC40900CEA88B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A7E478281E5AC43100CEA88B /* String+Extension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +338,7 @@
 				A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */,
 				A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */,
 				A78AB76C1E58D90D0024E9C6 /* EventTableViewCell.swift in Sources */,
+				A7E478291E5AC43100CEA88B /* String+Extension.swift in Sources */,
 				520FA81C1E58FDFF00AE4441 /* WheelMapLocations.swift in Sources */,
 				A78AB7611E58AF600024E9C6 /* ResourcesTableViewController.swift in Sources */,
 				A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */,

@@ -60,6 +60,7 @@ class SocialServicesDetailViewController: UIViewController {
         self.view.addSubview(organizationNameLabel)
         self.view.addSubview(descriptionLabel)
         self.view.addSubview(openInMapButton)
+        self.view.addSubview(makeACallButton)
     }
     
     func openInMap() {
@@ -68,7 +69,6 @@ class SocialServicesDetailViewController: UIViewController {
             socialServicesMapViewController.coordinates = validCoordinates
             socialServicesMapViewController.socialService1 = self.socialService1
             self.navigationController?.pushViewController(socialServicesMapViewController, animated: true)
-            //self.present(socialServicesMapViewController, animated: true, completion: nil)
         }
     }
     
@@ -87,6 +87,11 @@ class SocialServicesDetailViewController: UIViewController {
         
         openInMapButton.snp.makeConstraints { (button) in
             button.top.equalTo(self.descriptionLabel.snp.bottom).offset(16)
+            button.centerX.equalToSuperview()
+        }
+        
+        makeACallButton.snp.makeConstraints { (button) in
+            button.top.equalTo(self.openInMapButton.snp.bottom).offset(16)
             button.centerX.equalToSuperview()
         }
     }
@@ -115,6 +120,20 @@ class SocialServicesDetailViewController: UIViewController {
         //<a href="https://icons8.com/web-app/30563/Map-Marker">
         button.imageView?.image = #imageLiteral(resourceName: "Map Marker-50")
         button.addTarget(self, action: #selector(openInMap), for: .touchUpInside)
+        return button
+    }()
+    
+    func makeACall() {
+        guard let validPhone = self.socialService1?.phone else { return }
+            let phoneNumber: String = "tel://\(validPhone)"
+        UIApplication.shared.open(URL(string: phoneNumber)!, options: [:], completionHandler: nil)
+    }
+    
+    lazy var makeACallButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Call Company", for: .normal)
+        button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(makeACall), for: .touchUpInside)
         return button
     }()
     
