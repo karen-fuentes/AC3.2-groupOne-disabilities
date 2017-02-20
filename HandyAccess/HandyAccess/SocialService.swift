@@ -18,7 +18,7 @@ class Coordinates {
     convenience init? (with array : [Double]?) {
         guard let validArray = array else { return nil }
         guard validArray.count == 2 else { return nil }
-        self.init(lat: validArray[0], long: validArray[1])
+        self.init(lat: validArray[1], long: validArray[0])
     }
     
     convenience init? (with dict: [String: Any]) {

@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Speech
+import Mapbox
 
 class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -16,9 +17,21 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+    private var mapView:MapViewController?
+
+    public func setMapController(map1: MapViewController) {
+        mapView = map1
+    }
     
     var textSpoken = String()
     let boroughArray = ["Queens", "Brooklyn", "Bronx", "Staten Island", "Manhattan", "All"]
+
+    class MyCustomPointAnnotation: MGLPointAnnotation {
+        var willUseImage: Bool = false
+    }
+    var wheelMapLocationsArr = [WheelMapLocations]()
+    let data = [WheelMapLocations]()
+    var effect: UIVisualEffect!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,6 +169,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         speechOrButtonContainer.addSubview(speechOrClickLabel)
         speechOrButtonContainer.addSubview(speechButtonForContainer)
         speechOrButtonContainer.addSubview(clickButtonsForContainer)
+
+        view.addSubview(speechButton)
     }
     
     func setupView() {
@@ -168,15 +183,6 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func buttonPressed(button: UIButton) {
-//        if button == speechButtonForContainer {
-//            print("Speech Button pressed")
-//            //present karens speech view
-//        } else if button == clickButtonsForContainer {
-//            print("Want buttons")
-//            fadeOutView(view: speechOrButtonContainer, hidden: true)
-//            fadeInView(view: boroughContainer, hidden: true)
-//        }
-        
         switch button {
 //        case speechButtonForContainer:
 //            print("Speech Button pressed")
@@ -319,12 +325,47 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         })
     }
     
+//    func buttonPressed(button: UIButton) {
+//        
+//
+//        //baseendpoint
+//        //var endpoint = "http://wheelmap.org/api/categories/\(categoryNum)/node_types?&per_page=6"
+//        let c = self.mapView!.getmapbounds() as MGLCoordinateBounds
+//        
+//        var endpoint = "http://wheelmap.org/en/api/nodes/search?q=\(categoryName)&bbox=\(c.ne.longitude),\(c.ne.latitude),\(c.sw.longitude),\(c.sw.latitude)&per_page=10"
+//        print(endpoint)
+//        
+//        //make api call with endpoint
+//        //update an array for objects
+//        WheelMapManager.manager.getData(endpoint: endpoint) {(allData: [WheelMapLocations]?) in
+//            //guard let allData = allData else {return}
+//            
+//            if allData != nil {
+//                self.mapView!.refresh(object1: (allData)!)
+//                self.dismiss(animated: true, completion: nil)
+//            } else {
+//                print("None There")
+//            }
+//            
+//            
+//            
+//
+////            dump(allData)
+////            DispatchQueue.main.async {
+////                MapViewController().reloadInputViews()
+////            }
+//            
+//        }
+//        //dismiss after
+//        //dismiss(animated: true, completion: nil)
+//    }
+
     func fadeOutView(view: UIView, hidden: Bool) {
         UIView.transition(with: view, duration: 1.0, options: .transitionCrossDissolve, animations: {() -> Void in
             view.isHidden = true
         }, completion: { _ in })
     }
-    
+
     func fadeInView(view: UIView, hidden: Bool) {
         UIView.transition(with: view, duration: 1.0, options: .transitionCrossDissolve, animations: {() -> Void in
             view.isHidden = false
@@ -404,6 +445,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         button.setTitle("Bronx", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
+//        button.backgroundColor?.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()

@@ -41,9 +41,9 @@ class SocialServicesDetailViewController: UIViewController {
         guard let validCoordinate = socialService1?.location_1 else { return }
         self.coordinates = validCoordinate
         
-        if self.coordinates != nil {
+        if self.coordinates == nil {
             dump(self.coordinates)
-            self.openInMapButton.isHidden = false
+            self.openInMapButton.isHidden = true
         }
 
     }
