@@ -40,21 +40,20 @@ class SocialServicesDetailViewController: UIViewController {
         
         //APIRequestManager.shared.getCoordinateFromGoogle(companyName: String, borough: String , complete: @escaping ([Coordinates]?) -> Void)
        
-        
-//        APIRequestManager.shared.getCoordinateFromGoogle(companyName: (self.socialService1?.organizationname)!, borough: self.borough!) { (coordinatesArr:[Coordinates]?) in
-//            guard let validCoordinatesArr = coordinatesArr else { return }
-//            guard validCoordinatesArr.count > 0 else { return }
-//            self.coordinates = validCoordinatesArr[0]
-//        }
-        
-        guard let validCoordinate = socialService1?.location_1 else { return }
-        self.coordinates = validCoordinate
-        
-        if self.coordinates == nil {
-            dump(self.coordinates)
-            self.openInMapButton.isHidden = true
+        if let validSocialService1 = self.socialService1 {
+            if let validCoordinate = validSocialService1.location_1 {
+                self.coordinates = validCoordinate
+            } else {
+                guard let borough = self.borough else { return }
+                APIRequestManager.shared.getCoordinateFromGoogle(companyName: validSocialService1.organizationname, borough: borough) { (coordinatesArr:[Coordinates]?) in
+                    DispatchQueue.main.async {
+                        guard let validCoordinatesArr = coordinatesArr else { return }
+                        guard validCoordinatesArr.count > 0 else { return }
+                        self.coordinates = validCoordinatesArr[0]
+                    }
+                }
+            }
         }
-
     }
     
     private func setupViewHierarchy() {
@@ -67,7 +66,8 @@ class SocialServicesDetailViewController: UIViewController {
         if let validCoordinates = self.coordinates {
             let socialServicesMapViewController = SocialServicesMapViewController()
             socialServicesMapViewController.coordinates = validCoordinates
-            self.present(socialServicesMapViewController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(socialServicesMapViewController, animated: true)
+            //self.present(socialServicesMapViewController, animated: true, completion: nil)
         }
     }
     
