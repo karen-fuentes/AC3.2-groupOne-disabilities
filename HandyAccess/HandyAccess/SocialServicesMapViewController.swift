@@ -81,6 +81,8 @@ class SocialServicesMapViewController: UIViewController, MGLMapViewDelegate/*, C
         return true
     }
 
+    // MARK: - view vars
+    
     internal var mapView: MGLMapView = {
         let mglMap = MGLMapView()
         return mglMap

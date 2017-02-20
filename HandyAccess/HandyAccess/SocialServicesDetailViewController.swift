@@ -23,22 +23,6 @@ class SocialServicesDetailViewController: UIViewController {
         
         self.organizationNameLabel.text = socialService1?.organizationname
         self.descriptionLabel.text = socialService1?.description
-        
-//        APIRequestManager.shared.getDataForCoordinates(address: "31-00 47th Ave", borough: "queens") { (coordinates: [Coordinates]?) in
-//            guard let validCoordinates = coordinates else { return }
-//            dump(validCoordinates)
-//        }
-        
-//        guard let validAddress = socialService1?.location_1_location else { return }
-//        guard let validBorough = self.borough else { return }
-//        
-//        APIRequestManager.shared.getDataForCoordinates(address: validAddress, borough: validBorough) { (coordinatesArr: [Coordinates]?) in
-//            guard let validCoordinatesArr = coordinatesArr else { return }
-//            self.coordinates = validCoordinatesArr[0]
-//            dump(validCoordinatesArr)
-//        }
-        
-        //APIRequestManager.shared.getCoordinateFromGoogle(companyName: String, borough: String , complete: @escaping ([Coordinates]?) -> Void)
        
         if let validSocialService1 = self.socialService1 {
             if let validCoordinate = validSocialService1.location_1 {
@@ -57,24 +41,29 @@ class SocialServicesDetailViewController: UIViewController {
     }
     
     private func setupViewHierarchy() {
-        self.view.addSubview(organizationNameLabel)
-        self.view.addSubview(descriptionLabel)
-        self.view.addSubview(openInMapButton)
-        self.view.addSubview(makeACallButton)
-    }
-    
-    func openInMap() {
-        if let validCoordinates = self.coordinates {
-            let socialServicesMapViewController = SocialServicesMapViewController()
-            socialServicesMapViewController.coordinates = validCoordinates
-            socialServicesMapViewController.socialService1 = self.socialService1
-            self.navigationController?.pushViewController(socialServicesMapViewController, animated: true)
-        }
+        self.view.addSubview(scrollView)
+        self.scrollView.addSubview(containerView)
+        self.containerView.addSubview(organizationNameLabel)
+        self.containerView.addSubview(descriptionLabel)
+        self.containerView.addSubview(openInMapButton)
+        self.containerView.addSubview(makeACallButton)
     }
     
     private func configureConstraints() {
+        scrollView.snp.makeConstraints { (view) in
+            view.top.equalTo(self.topLayoutGuide.snp.bottom)
+            view.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints { (view) in
+            view.top.equalTo(self.topLayoutGuide.snp.bottom)
+            view.leading.equalTo(self.view.snp.leading)
+            view.trailing.equalTo(self.view.snp.trailing)
+            view.bottom.equalTo(self.view.snp.bottom)
+        }
+        
         organizationNameLabel.snp.makeConstraints { (label) in
-            label.top.equalTo(self.topLayoutGuide.snp.bottom).offset(16)
+            label.top.equalToSuperview().offset(16)
             label.leading.equalToSuperview().offset(16)
             label.trailing.equalToSuperview().inset(16)
         }
@@ -96,6 +85,32 @@ class SocialServicesDetailViewController: UIViewController {
         }
     }
     
+    // MARK: - Target Functions
+    func openInMap() {
+        if let validCoordinates = self.coordinates {
+            let socialServicesMapViewController = SocialServicesMapViewController()
+            socialServicesMapViewController.coordinates = validCoordinates
+            socialServicesMapViewController.socialService1 = self.socialService1
+            self.navigationController?.pushViewController(socialServicesMapViewController, animated: true)
+        }
+    }
+    
+    func makeACall() {
+        guard let validPhone = self.socialService1?.phone else { return }
+        let phoneNumber: String = "tel://\(validPhone)"
+        UIApplication.shared.open(URL(string: phoneNumber)!, options: [:], completionHandler: nil)
+    }
+    
+    // MARK: - Lazy Vars
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        return view
+    }()
     
     lazy var organizationNameLabel: UILabel = {
         let label = UILabel()
@@ -122,13 +137,7 @@ class SocialServicesDetailViewController: UIViewController {
         button.addTarget(self, action: #selector(openInMap), for: .touchUpInside)
         return button
     }()
-    
-    func makeACall() {
-        guard let validPhone = self.socialService1?.phone else { return }
-            let phoneNumber: String = "tel://\(validPhone)"
-        UIApplication.shared.open(URL(string: phoneNumber)!, options: [:], completionHandler: nil)
-    }
-    
+
     lazy var makeACallButton: UIButton = {
         let button = UIButton()
         button.setTitle("Call Company", for: .normal)
