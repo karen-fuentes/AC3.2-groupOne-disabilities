@@ -90,13 +90,14 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
             self.isFinal = false
-            print("isFinal \(self.isFinal) after entering the speechRecognizer; suppose to be false")
+            //print("isFinal \(self.isFinal) after entering the speechRecognizer; suppose to be false")
             if let result = result {
                 let results = result.bestTranscription.formattedString
                 self.textView.text = result.bestTranscription.formattedString
                 self.isFinal = result.isFinal
-                print("\(self.isFinal) when do self.isFinal = result.isFinal")
-                if results == "Resources" || results == "Resource"{
+                //print("\(self.isFinal) when do self.isFinal = result.isFinal")
+                //if results == "Resources" || results == "Resource"{
+                if results.lowercased().contains("resources") || results.lowercased().contains("resource") {
                     if self.isAlreadyPushed == false {
                         self.navigationController?.pushViewController(SocialServicesTableViewController(), animated: true)
                         self.audioEngine.stop()
@@ -106,7 +107,8 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                         self.isAlreadyPushed = true
                     }
                 
-                } else if results == "Local service" || results == "Local services" {
+                //} else if results == "Local service" || results == "Local services" {
+                } else if results.lowercased().contains("local service") || results.lowercased().contains("local services") {
                     if self.isAlreadyPushed == false {
                     self.navigationController?.pushViewController(MapViewController(), animated: true)
                         self.audioEngine.stop()
@@ -118,7 +120,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                 }
             }
             self.recordButton.isEnabled = true
-            print("isFinal \(self.isFinal) after resetting record button to true, suppose to be true")
+            //print("isFinal \(self.isFinal) after resetting record button to true, suppose to be true")
             
             if error != nil || self.isFinal == true {
                 
@@ -193,7 +195,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     // MARK: - Button Function
     
     func recordButtonWasTapped() {
-        print("I'm trapped")
+        //print("I'm trapped")
         self.isAlreadyPushed = false
         
         if audioEngine.isRunning {
