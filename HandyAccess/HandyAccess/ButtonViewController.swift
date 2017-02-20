@@ -48,6 +48,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         setupView()
         
         speechButton.isEnabled = false
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: Selector("filterButtonBarButtonPressed"))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,6 +76,10 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
             }
         }
     }
+    
+    //private func filterButtonBarButtonPressed() {
+    //    self.present(ButtonViewController(), animated: true, completion: nil)
+    //}
     
     private func startRecording() throws {
         
@@ -296,14 +301,15 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         //update an array for objects
         WheelMapManager.manager.getData(endpoint: endpoint) {(allData: [WheelMapLocations]?) in
             //guard let allData = allData else {return}
-            
-            if allData != nil {
-                self.mapView!.refresh(object1: (allData)!)
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                print("None There")
+            DispatchQueue.main.async {
+                if allData != nil {
+                    self.mapView!.refresh(object1: (allData)!)
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    print("None There")
+                }
+                
             }
-            
             
             
 
