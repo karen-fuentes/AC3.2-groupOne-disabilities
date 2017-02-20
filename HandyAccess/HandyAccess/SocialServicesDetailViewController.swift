@@ -41,47 +41,64 @@ class SocialServicesDetailViewController: UIViewController {
     }
     
     private func setupViewHierarchy() {
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(containerView)
-        self.containerView.addSubview(organizationNameLabel)
-        self.containerView.addSubview(descriptionLabel)
-        self.containerView.addSubview(openInMapButton)
-        self.containerView.addSubview(makeACallButton)
+        self.view.addSubview(containerView)
+        self.containerView.addSubview(scrollView)
+        self.scrollView.addSubview(contentView)
+        self.contentView.addSubview(organizationNameLabel)
+        self.contentView.addSubview(descriptionLabel)
+        self.contentView.addSubview(openInMapButton)
+        self.contentView.addSubview(makeACallButton)
     }
     
     private func configureConstraints() {
-        scrollView.snp.makeConstraints { (view) in
-            view.top.equalTo(self.topLayoutGuide.snp.bottom)
-            view.leading.trailing.bottom.equalToSuperview()
-        }
-        
         containerView.snp.makeConstraints { (view) in
             view.top.equalTo(self.topLayoutGuide.snp.bottom)
-            view.leading.equalTo(self.view.snp.leading)
-            view.trailing.equalTo(self.view.snp.trailing)
-            view.bottom.equalTo(self.view.snp.bottom)
+            view.leading.trailing.equalToSuperview()
+            view.bottom.equalTo(bottomLayoutGuide.snp.top)
+        }
+        
+        scrollView.snp.makeConstraints { (view) in
+            view.top.equalToSuperview()
+            view.leading.equalToSuperview()
+            view.trailing.equalToSuperview()
+            view.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints { (view) in
+            view.top.leading.trailing.bottom.equalToSuperview()
         }
         
         organizationNameLabel.snp.makeConstraints { (label) in
-            label.top.equalToSuperview().offset(16)
-            label.leading.equalToSuperview().offset(16)
-            label.trailing.equalToSuperview().inset(16)
+            label.top.equalTo(self.containerView.snp.top).offset(16)
+            label.leading.equalTo(self.containerView.snp.leading).offset(16)
+            label.trailing.equalTo(self.containerView.snp.trailing).inset(16)
+            
+            //label.top.equalToSuperview().offset(16)
+            //label.leading.equalToSuperview().offset(16)
+            //label.trailing.equalToSuperview().inset(16)
         }
         
         descriptionLabel.snp.makeConstraints { (label) in
             label.top.equalTo(self.organizationNameLabel.snp.bottom).offset(16)
-            label.leading.equalToSuperview().offset(16)
-            label.trailing.equalToSuperview().inset(16)
+            label.leading.equalTo(self.containerView.snp.leading).offset(16)
+            label.trailing.equalTo(self.containerView.snp.trailing).inset(16)
+            
+            //label.top.equalTo(self.organizationNameLabel.snp.bottom).offset(16)
+            //label.leading.equalToSuperview().offset(16)
+            //label.trailing.equalToSuperview().inset(16)
         }
         
         openInMapButton.snp.makeConstraints { (button) in
             button.top.equalTo(self.descriptionLabel.snp.bottom).offset(16)
-            button.centerX.equalToSuperview()
+            button.centerX.equalTo(self.containerView.snp.centerX)
+            
+            //button.top.equalTo(self.descriptionLabel.snp.bottom).offset(16)
+            //button.centerX.equalToSuperview()
         }
         
         makeACallButton.snp.makeConstraints { (button) in
             button.top.equalTo(self.openInMapButton.snp.bottom).offset(16)
-            button.centerX.equalToSuperview()
+            button.centerX.equalTo(self.containerView.snp.centerX)
         }
     }
     
@@ -104,10 +121,16 @@ class SocialServicesDetailViewController: UIViewController {
     // MARK: - Lazy Vars
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
         return scrollView
     }()
     
     lazy var containerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    lazy var contentView: UIView = {
         let view = UIView()
         return view
     }()
