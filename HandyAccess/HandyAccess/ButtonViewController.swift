@@ -18,6 +18,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     private let audioEngine = AVAudioEngine()
     
     var textSpoken = String()
+    let boroughArray = ["Queens", "Brooklyn", "Bronx", "Staten Island", "Manhattan", "All"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +120,16 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
+    func speachButtonPressed() {
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            speechButton.isEnabled = false
+        } else {
+            try! startRecording()
+        }
+    }
+    
     func setupViewHierarchy() {
         self.edgesForExtendedLayout = []
         
@@ -134,15 +145,17 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         boroughContainer.addSubview(manhattanButton)
         boroughContainer.addSubview(allButton)
         
+        boroughContainer.addSubview(resourceLabel)
+        boroughContainer.addSubview(housingButton)
+        boroughContainer.addSubview(healthButton)
+        boroughContainer.addSubview(educationButton)
+        boroughContainer.addSubview(employmentButton)
+        boroughContainer.addSubview(artsCultureButton)
+        boroughContainer.addSubview(disabilitiesButton)
+        
         speechOrButtonContainer.addSubview(speechOrClickLabel)
         speechOrButtonContainer.addSubview(speechButtonForContainer)
-        speechButtonForContainer.addSubview(clickButtonsForContainer)
-//        view.addSubview(button1)
-//        view.addSubview(button2)
-//        view.addSubview(button3)
-//        view.addSubview(button4)
-//        view.addSubview(button5)
-        boroughContainer.addSubview(speechButton)
+        speechOrButtonContainer.addSubview(clickButtonsForContainer)
     }
     
     func setupView() {
@@ -152,135 +165,35 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         speechAndButtonContainer()
         boroughContrainer()
-        
-        
-//        button1.snp.makeConstraints({ (view) in
-//            view.top.equalToSuperview().offset(50)
-//            view.centerX.equalToSuperview()
-//            view.width.equalToSuperview().multipliedBy(0.5)
-//            view.height.equalTo(70)
-//        })
-//        
-//        button2.snp.makeConstraints({ (view) in
-//            view.top.equalTo(button1.snp.bottom).offset(30)
-//            view.centerX.equalToSuperview()
-//            view.width.equalToSuperview().multipliedBy(0.5)
-//            view.height.equalTo(70)
-//        })
-//        
-//        button3.snp.makeConstraints({ (view) in
-//            view.top.equalTo(button2.snp.bottom).offset(30)
-//            view.centerX.equalToSuperview()
-//            view.width.equalToSuperview().multipliedBy(0.5)
-//            view.height.equalTo(70)
-//        })
-//        
-//        button4.snp.makeConstraints({ (view) in
-//            view.top.equalTo(button3.snp.bottom).offset(30)
-//            view.centerX.equalToSuperview()
-//            view.width.equalToSuperview().multipliedBy(0.5)
-//            view.height.equalTo(70)
-//        })
-//        
-//        button5.snp.makeConstraints({ (view) in
-//            view.top.equalTo(button4.snp.bottom).offset(30)
-//            view.centerX.equalToSuperview()
-//            view.width.equalToSuperview().multipliedBy(0.5)
-//            view.height.equalTo(70)
-//        })
-        
-//        speechButton.snp.makeConstraints({ (view) in
-//            view.top.equalTo(button5.snp.bottom).offset(30)
-//            view.centerX.equalToSuperview()
-//            view.width.equalToSuperview().multipliedBy(0.2)
-//            view.height.equalTo(70)
-//        })
     }
     
     func buttonPressed(button: UIButton) {
-//        if button == button1 {
-//            print("button 1")
-//            dismiss(animated: true, completion: nil)
-//        } else if button == button2 {
-//            print("button 2")
-//            dismiss(animated: true, completion: nil)
-//        } else if button == button3 {
-//            print("button 3")
-//            dismiss(animated: true, completion: nil)
-//        } else if button == button4 {
-//            print("button 4")
-//            dismiss(animated: true, completion: nil)
-//        } else if button == button5 {
-//            print("button 5")
-//            dismiss(animated: true, completion: nil)
+//        if button == speechButtonForContainer {
+//            print("Speech Button pressed")
+//            //present karens speech view
+//        } else if button == clickButtonsForContainer {
+//            print("Want buttons")
+//            fadeOutView(view: speechOrButtonContainer, hidden: true)
+//            fadeInView(view: boroughContainer, hidden: true)
 //        }
         
-        if button == speechButtonForContainer {
-            print("Speech Button pressed")
-            fadeOutView(view: speechOrButtonContainer, hidden: true)
-            fadeInView(view: boroughContainer, hidden: true)
-        } else if button == clickButtonsForContainer {
+        switch button {
+//        case speechButtonForContainer:
+//            print("Speech Button pressed")
+        case clickButtonsForContainer:
             print("Want buttons")
             fadeOutView(view: speechOrButtonContainer, hidden: true)
+            fadeInView(view: boroughContainer, hidden: true)
+        default:
+            break
         }
     }
-    
-    func speachButtonPressed() {
-        if audioEngine.isRunning {
-            audioEngine.stop()
-            recognitionRequest?.endAudio()
-            speechButton.isEnabled = false
-        } else {
-            try! startRecording()
-        }
-    }
-
-//    internal lazy var button1: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("button", for: .normal)
-//        button.backgroundColor = UIColor.gray
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//        return button
-//    }()
-//    
-//    internal lazy var button2: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("button", for: .normal)
-//        button.backgroundColor = UIColor.gray
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//        return button
-//    }()
-//    
-//    internal lazy var button3: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("button", for: .normal)
-//        button.backgroundColor = UIColor.gray
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//        return button
-//    }()
-//    
-//    internal lazy var button4: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("button", for: .normal)
-//        button.backgroundColor = UIColor.gray
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//        return button
-//    }()
-//    
-//    internal lazy var button5: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("button", for: .normal)
-//        button.backgroundColor = UIColor.gray
-////        button.backgroundColor?.withAlphaComponent(0.5)
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//        return button
-//    }()
     
     func boroughContrainer() {
         boroughContainer.snp.makeConstraints({ (view) in
             view.center.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.8)
-            view.width.equalToSuperview().multipliedBy(0.8)
+            view.width.equalToSuperview().multipliedBy(0.9)
         })
         boroughContainer.isHidden = true
         
@@ -292,38 +205,90 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         queensButton.snp.makeConstraints({ (view) in
             view.leading.equalTo(boroughContainer.snp.leading).offset(20)
             view.top.equalTo(boroughLabel.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
         
         brooklynButton.snp.makeConstraints({ (view) in
             view.leading.equalTo(boroughContainer.snp.leading).offset(20)
             view.top.equalTo(queensButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
         
         bronxButton.snp.makeConstraints({ (view) in
             view.leading.equalTo(boroughContainer.snp.leading).offset(20)
             view.top.equalTo(brooklynButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
         
         statenIslandButton.snp.makeConstraints({ (view) in
             view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
             view.top.equalTo(boroughLabel.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
         
         manhattanButton.snp.makeConstraints({ (view) in
             view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
             view.top.equalTo(statenIslandButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
         
         allButton.snp.makeConstraints({ (view) in
             view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
             view.top.equalTo(manhattanButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
         
-        speechButton.snp.makeConstraints({ (view) in
-            view.top.equalTo(allButton.snp.bottom).offset(30)
-            view.centerX.equalToSuperview()
-            view.width.equalToSuperview().multipliedBy(0.2)
-            view.height.equalTo(70)
+        resourceLabel.snp.makeConstraints({ (view) in
+            view.top.equalTo(allButton.snp.bottom).offset(20)
+            view.centerX.equalTo(boroughContainer.snp.centerX)
+        })
+        
+        employmentButton.snp.makeConstraints({ (view) in
+            view.leading.equalTo(boroughContainer.snp.leading).offset(20)
+            view.top.equalTo(resourceLabel.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
+        })
+        
+        disabilitiesButton.snp.makeConstraints({ (view) in
+            view.leading.equalTo(boroughContainer.snp.leading).offset(20)
+            view.top.equalTo(employmentButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
+        })
+        
+        housingButton.snp.makeConstraints({ (view) in
+            view.leading.equalTo(boroughContainer.snp.leading).offset(20)
+            view.top.equalTo(disabilitiesButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
+        })
+        
+        educationButton.snp.makeConstraints({ (view) in
+            view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
+            view.top.equalTo(resourceLabel.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
+        })
+        
+        artsCultureButton.snp.makeConstraints({ (view) in
+            view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
+            view.top.equalTo(educationButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
+        })
+        
+        healthButton.snp.makeConstraints({ (view) in
+            view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
+            view.top.equalTo(artsCultureButton.snp.bottom).offset(20)
+            view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            view.height.equalTo(45)
         })
     }
     
@@ -339,14 +304,18 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
             view.centerX.equalTo(speechOrButtonContainer.snp.centerX)
         })
         
-        speechButtonForContainer.snp.makeConstraints({ (view) in
-            view.top.equalTo(speechOrClickLabel.snp.bottom).offset(20)
-            view.leading.equalTo(speechOrButtonContainer.snp.leading).offset(20)
-        })
-        
         clickButtonsForContainer.snp.makeConstraints({ (view) in
             view.top.equalTo(speechOrClickLabel.snp.bottom).offset(20)
-            view.trailing.equalTo(speechOrButtonContainer.snp.trailing).inset(20)
+            view.width.equalTo(speechOrButtonContainer.snp.width).multipliedBy(0.8)
+            view.centerX.equalTo(speechOrButtonContainer.snp.centerX)
+            view.height.equalTo(45)
+        })
+        
+        speechButtonForContainer.snp.makeConstraints({ (view) in
+            view.top.equalTo(clickButtonsForContainer.snp.bottom).offset(20)
+            view.width.equalTo(speechOrButtonContainer.snp.width).multipliedBy(0.8)
+            view.centerX.equalTo(speechOrButtonContainer.snp.centerX)
+            view.height.equalTo(45)
         })
     }
     
@@ -372,34 +341,37 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     internal lazy var speechOrButtonContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.brown
+        //view.backgroundColor = UIColor.brown
         return view
     }()
     
     internal lazy var speechOrClickLabel: UILabel = {
         let label = UILabel()
-        label.text = "Choose Speech or Clicks"
-
+        label.text = "How would you like to navigate?"
         return label
     }()
     
     internal lazy var speechButtonForContainer: UIButton = {
         let button = UIButton()
-        button.setTitle("Speech", for: .normal)
+        button.setTitle("Sound", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
     
     internal lazy var clickButtonsForContainer: UIButton = {
         let button = UIButton()
-        button.setTitle("Click", for: .normal)
+        button.setTitle("Sight", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
     
     internal lazy var boroughContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.brown
+        //view.backgroundColor = UIColor.brown
         return view
     }()
     
@@ -412,6 +384,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     internal lazy var queensButton: UIButton = {
         let button = UIButton()
         button.setTitle("Queens", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
@@ -419,6 +393,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     internal lazy var brooklynButton: UIButton = {
         let button = UIButton()
         button.setTitle("Brooklyn", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
@@ -426,6 +402,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     internal lazy var bronxButton: UIButton = {
         let button = UIButton()
         button.setTitle("Bronx", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
@@ -433,6 +411,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     internal lazy var statenIslandButton: UIButton = {
         let button = UIButton()
         button.setTitle("Staten Island", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
@@ -440,6 +420,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     internal lazy var manhattanButton: UIButton = {
         let button = UIButton()
         button.setTitle("Manhattan", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
@@ -447,6 +429,68 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
     internal lazy var allButton: UIButton = {
         let button = UIButton()
         button.setTitle("All", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var resourceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Choose Resource..."
+        return label
+    }()
+    
+    internal lazy var housingButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Housing", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var healthButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Housing", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var educationButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Housing", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var employmentButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Housing", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var artsCultureButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Housing", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    internal lazy var disabilitiesButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Housing", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()

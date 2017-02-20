@@ -33,11 +33,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
 
         setupViewHierarchy()
         setupView()
+        //showModal()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         showModal()
     }
     
     func showModal() {
         let modalViewController = ButtonViewController()
+        //modalViewController.definesPresentationContext = true
         modalViewController.modalPresentationStyle = .overCurrentContext
         present(modalViewController, animated: true, completion: nil)
     }
