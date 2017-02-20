@@ -14,6 +14,8 @@ import SideMenu
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var customizedLaunchScreenView: UIView?
+    var rollingLogo: UIImageView?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -77,6 +79,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
 //        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+        
+//        if let window = self.window {
+//            self.customizedLaunchScreenView = UIView(frame: window.bounds)
+//            self.customizedLaunchScreenView?.backgroundColor = .cyan
+//            
+//            self.window?.addSubview(self.customizedLaunchScreenView!)
+//            self.window?.bringSubview(toFront: self.customizedLaunchScreenView!)
+//            
+//            self.rollingLogo = UIImageView(frame: .zero)
+//            self.rollingLogo?.image = UIImage(named: "logo")
+//            
+//            self.window?.addSubview(rollingLogo!)
+//            self.window?.bringSubview(toFront: rollingLogo!)
+//            
+//            self.rollingLogo?.snp.makeConstraints{ (view) in
+//                view.centerY.equalTo(window.snp.centerY).offset(10)
+//                view.centerX.equalTo(window.snp.centerX)
+//            }
+//        }
+
+
+//        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+
 
         return true
     }
