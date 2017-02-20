@@ -62,6 +62,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         userLongitude = Float(locationValue.longitude)
         
         let coordinateRegion = CLLocationCoordinate2D(latitude: validLocation.coordinate.latitude, longitude: validLocation.coordinate.longitude)
+        print(validLocation.coordinate.latitude)
         mapView.setCenter(coordinateRegion, zoomLevel: 14, animated: true)
         
         let pinAnnotation: MGLPointAnnotation = MGLPointAnnotation()
