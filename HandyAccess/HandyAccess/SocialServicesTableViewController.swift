@@ -11,6 +11,8 @@ import SnapKit
 
 class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    let colorScheme = ColorScheme()
+    
     var socialServices1 = [SocialService1]()
     let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json?Queens=Y&aging=Y"
     //    var metaViews = [MetaView]()
@@ -94,7 +96,8 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         
         self.socialSourceTableView.snp.makeConstraints { (view) in
             view.top.equalTo(self.filterPicker.snp.bottom)
-            view.bottom.leading.trailing.equalToSuperview()
+            view.leading.trailing.equalToSuperview()
+            view.bottom.equalTo(self.bottomLayoutGuide.snp.top)
         }
     }
     
@@ -119,6 +122,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
             let url = URL(string: urlString) {
             //Do Stuff
         }
+        cell.backgroundColor = self.colorScheme.colorSchemeArr[indexPath.row % self.colorScheme.colorSchemeArr.count]
         return cell
     }
     

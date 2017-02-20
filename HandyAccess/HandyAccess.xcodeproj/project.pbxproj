@@ -35,6 +35,7 @@
 		A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */; };
 		A78AB76C1E58D90D0024E9C6 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB76B1E58D90D0024E9C6 /* EventTableViewCell.swift */; };
 		A78AB76E1E5968250024E9C6 /* SocialServicesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */; };
+		A7E478261E5A9E9F00CEA88B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E478251E5A9E9F00CEA88B /* ColorScheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		A78AB7571E58AF600024E9C6 /* SocialServiceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServiceTableViewCell.swift; sourceTree = "<group>"; };
 		A78AB76B1E58D90D0024E9C6 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialServicesDetailViewController.swift; sourceTree = "<group>"; };
+		A7E478251E5A9E9F00CEA88B /* ColorScheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.release.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +168,7 @@
 				A78AB7521E58AF600024E9C6 /* Parks.swift */,
 				A78AB7551E58AF600024E9C6 /* SocialService.swift */,
 				52C866431E58B5E900F0F7CE /* Users.swift */,
+				A7E478251E5A9E9F00CEA88B /* ColorScheme.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				9C44C1411E5A38C3002B1787 /* InitialViewController.swift in Sources */,
 				A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */,
 				A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */,
+				A7E478261E5A9E9F00CEA88B /* ColorScheme.swift in Sources */,
 				520FA81E1E5903D700AE4441 /* MapTableViewController.swift in Sources */,
 				52C866441E58B5E900F0F7CE /* Users.swift in Sources */,
 				520FA81A1E58F7E100AE4441 /* WheelMapManager.swift in Sources */,
