@@ -38,6 +38,15 @@ class SocialServicesDetailViewController: UIViewController {
 //            dump(validCoordinatesArr)
 //        }
         
+        //APIRequestManager.shared.getCoordinateFromGoogle(companyName: String, borough: String , complete: @escaping ([Coordinates]?) -> Void)
+       
+        
+//        APIRequestManager.shared.getCoordinateFromGoogle(companyName: (self.socialService1?.organizationname)!, borough: self.borough!) { (coordinatesArr:[Coordinates]?) in
+//            guard let validCoordinatesArr = coordinatesArr else { return }
+//            guard validCoordinatesArr.count > 0 else { return }
+//            self.coordinates = validCoordinatesArr[0]
+//        }
+        
         guard let validCoordinate = socialService1?.location_1 else { return }
         self.coordinates = validCoordinate
         

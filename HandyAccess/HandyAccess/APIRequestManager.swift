@@ -23,6 +23,7 @@ enum CoordinatesParseError: Error {
     case results
     case response
     case coordinates
+    case location
 }
 
 class APIRequestManager {
@@ -226,6 +227,66 @@ class APIRequestManager {
             //dump(coordinatesArray)
             
             callback(coordinatesArray)
+            
+            }.resume()
+    }
+    
+    func getCoordinateFromGoogle(companyName: String, borough: String , complete: @escaping ([Coordinates]?) -> Void) {
+        //https://maps.googleapis.com/maps/api/geocode/json?address=Woodside+on+the+move+NY&key=AIzaSyCJRwsd2ho13mhWQUrvi7AOXIbBMgBPLsY
+        let validAddressSearchValue = (companyName + " " + borough).replacingOccurrences(of: " ", with: "+")
+        let urlString = "https://maps.googleapis.com/maps/api/geocode/json?address=\(validAddressSearchValue)+NY&key=AIzaSyCJRwsd2ho13mhWQUrvi7AOXIbBMgBPLsY"
+        guard let validURL = URL(string: urlString) else { return }
+        
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: validURL) { (data:Data?, response: URLResponse?, error: Error?) in
+            if error != nil {
+                print(error)
+            }
+            guard let validData = data else { return }
+            
+            var coordinatesArray = [Coordinates]()
+            
+            do {
+                guard let validJson = try JSONSerialization.jsonObject(with: validData, options: []) as? [String: Any] else {
+                    throw CoordinatesParseError.json
+                }
+                //                let json = try JSONSerialization.jsonObject(with: validData, options: []) as? Any
+                //                guard let validJson = json as? [String: Any] else {
+                //                    throw CoordinatesParseError.json
+                //                }
+                
+                guard let resultsDict = validJson["results"] as? [[String: Any]] else {
+                    throw CoordinatesParseError.results
+                }
+                
+                for result in resultsDict{
+                    guard let geometry = result["geometry"] as? [String: Any] else {
+                        throw CoordinatesParseError.response
+                    }
+                    guard let location = geometry["location"] as? [String: Any] else {
+                        throw CoordinatesParseError.location
+                    }
+                    guard let lat = location["lat"] as? Double,
+                        let lng = location["lng"] as? Double else {
+                            throw CoordinatesParseError.coordinates
+                    }
+                    let c = Coordinates(lat: lat, long: lng)
+                    coordinatesArray.append(c)
+                }
+            }
+            catch CoordinatesParseError.json {
+                print("CoordinatesParseError.json")
+            }
+            catch CoordinatesParseError.results {
+                print("CoordinatesParseError.results")
+            }
+            catch {
+                print(error)
+            }
+            
+            //dump(coordinatesArray)
+            
+            complete(coordinatesArray)
             
             }.resume()
     }
