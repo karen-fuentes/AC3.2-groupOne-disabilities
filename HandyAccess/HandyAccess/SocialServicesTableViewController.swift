@@ -97,7 +97,9 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
     private func configureConstraints() {
         self.filterPicker.backgroundColor = self.colorScheme._50
         self.filterPicker.snp.makeConstraints{ (view) in
-            view.top.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.topLayoutGuide.snp.bottom)
+            view.leading.trailing.equalToSuperview()
+            view.height.equalToSuperview().multipliedBy(0.2)
         }
         
         self.socialSourceTableView.snp.makeConstraints { (view) in
@@ -210,6 +212,11 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         let barButton = UIBarButtonItem()
         barButton.title = "Filter"
         return barButton
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        return view
     }()
     
     lazy var filterPicker: UIPickerView = {
