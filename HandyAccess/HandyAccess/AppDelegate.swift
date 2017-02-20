@@ -78,8 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = navVC
         self.window?.makeKeyAndVisible()
         
-<<<<<<< HEAD
-        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+//        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
         
 //        if let window = self.window {
 //            self.customizedLaunchScreenView = UIView(frame: window.bounds)
@@ -100,9 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
 
-=======
+
 //        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
->>>>>>> 80ae864c7d435079d018f15264cb85248859f9f2
+
 
         return true
     }
