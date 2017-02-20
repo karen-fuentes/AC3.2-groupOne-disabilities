@@ -23,6 +23,7 @@ enum CoordinatesParseError: Error {
     case results
     case response
     case coordinates
+    case location
 }
 
 class APIRequestManager {
@@ -168,18 +169,6 @@ class APIRequestManager {
     }
     
     internal func getDataForCoordinates(address:String, borough: String, callback: @escaping([Coordinates]?) -> Void) {
-        //https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=1a4ac0f9&app_key=f6ecb3c64c54ece79b4667cae7ed96ad&input=%2031-00%2047th%20Ave%20queens
-        //guard let urlBase = URL(string: "https://api.cityofnewyork.us/geoclient/v1/search.json?") else { return }
-//        guard let urlBaseString = ("https://api.cityofnewyork.us/geoclient/v1/search.json?" + "input=" + address + " " + borough).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
-//        guard let validBaseURL = URL(string: urlBaseString) else { return }
-//        var request = URLRequest(url: validBaseURL)
-//        request.httpMethod = "GET"
-//        request.addValue("application/json", forHTTPHeaderField: "Accept")
-//        request.addValue("1a4ac0f9", forHTTPHeaderField: "app_id")
-//        request.addValue("f6ecb3c64c54ece79b4667cae7ed96ad", forHTTPHeaderField: "app_key")
-//        //request.addValue(urlExtension, forHTTPHeaderField: "input")
-//        
-//        print(request)
         
         guard let validURL = URL(string: "https://api.cityofnewyork.us/geoclient/v1/search.json?app_id=1a4ac0f9&app_key=f6ecb3c64c54ece79b4667cae7ed96ad&input=%2031-00%2047th%20Ave%20queens") else { return }
         
@@ -196,10 +185,6 @@ class APIRequestManager {
                 guard let validJson = try JSONSerialization.jsonObject(with: validData, options: []) as? [String: Any] else {
                     throw CoordinatesParseError.json
                 }
-//                let json = try JSONSerialization.jsonObject(with: validData, options: []) as? Any
-//                guard let validJson = json as? [String: Any] else {
-//                    throw CoordinatesParseError.json
-//                }
                 
                 guard let resultsDict = validJson["results"] as? [[String: Any]] else {
                     throw CoordinatesParseError.results
@@ -226,6 +211,68 @@ class APIRequestManager {
             //dump(coordinatesArray)
             
             callback(coordinatesArray)
+            
+            }.resume()
+    }
+    
+    //Documentation
+    //https://developers.google.com/maps/documentation/geocoding/start
+    func getCoordinateFromGoogle(companyName: String, borough: String , complete: @escaping ([Coordinates]?) -> Void) {
+        //https://maps.googleapis.com/maps/api/geocode/json?address=Woodside+on+the+move+NY&key=AIzaSyCJRwsd2ho13mhWQUrvi7AOXIbBMgBPLsY
+        let validAddressSearchValue = (companyName + " " + borough).googleGeocodingSearchValue
+        let urlString = "https://maps.googleapis.com/maps/api/geocode/json?address=\(validAddressSearchValue)+NY&key=AIzaSyCJRwsd2ho13mhWQUrvi7AOXIbBMgBPLsY"
+        guard let validURL = URL(string: urlString) else { return }
+        
+        let session = URLSession(configuration: URLSessionConfiguration.default)
+        session.dataTask(with: validURL) { (data:Data?, response: URLResponse?, error: Error?) in
+            if error != nil {
+                print(error)
+            }
+            guard let validData = data else { return }
+            
+            var coordinatesArray = [Coordinates]()
+            
+            do {
+                guard let validJson = try JSONSerialization.jsonObject(with: validData, options: []) as? [String: Any] else {
+                    throw CoordinatesParseError.json
+                }
+                //                let json = try JSONSerialization.jsonObject(with: validData, options: []) as? Any
+                //                guard let validJson = json as? [String: Any] else {
+                //                    throw CoordinatesParseError.json
+                //                }
+                
+                guard let resultsDict = validJson["results"] as? [[String: Any]] else {
+                    throw CoordinatesParseError.results
+                }
+                
+                for result in resultsDict{
+                    guard let geometry = result["geometry"] as? [String: Any] else {
+                        throw CoordinatesParseError.response
+                    }
+                    guard let location = geometry["location"] as? [String: Any] else {
+                        throw CoordinatesParseError.location
+                    }
+                    guard let lat = location["lat"] as? Double,
+                        let lng = location["lng"] as? Double else {
+                            throw CoordinatesParseError.coordinates
+                    }
+                    let c = Coordinates(lat: lat, long: lng)
+                    coordinatesArray.append(c)
+                }
+            }
+            catch CoordinatesParseError.json {
+                print("CoordinatesParseError.json")
+            }
+            catch CoordinatesParseError.results {
+                print("CoordinatesParseError.results")
+            }
+            catch {
+                print(error)
+            }
+            
+            //dump(coordinatesArray)
+            
+            complete(coordinatesArray)
             
             }.resume()
     }

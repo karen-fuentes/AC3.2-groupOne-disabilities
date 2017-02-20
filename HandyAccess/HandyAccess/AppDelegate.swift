@@ -14,69 +14,87 @@ import SideMenu
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var customizedLaunchScreenView: UIView?
+    var rollingLogo: UIImageView?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
         
-//        let nv = UINavigationController(rootViewController: SocialServicesTableViewController())
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = nv
-//        self.window?.makeKeyAndVisible()
+        let tabVC: UITabBarController = UITabBarController()
         
-        // Override point for customization after application launch.
-//        let rootSlideVC = ViewController()
-//        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: rootSlideVC)
-//        menuLeftNavigationController.leftSide = true
-        
-//        let rootVC = MapViewController()
-//        let navController = UINavigationController(rootViewController: rootVC)
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window?.rootViewController = navController
-//        self.window?.makeKeyAndVisible()
-//        
-//        SideMenuManager.menuLeftNavigationController = menuLeftNavigationController
-        
-//        let tabVC: UITabBarController = UITabBarController()
-        
-//        let eventsVC = EventsViewController()
-        //let resourcesTVC = SocialServicesTableViewController()
-//        let mapVC = MapViewController()
-//        let profileVc = ProfileFavoritesViewController()
+        let initialVc = InitialViewController()
+        let mapVC = MapViewController()
+        //let eventsVC = EventsViewController()
+        let resourcesTVC = SocialServicesTableViewController()
+        //let profileVc = ProfileFavoritesViewController()
     
-//        let firstNav = UINavigationController(rootViewController: )
-//        let secondNav = UINavigationController(rootViewController: eventsVC)
-//        let thirdNav = UINavigationController(rootViewController: resourcesTVC)
-//        let fourthNav = UINavigationController(rootViewController: profileVc)
+        let firstNav = UINavigationController(rootViewController: initialVc)
+        let secondNav = UINavigationController(rootViewController: mapVC)
+        //let thirdNav = UINavigationController(rootViewController: eventsVC)
+        let fourthNav = UINavigationController(rootViewController: resourcesTVC)
+        //let fifthNav = UINavigationController(rootViewController: profileVc)
         
-//        let firstTabItemImage = #imageLiteral(resourceName: "map")
-//        let secondTabItemImage = #imageLiteral(resourceName: "events")
-//        let thirdTabItemImage = #imageLiteral(resourceName: "resources")
-//        let fourthTabItemImage = #imageLiteral(resourceName: "profile")
-//    
-//        
-//        let tab1ItemInfo = UITabBarItem(title: "Map", image: firstTabItemImage, tag: 0)
-//        let tab2ItemInfo = UITabBarItem(title: "Events", image: secondTabItemImage, tag: 1)
-//        let tab3ItemInfo = UITabBarItem(title: "Resources", image: thirdTabItemImage, tag: 2)
-//        let tab4ItemInfo = UITabBarItem(title: "Profile", image: fourthTabItemImage, tag: 3)
+        let firstTabItemImage = #imageLiteral(resourceName: "Filter-50")
+        let secondTabItemImage = #imageLiteral(resourceName: "map")
+        //let thirdTabItemImage = #imageLiteral(resourceName: "events")
+        let fourthTabItemImage = #imageLiteral(resourceName: "resources")
+        //let fifthTabItemImage = #imageLiteral(resourceName: "profile")
+    
+        
+        let tab1ItemInfo = UITabBarItem(title: "Initial", image: firstTabItemImage, tag: 4)
+        let tab2ItemInfo = UITabBarItem(title: "Map", image: secondTabItemImage, tag: 0)
+        //let tab3ItemInfo = UITabBarItem(title: "Events", image: thirdTabItemImage, tag: 1)
+        let tab4ItemInfo = UITabBarItem(title: "Resources", image: fourthTabItemImage, tag: 2)
+        //let tab5ItemInfo = UITabBarItem(title: "Profile", image: fifthTabItemImage, tag: 3)
 
-//    
-//        firstNav.tabBarItem = tab1ItemInfo
-//        secondNav.tabBarItem = tab2ItemInfo
-//        thirdNav.tabBarItem = tab3ItemInfo
-//        fourthNav.tabBarItem = tab4ItemInfo
+    
+        firstNav.tabBarItem = tab1ItemInfo
+        secondNav.tabBarItem = tab2ItemInfo
+        //thirdNav.tabBarItem = tab3ItemInfo
+        fourthNav.tabBarItem = tab4ItemInfo
+        //fifthNav.tabBarItem = tab5ItemInfo
         
-//        UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
+        UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
         
-//        
-        let initialVC = InitialViewController()
-        let navVC = UINavigationController(rootViewController: initialVC)
-       
+        tabVC.viewControllers = [firstNav,secondNav,/*thirdNav,*/ fourthNav, /*fifthNav*/]
+        
+        //let navVC = UINavigationController(rootViewController: tabVC)
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navVC
+        self.window?.rootViewController = tabVC
         self.window?.makeKeyAndVisible()
         
+        //--------For initial View Controller---------
+//        let initialVC = InitialViewController()
+//        let navVC = UINavigationController(rootViewController: initialVC)
+//
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = navVC
+//        self.window?.makeKeyAndVisible()
+        //----------
+        
+        
+//        if let window = self.window {
+//            self.customizedLaunchScreenView = UIView(frame: window.bounds)
+//            self.customizedLaunchScreenView?.backgroundColor = .cyan
+//            
+//            self.window?.addSubview(self.customizedLaunchScreenView!)
+//            self.window?.bringSubview(toFront: self.customizedLaunchScreenView!)
+//            
+//            self.rollingLogo = UIImageView(frame: .zero)
+//            self.rollingLogo?.image = UIImage(named: "logo")
+//            
+//            self.window?.addSubview(rollingLogo!)
+//            self.window?.bringSubview(toFront: rollingLogo!)
+//            
+//            self.rollingLogo?.snp.makeConstraints{ (view) in
+//                view.centerY.equalTo(window.snp.centerY).offset(10)
+//                view.centerX.equalTo(window.snp.centerX)
+//            }
+//        }
+
+
 //        tabVC.viewControllers = [firstNav,secondNav,thirdNav, fourthNav]
+
 
         return true
     }
