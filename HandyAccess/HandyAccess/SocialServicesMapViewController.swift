@@ -12,34 +12,7 @@ import Mapbox
 class SocialServicesMapViewController: UIViewController, MGLMapViewDelegate/*, CLLocationManagerDelegate */{
     
     var socialService1: SocialService1!
-    var coordinates: Coordinates! {
-        didSet {
-//            self.mapView = MGLMapView(frame: self.containerView.bounds)
-//            mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            
-//            // Set the map’s center coordinate and zoom level.
-//            
-//            mapView.setCenter(CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long))), zoomLevel: 12, animated: false)
-//            view.addSubview(mapView)
-//            
-//            // Set the delegate property of our map view to `self` after instantiating it.
-//            mapView.delegate = self
-//            
-//            // Declare the marker `hello` and set its coordinates, title, and subtitle.
-//            //guard let validSocialServices1 = self.socialService1 else { return }
-//            let location = MGLPointAnnotation()
-//            location.coordinate = CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long)))
-//            guard let validSocialServices1 = self.socialService1 else { return }
-//            location.title = "\(validSocialServices1.organizationname)"
-//            location.subtitle = "\(validSocialServices1.description)"
-//            
-//            // Add marker `location` to the map.
-//            mapView.addAnnotation(location)
-//            
-//            //Set the map’s center coordinate and zoom level.
-//            //self.reloadInputViews()
-        }
-    }
+    var coordinates: Coordinates!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,62 +31,15 @@ class SocialServicesMapViewController: UIViewController, MGLMapViewDelegate/*, C
         mapView.delegate = self
         
         // Declare the marker `hello` and set its coordinates, title, and subtitle.
-        //guard let validSocialServices1 = self.socialService1 else { return }
+        guard let validSocialServices1 = self.socialService1 else { return }
         let location = MGLPointAnnotation()
         location.coordinate = CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long)))
-        location.title = "No Organization Name"
-        location.subtitle = "No Description"
-        if let validSocialServices1 = self.socialService1 {
-            location.title = validSocialServices1.organizationname
-            location.subtitle = validSocialServices1.description
-        }
+        location.title = validSocialServices1.organizationname
+        location.subtitle = validSocialServices1.description
         
         // Add marker `location` to the map.
         mapView.addAnnotation(location)
-        
-        //Set the map’s center coordinate and zoom level.
-        //self.reloadInputViews()
-        
-//        let mapView = MGLMapView(frame: view.bounds)
-//        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        
-//        // Set the map’s center coordinate and zoom level.
-//        
-//        mapView.setCenter(CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long))), zoomLevel: 12, animated: false)
-//        view.addSubview(mapView)
-//        
-//        // Set the delegate property of our map view to `self` after instantiating it.
-//        mapView.delegate = self
-//        
-//        // Declare the marker `hello` and set its coordinates, title, and subtitle.
-//        guard let validSocialServices1 = self.socialService1 else { return }
-//        let location = MGLPointAnnotation()
-//        location.coordinate = CLLocationCoordinate2D(latitude: Double(Float(self.coordinates.lat)), longitude: Double(Float(self.coordinates.long)))
-//        location.title = "Organization Name"
-//        location.subtitle = "\(validSocialServices1.organizationname)"
-//        
-//        // Add marker `location` to the map.
-//        mapView.addAnnotation(location)
-//        
-//        //Set the map’s center coordinate and zoom level.
-        
-        
 
-        
-//        guard let validCoordinate = self.coordinates else { return }
-//        let mapView = MGLMapView(frame: self.view.bounds)
-//        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        self.mapView.setCenter(CLLocationCoordinate2D(latitude: Double(validCoordinate.lat), longitude: Double(validCoordinate.long)), zoomLevel: 12, animated: true)
-//        print("validCoordinate.lat\(validCoordinate.lat)")
-//        print("validCoordinate.long\(validCoordinate.long)")
-//        //self.edgesForExtendedLayout = []
-//        self.view.addSubview(self.mapView)
-//        mapView.delegate = self
-        
-        //locationManager.delegate = self
-        //mapView.delegate = self
-        
-        //setUpMap()
     }
     
     private func setupViewHierarchy() {

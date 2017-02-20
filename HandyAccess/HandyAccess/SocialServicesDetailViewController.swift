@@ -66,6 +66,7 @@ class SocialServicesDetailViewController: UIViewController {
         if let validCoordinates = self.coordinates {
             let socialServicesMapViewController = SocialServicesMapViewController()
             socialServicesMapViewController.coordinates = validCoordinates
+            socialServicesMapViewController.socialService1 = self.socialService1
             self.navigationController?.pushViewController(socialServicesMapViewController, animated: true)
             //self.present(socialServicesMapViewController, animated: true, completion: nil)
         }
