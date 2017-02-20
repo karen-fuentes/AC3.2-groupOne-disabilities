@@ -37,7 +37,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         speechRecognizer.delegate = self
         let synthesizer = AVSpeechSynthesizer()
-        let myUtterance = AVSpeechUtterance(string: "Welcome to Easy Access. Tap the Red record button to give you local services or resources")
+        let myUtterance = AVSpeechUtterance(string: "Tap the bottom of the bottom of the screen if you would like local services say local services for resources say resources")
         myUtterance.rate = 0.50
         myUtterance.pitchMultiplier = 1.0
         myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
@@ -175,19 +175,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
             button.leading.trailing.bottom.equalToSuperview()
             button.top.equalTo(textView.snp.bottom)
         }
-        //        buttonContainer.snp.makeConstraints { (container) in
-        //            container.top.bottom.leading.trailing.equalToSuperview()
-        //        }
-        //        resourcesButton.snp.makeConstraints { (button) in
-        //            button.leading.trailing.top.equalToSuperview()
-        //            button.height.equalToSuperview().multipliedBy(0.4)
-        //        }
-        //        serviceButton.snp.makeConstraints { (button) in
-        //            button.leading.trailing.equalToSuperview()
-        //            button.bottom.equalToSuperview().inset(8.0)
-        //            button.height.equalToSuperview().multipliedBy(0.4)
-        //        }
-        //
+     
     }
     
     // MARK: - Button Function
@@ -230,19 +218,4 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         view.backgroundColor = .gray
         return view
     }()
-    lazy var serviceButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .gray
-        button.setTitle("Local Services", for: .normal)
-        return button
-        
-    }()
-    lazy var resourcesButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .red
-        button.setTitle("Resouces", for: .normal)
-        return button
-        
-    }()
-    
 }

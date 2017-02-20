@@ -21,6 +21,12 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewHiearchy()
+        configureConstraints()
+        view.backgroundColor = .white
+        self.textView.text = "How Can I Help You? 😊"
+        self.resourcesButton.addTarget(self, action: #selector(resourcesButtonWasTapped), for: .touchUpInside)
+        self.serviceButton.addTarget(self, action: #selector(serviceButtonWasTapped), for: .touchUpInside)
 
         // Do any additional setup after loading the view.
     }
@@ -29,7 +35,7 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         speechRecognizer.delegate = self
         let synthesizer = AVSpeechSynthesizer()
-        let myUtterance = AVSpeechUtterance(string: "Welcome to Easy Access. Touch the bottom of the Screen and say Continue if you like for me to continue speaking")
+        let myUtterance = AVSpeechUtterance(string: "Welcome to Easy Access. Touch the bottom of the Screen and say Continue. This will allow me to speak even more")
         myUtterance.rate = 0.50
         myUtterance.pitchMultiplier = 1.0
         myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
@@ -86,10 +92,10 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.textView.text = result.bestTranscription.formattedString
                 self.isFinal = result.isFinal
        
-                if results == "Resources" || results == "Resource"{
+                if results == "Continue"{
                     
                     if self.isAlreadyPushed == false {
-                        self.navigationController?.pushViewController(SocialServicesTableViewController(), animated: true)
+                        self.navigationController?.pushViewController(InitialViewController(), animated: true)
                         self.audioEngine.stop()
                         self.recognitionRequest?.endAudio()
                         self.recordButton.isEnabled = false
@@ -97,15 +103,6 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
                         self.isAlreadyPushed = true
                     }
                     
-                } else if results == "Local service" || results == "Local services" {
-                    if self.isAlreadyPushed == false {
-                        self.navigationController?.pushViewController(MapViewController(), animated: true)
-                        self.audioEngine.stop()
-                        self.recognitionRequest?.endAudio()
-                        self.recordButton.isEnabled = false
-                        self.recordButton.setTitle("Stopping", for: .disabled)
-                        self.isAlreadyPushed = true
-                    }
                 }
             }
             self.recordButton.isEnabled = true
@@ -155,31 +152,32 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
     func configureConstraints() {
         textView.snp.makeConstraints { (view) in
             view.top.leading.trailing.equalToSuperview()
-            view.height.equalToSuperview().multipliedBy(0.40)
+            view.height.equalToSuperview().multipliedBy(0.50)
             
         }
         recordButton.snp.makeConstraints { (button) in
             button.leading.trailing.bottom.equalToSuperview()
+            button.size.equalTo(200)
     
          }
         serviceButton.snp.makeConstraints { (button) in
             button.leading.equalToSuperview()
             button.trailing.equalTo(self.view.snp.centerX)
             button.size.equalTo(100)
+            button.top.equalTo(textView.snp.bottom)
         
         }
         resourcesButton.snp.makeConstraints { (button) in
             button.trailing.equalToSuperview()
             button.leading.equalTo(self.view.snp.centerX)
             button.size.equalTo(100)
-            
+            button.top.equalTo(textView.snp.bottom)
         }
     }
     
     // MARK: - Button Function
     
     func recordButtonWasTapped() {
-        print("I'm trapped")
         self.isAlreadyPushed = false
         
         if audioEngine.isRunning {
@@ -191,6 +189,13 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
             try! startRecording()
             recordButton.setTitle("Stop recording", for: [])
         }
+    }
+    
+    func serviceButtonWasTapped() {
+        self.navigationController?.pushViewController(MapViewController(), animated: true)
+    }
+    func resourcesButtonWasTapped() {
+        self.navigationController?.pushViewController(ResourcesTableViewController(), animated: true)
     }
     
     
@@ -214,14 +219,14 @@ class FirstViewController: UIViewController, SFSpeechRecognizerDelegate {
   
     lazy var serviceButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .gray
+        button.backgroundColor = .blue
         button.setTitle("Local Services", for: .normal)
         return button
         
     }()
     lazy var resourcesButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .red
+        button.backgroundColor = .blue
         button.setTitle("Resouces", for: .normal)
         return button
         

@@ -19,58 +19,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let tabVC: UITabBarController = UITabBarController()
-        
-        let initialVc = InitialViewController()
-        let mapVC = MapViewController()
-        //let eventsVC = EventsViewController()
-        let resourcesTVC = SocialServicesTableViewController()
-        //let profileVc = ProfileFavoritesViewController()
-    
-        let firstNav = UINavigationController(rootViewController: initialVc)
-        let secondNav = UINavigationController(rootViewController: mapVC)
-        //let thirdNav = UINavigationController(rootViewController: eventsVC)
-        let fourthNav = UINavigationController(rootViewController: resourcesTVC)
-        //let fifthNav = UINavigationController(rootViewController: profileVc)
-        
-        let firstTabItemImage = #imageLiteral(resourceName: "Filter-50")
-        let secondTabItemImage = #imageLiteral(resourceName: "map")
-        //let thirdTabItemImage = #imageLiteral(resourceName: "events")
-        let fourthTabItemImage = #imageLiteral(resourceName: "resources")
-        //let fifthTabItemImage = #imageLiteral(resourceName: "profile")
-    
-        
-        let tab1ItemInfo = UITabBarItem(title: "Initial", image: firstTabItemImage, tag: 4)
-        let tab2ItemInfo = UITabBarItem(title: "Map", image: secondTabItemImage, tag: 0)
-        //let tab3ItemInfo = UITabBarItem(title: "Events", image: thirdTabItemImage, tag: 1)
-        let tab4ItemInfo = UITabBarItem(title: "Resources", image: fourthTabItemImage, tag: 2)
-        //let tab5ItemInfo = UITabBarItem(title: "Profile", image: fifthTabItemImage, tag: 3)
-
-    
-        firstNav.tabBarItem = tab1ItemInfo
-        secondNav.tabBarItem = tab2ItemInfo
-        //thirdNav.tabBarItem = tab3ItemInfo
-        fourthNav.tabBarItem = tab4ItemInfo
-        //fifthNav.tabBarItem = tab5ItemInfo
-        
-        UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
-        
-        tabVC.viewControllers = [firstNav,secondNav,/*thirdNav,*/ fourthNav, /*fifthNav*/]
-        
-        let navVC = UINavigationController(rootViewController: tabVC)
-        
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navVC
-        self.window?.makeKeyAndVisible()
-        
-        //--------For initial View Controller---------
-//        let initialVC = InitialViewController()
-//        let navVC = UINavigationController(rootViewController: initialVC)
+//        let tabVC: UITabBarController = UITabBarController()
+//        
+//        let initialVc = InitialViewController()
+//        let mapVC = MapViewController()
+//        //let eventsVC = EventsViewController()
+//        let resourcesTVC = SocialServicesTableViewController()
+//        //let profileVc = ProfileFavoritesViewController()
+//    
+//        let firstNav = UINavigationController(rootViewController: initialVc)
+//        let secondNav = UINavigationController(rootViewController: mapVC)
+//        //let thirdNav = UINavigationController(rootViewController: eventsVC)
+//        let fourthNav = UINavigationController(rootViewController: resourcesTVC)
+//        //let fifthNav = UINavigationController(rootViewController: profileVc)
+//        
+//        let firstTabItemImage = #imageLiteral(resourceName: "Filter-50")
+//        let secondTabItemImage = #imageLiteral(resourceName: "map")
+//        //let thirdTabItemImage = #imageLiteral(resourceName: "events")
+//        let fourthTabItemImage = #imageLiteral(resourceName: "resources")
+//        //let fifthTabItemImage = #imageLiteral(resourceName: "profile")
+//    
+//        
+//        let tab1ItemInfo = UITabBarItem(title: "Initial", image: firstTabItemImage, tag: 4)
+//        let tab2ItemInfo = UITabBarItem(title: "Map", image: secondTabItemImage, tag: 0)
+//        //let tab3ItemInfo = UITabBarItem(title: "Events", image: thirdTabItemImage, tag: 1)
+//        let tab4ItemInfo = UITabBarItem(title: "Resources", image: fourthTabItemImage, tag: 2)
+//        //let tab5ItemInfo = UITabBarItem(title: "Profile", image: fifthTabItemImage, tag: 3)
 //
+//    
+//        firstNav.tabBarItem = tab1ItemInfo
+//        secondNav.tabBarItem = tab2ItemInfo
+//        //thirdNav.tabBarItem = tab3ItemInfo
+//        fourthNav.tabBarItem = tab4ItemInfo
+//        //fifthNav.tabBarItem = tab5ItemInfo
+//        
+//        UITabBar.appearance().tintColor = UIColor(red: 71/255, green: 138/255, blue: 204/255, alpha: 1.0)
+//        
+//        tabVC.viewControllers = [firstNav,secondNav,/*thirdNav,*/ fourthNav, /*fifthNav*/]
+//        
+//        let navVC = UINavigationController(rootViewController: tabVC)
+//        
 //        self.window = UIWindow(frame: UIScreen.main.bounds)
 //        self.window?.rootViewController = navVC
 //        self.window?.makeKeyAndVisible()
-        //----------
+        
+      //  --------For initial View Controller---------
+        let initialVC = FirstViewController()
+        let navVC = UINavigationController(rootViewController: initialVC)
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = navVC
+        self.window?.makeKeyAndVisible()
+       // ----------
         
         
 //        if let window = self.window {
