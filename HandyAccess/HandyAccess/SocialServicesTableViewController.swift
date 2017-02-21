@@ -26,7 +26,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
                         "Manhatttan":"Manhattan",
                         "Staten Island":"Staten_island",
                         "All":"All" ]
-    let catagoriesDict = ["Aging" : "aging",
+    let categoriesDict = ["Aging" : "aging",
                           "Counseling Support" : "counseling_support_groups",
                           "Disabilities" : "disabilities",
                           "Education" : "education",
@@ -69,9 +69,27 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
+    
+    var titleComponents : [String: String] {
+        get {
+            var titleBorough = ""
+            var titleCategory = ""
+            for (key, value) in categoriesDict {
+                if let category = urlComponents["category"], value == category {
+                    titleCategory = key
+                }
+            }
+            for (key, value) in boroughsDict {
+                if let borough = urlComponents["borough"], value == borough {
+                    titleBorough = key
+                }
+            }
+            return ["borough" : "\(titleBorough)", "category" : "\(titleCategory)"]
+        }
+    }
     var catagoryKeys : [String] {
         get  {
-            return self.catagoriesDict.map{$0.key}.sorted(by: <)
+            return self.categoriesDict.map{$0.key}.sorted(by: <)
         }
     }
     var boroughKeys : [String] {
@@ -85,8 +103,11 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         setupViewHierarchy()
         configureConstraints()
         self.view.backgroundColor = UIColor.white
-        
-        APIRequestManager.shared.getSocialServices1(endPoint: self.endpoint) { (socialServices: [SocialService1]?) in
+        if let category = titleComponents["category"], let borough = titleComponents["borough"] {
+            self.title = "\(borough) \(category)"
+        }
+        let url = buildUrlWithComponent(self.urlComponents)
+        APIRequestManager.shared.getSocialServices1(endPoint: url) { (socialServices: [SocialService1]?) in
             guard let validSocialServices = socialServices else { return }
             DispatchQueue.main.async {
                 self.socialServices1 = validSocialServices
@@ -194,7 +215,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         case 0:
             self.urlComponents["borough"] = self.boroughsDict[self.boroughKeys[row]]
         case 1:
-            self.urlComponents["category"] = self.catagoriesDict[self.catagoryKeys[row]]
+            self.urlComponents["category"] = self.categoriesDict[self.catagoryKeys[row]]
         default:
             break
         }
