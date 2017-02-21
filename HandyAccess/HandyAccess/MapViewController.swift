@@ -60,7 +60,7 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
     }
     
     func filterButtonBarButtonPressed() {
-        let buttonViewController = ButtonViewController()
+        let buttonViewController = MapButtonViewController()
         buttonViewController.setMapController(map1: self)
         guard let annotations = mapView.annotations else { return print("Annotations Error") }
         
@@ -119,16 +119,10 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
     }
     
     func showModal() {
-        let modalViewController = FirstShowViewController()
-        //let modalViewController = ButtonViewController()
-        //modalViewController.setMapController(map1: self)
+        let modalViewController = MapButtonViewController()
+        //modalViewController.mapView = self
         modalViewController.modalPresentationStyle = .overCurrentContext
-
-        modalViewController.view.backgroundColor = .clear
         present(modalViewController, animated: true, completion: nil)
-
-//        present(modalViewController, animated: true, completion: nil)
-        navigationController?.pushViewController(modalViewController, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
