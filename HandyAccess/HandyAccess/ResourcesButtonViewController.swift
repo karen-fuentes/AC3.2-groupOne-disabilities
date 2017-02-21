@@ -33,8 +33,11 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+        view.backgroundColor = UIColor.white
+        setupViewHierarchy()
+        configureConstraints()
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,7 +121,7 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
             view.height.equalToSuperview().multipliedBy(0.4)
             view.width.equalToSuperview().multipliedBy(0.9)
         })
-        boroughContainer.isHidden = true
+        //boroughContainer.isHidden = true
         
         boroughLabel.snp.makeConstraints({ (view) in
             view.top.equalTo(boroughContainer.snp.top).offset(20)
@@ -173,7 +176,7 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
             view.height.equalToSuperview().multipliedBy(0.4)
             view.width.equalTo(1000)
         })
-        resourcesScrollView.isHidden = true
+        //resourcesScrollView.isHidden = true
         
         resourceLabel.snp.makeConstraints({ (view) in
             view.top.equalTo(resourcesScrollView.snp.top).offset(20)
