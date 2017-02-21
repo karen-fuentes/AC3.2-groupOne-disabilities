@@ -30,14 +30,21 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
                           "victim services" : "victim_services",
                           "youth services" : "youth_services"]
     var urlComponents = ["borough": " ", "category": " "]
+    let color = ColorScheme()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = color._50
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.navigationBar.barTintColor = color._50
         setupViewHierarchy()
         configureConstraints()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +57,6 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(blur)
         view.addSubview(boroughContainer)
-        view.addSubview(speechOrButtonContainer)
         view.addSubview(resourcesScrollView)
         
         boroughContainer.addSubview(boroughLabel)
@@ -69,10 +75,6 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         resourcesScrollView.addSubview(verteransButton)
         resourcesScrollView.addSubview(disabilitiesButton)
         resourcesScrollView.addSubview(goButton)
-        
-        speechOrButtonContainer.addSubview(speechOrClickLabel)
-        speechOrButtonContainer.addSubview(speechButtonForContainer)
-        speechOrButtonContainer.addSubview(clickButtonsForContainer)
 
     }
     
@@ -116,7 +118,7 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         self.edgesForExtendedLayout = []
         
         boroughContainer.snp.makeConstraints({ (view) in
-            view.top.equalTo(self.view.snp.top).offset(80)
+            view.top.equalTo(self.view.snp.top).offset(20)
             view.centerX.equalToSuperview()
             view.height.equalToSuperview().multipliedBy(0.4)
             view.width.equalToSuperview().multipliedBy(0.9)

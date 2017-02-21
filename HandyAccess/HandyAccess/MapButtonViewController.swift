@@ -22,11 +22,12 @@ class MapButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIS
     }
     var wheelMapLocationsArr = [WheelMapLocations]()
     let data = [WheelMapLocations]()
+    let color = ColorScheme()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = color._50
         
         setupViewHierarchy()
         setupView()
