@@ -9,16 +9,23 @@
 import UIKit
 
 class FirstShowViewController: UIViewController {
+    
+    let color = ColorScheme()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = color._50
+        self.navigationController?.isNavigationBarHidden = true
 
         setupViewHierarchy()
         setupView()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     func setupViewHierarchy() {
         self.edgesForExtendedLayout = []
         
