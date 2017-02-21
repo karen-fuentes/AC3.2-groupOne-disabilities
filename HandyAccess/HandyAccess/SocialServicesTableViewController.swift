@@ -103,6 +103,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         setupViewHierarchy()
         configureConstraints()
         self.view.backgroundColor = UIColor.white
+        self.navigationController?.isNavigationBarHidden = false
         if let category = titleComponents["category"], let borough = titleComponents["borough"] {
             self.title = "\(borough) \(category)"
         }
