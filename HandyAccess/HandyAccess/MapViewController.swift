@@ -62,7 +62,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     }
     
     func filterButtonBarButtonPressed() {
-        let buttonViewController = ButtonViewController()
+        let buttonViewController = MapButtonViewController()
         buttonViewController.setMapController(map1: self)
         buttonViewController.modalPresentationStyle = .overCurrentContext
         self.present(buttonViewController, animated: true, completion: nil)
@@ -108,12 +108,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     }
     
     func showModal() {
-        let modalViewController = FirstShowViewController()
-        //let modalViewController = ButtonViewController()
-        //modalViewController.setMapController(map1: self)
+        let modalViewController = MapButtonViewController()
+        //modalViewController.mapView = self
         modalViewController.modalPresentationStyle = .overCurrentContext
-//        present(modalViewController, animated: true, completion: nil)
-        navigationController?.pushViewController(modalViewController, animated: true)
+        present(modalViewController, animated: true, completion: nil)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

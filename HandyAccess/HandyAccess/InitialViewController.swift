@@ -67,6 +67,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         recordButton.isEnabled = false
         self.textViewText = "Welcome to Easy Access. Tap the Red record button to give you local services or resources"
         self.textView.text = self.textViewText
+    
     }
     
     override func viewDidAppear(_ animated: Bool) {

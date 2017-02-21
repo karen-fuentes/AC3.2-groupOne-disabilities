@@ -26,6 +26,8 @@ class MapButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.white
+        
         setupViewHierarchy()
         setupView()
     }
@@ -235,6 +237,7 @@ class MapButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIS
 
             if allData != nil {
                 self.mapView!.refresh(object1: (allData)!)
+                //self.navigationController?.pushViewController(self.mapView!, animated: true)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print("None There")
