@@ -53,9 +53,15 @@ class FirstShowViewController: UIViewController {
             fadeOutView(view: speechOrButtonContainer, hidden: true)
             fadeInView(view: resourcesOrNearBy, hidden: true)
         case resoucesButton:
-            fadeOutView(view: resourcesOrNearBy, hidden: true)
+//            fadeOutView(view: resourcesOrNearBy, hidden: true)
+
             let resoucesButtonVC = ResourcesButtonViewController()
+            
             self.navigationController?.pushViewController(resoucesButtonVC, animated: true)
+        case mapResoucesButton:
+            let mapButtonVC = MapButtonViewController()
+            self.navigationController?.pushViewController(mapButtonVC, animated: true)
+            
 //            fadeInView(view: boroughContainer, hidden: true)
 //            fadeInView(view: resourcesScrollView, hidden: true)
 //        case mapResoucesButton:
