@@ -57,7 +57,18 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
                       "personal_finance_financial_education",
                       "professional_association",
     */
-    var urlComponents = ["borough": "Queens", "category": "aging"]
+    var urlComponents = ["borough": "Queens", "category": "aging"] {
+        didSet {
+            let url = buildUrlWithComponent(self.urlComponents)
+            APIRequestManager.shared.getSocialServices1(endPoint: url) { (socialServices1: [SocialService1]?) in
+                guard let validSocialServices1 = socialServices1 else { return }
+                DispatchQueue.main.async {
+                    self.socialServices1 = validSocialServices1
+                    self.socialSourceTableView.reloadData()
+                }
+            }
+        }
+    }
     var catagoryKeys : [String] {
         get  {
             return self.catagoriesDict.map{$0.key}.sorted(by: <)

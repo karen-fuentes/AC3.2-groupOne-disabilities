@@ -170,72 +170,92 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         button1.snp.makeConstraints({ (view) in
             view.top.equalToSuperview().offset(50)
-            view.width.equalTo(150)
             view.leading.equalTo(20)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button2.snp.makeConstraints({ (view) in
             view.top.equalToSuperview().offset(50)
             view.trailing.equalToSuperview().inset(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button3.snp.makeConstraints({ (view) in
             view.top.equalTo(button1.snp.bottom).offset(30)
-            view.width.equalTo(150)
             view.leading.equalTo(20)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button4.snp.makeConstraints({ (view) in
             view.top.equalTo(button2.snp.bottom).offset(30)
             view.trailing.equalToSuperview().inset(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button5.snp.makeConstraints({ (view) in
             view.top.equalTo(button3.snp.bottom).offset(30)
-            view.width.equalTo(150)
             view.leading.equalTo(20)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button6.snp.makeConstraints({ (view) in
             view.top.equalTo(button4.snp.bottom).offset(30)
             view.trailing.equalToSuperview().inset(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button7.snp.makeConstraints({ (view) in
             view.top.equalTo(button5.snp.bottom).offset(30)
             view.leading.equalTo(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button8.snp.makeConstraints({ (view) in
             view.top.equalTo(button6.snp.bottom).offset(30)
             view.trailing.equalToSuperview().inset(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button9.snp.makeConstraints({ (view) in
             view.top.equalTo(button7.snp.bottom).offset(30)
             view.leading.equalTo(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         button10.snp.makeConstraints({ (view) in
             view.top.equalTo(button8.snp.bottom).offset(30)
             view.trailing.equalToSuperview().inset(20)
-            view.width.equalTo(150)
-            view.height.equalTo(70)
+            view.width.equalToSuperview().multipliedBy(0.333)
+            view.height.equalToSuperview().multipliedBy(0.1)
+            //view.width.equalTo(150)
+            //view.height.equalTo(70)
         })
         
         speechButton.snp.makeConstraints({ (view) in
