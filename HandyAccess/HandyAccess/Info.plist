@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Yes</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>en_US</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,7 +30,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need Permission</string>
+	<string>Always shows your location on the map</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Need Microphone</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
