@@ -9,6 +9,7 @@
 import UIKit
 import Mapbox
 import SnapKit
+import CoreLocation
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapViewDelegate/*UICollectionViewDelegate, UICollectionViewDataSource*/ {
     class MyCustomPointAnnotation: MGLPointAnnotation {
@@ -29,11 +30,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     let cellIdentifier = "ButtonCell"
     var filterString = String()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         locationManager.delegate = self
         mapView.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
         setupViewHierarchy()
         setupView()
@@ -42,6 +47,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         // Remove current annotations
         annotationPointsMap()
         
+
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(filterButtonBarButtonPressed))
         
 //        let pointA = MyCustomPointAnnotation()
@@ -51,6 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
 //        
 //        let myPlaces = [pointA]
 //        mapView.addAnnotations(myPlaces)
+
     }
     
     func filterButtonBarButtonPressed() {
@@ -75,6 +83,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
             
             arrOfAnnotation.append(point)
             mapView.addAnnotation(point)
+            mapView.setCenter(point.coordinate, zoomLevel: 17, animated: false)
+            mapView.selectAnnotation(point, animated: true)
             
         }
         
@@ -123,7 +133,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         let locationValue: CLLocationCoordinate2D = (manager.location?.coordinate)!
         userLatitude =  Float(locationValue.latitude)
         userLongitude = Float(locationValue.longitude)
-        
+       
+    
         let coordinateRegion = CLLocationCoordinate2D(latitude: validLocation.coordinate.latitude, longitude: validLocation.coordinate.longitude)
         mapView.setCenter(coordinateRegion, zoomLevel: 14, animated: true)
         
@@ -191,6 +202,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
+    
+    func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+        
+        
+        for location in wheelMapLocationsArr {
+       
+            if (annotation.title! == location.name) {
+            // Callout height is fixed; width expands to fit its content.
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 50))
+            label.textAlignment = .right
+            label.textColor = UIColor(red: 0.81, green: 0.71, blue: 0.23, alpha: 1)
+            label.text = "Name: \(location.name), Type: \(location.categoryIdentifier), Latitude:\(location.lat), Longitude: \(location.lon)"
+            
+            return label
+            }
+        }
+        return nil
+    }
+    
+    func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+        return UIButton(type: .detailDisclosure)
+    }
+    
+    func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+        // Hide the callout view.
+        mapView.deselectAnnotation(annotation, animated: false)
+        
+        UIAlertView(title: annotation.title!!, message: "A lovely (if touristy) place.", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "OK").show()
+    }
+
+
     
 //    func numberOfSections(in collectionView: UICollectionView) -> Int {
 //        return 1
