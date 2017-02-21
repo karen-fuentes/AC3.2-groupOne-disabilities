@@ -241,7 +241,6 @@
 				TargetAttributes = {
 					9CB279471E579BD600634BD6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = P29FUG645U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -471,11 +470,11 @@
 			baseConfigurationReference = 5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P29FUG645U;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HandyAccess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = c4q.EasyAccessPlease;
+				PRODUCT_BUNDLE_IDENTIFIER = c4q.HandyAccessPlease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -486,11 +485,11 @@
 			baseConfigurationReference = D5B28F5447074BAA85D57B5C /* Pods-HandyAccess.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = P29FUG645U;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HandyAccess/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = c4q.EasyAccessPlease;
+				PRODUCT_BUNDLE_IDENTIFIER = c4q.HandyAccessPlease;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
