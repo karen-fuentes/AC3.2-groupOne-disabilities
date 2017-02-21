@@ -30,12 +30,15 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
     var userLongitude = Float() /*= -73.920822*/
     let cellIdentifier = "ButtonCell"
     var filterString = String()
+    let color = ColorScheme()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         mapView.delegate = self
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.barTintColor = color._50
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -78,10 +81,6 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
     
        
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
     
     func annotationPointsMap() -> [MyCustomPointAnnotation] {
         var arrOfAnnotation = [MyCustomPointAnnotation]()
@@ -94,7 +93,7 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
             
             arrOfAnnotation.append(point)
             mapView.addAnnotation(point)
-            mapView.setCenter(point.coordinate, zoomLevel: 17, animated: false)
+            //mapView.setCenter(point.coordinate, zoomLevel: 13, animated: false)
             mapView.selectAnnotation(point, animated: true)
             
         }
@@ -146,7 +145,7 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
        
     
         let coordinateRegion = CLLocationCoordinate2D(latitude: validLocation.coordinate.latitude, longitude: validLocation.coordinate.longitude)
-        mapView.setCenter(coordinateRegion, zoomLevel: 14, animated: true)
+        mapView.setCenter(coordinateRegion, zoomLevel: 12, animated: true)
         
         let pinAnnotation: MGLPointAnnotation = MGLPointAnnotation()
         pinAnnotation.title = "Hey, Title"
@@ -244,6 +243,10 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
         UIAlertView(title: annotation.title!!, message: "A lovely (if touristy) place.", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "OK").show()
     }
 
+    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+        print(annotation)
+        mapView.selectAnnotation(annotation, animated: true)
+    }
 
     
 //    func numberOfSections(in collectionView: UICollectionView) -> Int {

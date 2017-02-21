@@ -86,13 +86,17 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         setupContrainers()
     }
     
-    func boroughButtonPressed(button: UIButton) {
+    func boroughButtonPressed(button: UIButton){
+        button.showsTouchWhenHighlighted = true
+
         guard let validButtonTitle = button.titleLabel?.text else { return }
         guard let validBorough = self.boroughsDict[validButtonTitle] else { return }
         self.urlComponents["borough"] = validBorough
     }
     
     func resourcesCategoryButtonPressed(button: UIButton) {
+        button.showsTouchWhenHighlighted = true
+        
         guard let validResourcesCategoryTitle = button.titleLabel?.text else { return }
         guard let validCategory = self.categoriesDict[validResourcesCategoryTitle.lowercased()] else { return }
         self.urlComponents["category"] = validCategory
@@ -175,8 +179,9 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         resourcesScrollView.snp.makeConstraints({ (view) in
             view.top.equalTo(self.boroughContainer.snp.bottom).offset(10)
             view.leading.equalTo(boroughContainer.snp.leading)
-            view.height.equalToSuperview().multipliedBy(0.4)
-            view.width.equalTo(1000)
+            view.height.equalToSuperview().multipliedBy(0.6)
+            view.width.equalToSuperview().multipliedBy(0.9)
+            //            view.width.equalTo(1000)
         })
         //resourcesScrollView.isHidden = true
         
@@ -229,7 +234,7 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         
         goButton.snp.makeConstraints({(button) in
             button.centerX.equalToSuperview()
-            button.top.equalTo(educationButton.snp.bottom).offset(20)
+            button.top.equalTo(housingButton.snp.bottom).offset(20)
             button.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
             button.height.equalTo(45)
         })
@@ -314,13 +319,11 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         return button
     }()
     
-    internal lazy var resourcesScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = true
+    internal lazy var resourcesScrollView: UIView = {
+        let view = UIView()
         //        scrollView.gestureRecognizerShouldBegin(true)
-        //scrollView.backgroundColor = UIColor.blue
-        scrollView.delegate = self
-        return scrollView
+        //view.backgroundColor = UIColor.blue
+        return view
     }()
     
     internal lazy var resourceLabel: UILabel = {
@@ -340,12 +343,10 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
     
     internal lazy var healthButton: UIButton = {
         let button = UIButton()
-        //button.setTitle("Health", for: .normal)
-        button.setTitle("Go", for: .normal)
+        button.setTitle("Health", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        //button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
-        button.addTarget(self, action: #selector(goButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -387,6 +388,7 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
     
     internal lazy var goButton: UIButton = {
         let button = UIButton()
+        button.backgroundColor = UIColor.red
         button.setTitle("Go", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
