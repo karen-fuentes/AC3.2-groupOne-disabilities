@@ -24,16 +24,15 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     var isAlreadyPushed = false
     //var searchTerm = " "
     
-    let synthesizer = AVSpeechSynthesizer()
     
     var level = 0
     
-    let boroughsDict = ["queens":"Queens",
-                        "brooklyn":"Brooklyn",
-                        "bronx":"Bronx",
-                        "banhatttan":"Manhattan",
-                        "staten Island":"Staten_island",
-                        "all":"All" ]
+    let boroughsDict = ["Queens":"Queens",
+                        "Brooklyn":"Brooklyn",
+                        "Bronx":"Bronx",
+                        "Manhatttan":"Manhattan",
+                        "Staten Island":"Staten_island",
+                        "All":"All" ]
     let catagoriesDict = ["aging" : "aging",
                           "counseling support" : "counseling_support_groups",
                           "disabilities" : "disabilities",
@@ -48,7 +47,17 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                           "youth services" : "youth_services"]
     var urlComponents = ["borough": "Queens", "category": "aging"]
     
-    var textViewText = ""
+    var textViewText = "" {
+        didSet {
+            let synthesizer = AVSpeechSynthesizer()
+            let myUtterance = AVSpeechUtterance(string: self.textViewText)
+            myUtterance.rate = 0.50
+            myUtterance.pitchMultiplier = 1.0
+            myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
+            synthesizer.speak(myUtterance)
+
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +71,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         speechRecognizer.delegate = self
+        let synthesizer = AVSpeechSynthesizer()
         let myUtterance = AVSpeechUtterance(string: "Welcome to Easy Access. Tap the Red record button to give you local services or resources")
         myUtterance.rate = 0.50
         myUtterance.pitchMultiplier = 1.0
@@ -118,25 +128,20 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
             //print("isFinal \(self.isFinal) after entering the speechRecognizer; suppose to be false")
             if let result = result {
                 let results = result.bestTranscription.formattedString
-                self.textView.text = result.bestTranscription.formattedString
+                //self.textView.text = result.bestTranscription.formattedString
                 self.isFinal = result.isFinal
                 //print("\(self.isFinal) when do self.isFinal = result.isFinal")
                 //if results == "Resources" || results == "Resource"{
                 if (results.lowercased().contains("resources") || results.lowercased().contains("resource")) && self.level == 0 {
                     if self.isAlreadyPushed == false {
-                        self.textViewText = "Which resources would you like? Queens, Brooklyn,Bronx, Manhatttan, Staten Island or All?"
-                        self.textView.text = self.textViewText
-                        let myUtterance = AVSpeechUtterance(string: self.textViewText)
-                        myUtterance.rate = 0.50
-                        myUtterance.pitchMultiplier = 1.0
-                        myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
-                        self.synthesizer.speak(myUtterance)
-                        //self.audioEngine.stop()
-                        //self.recognitionRequest?.endAudio()
-                        //self.recordButton.isEnabled = false
-                        //self.recordButton.setTitle("Stopping", for: .disabled)
+                        self.audioEngine.stop()
+                        self.recognitionRequest?.endAudio()
+                        self.recordButton.isEnabled = false
+                        self.recordButton.setTitle("Stopping", for: .disabled)
                         self.isAlreadyPushed = true
                         self.level += 1
+                        self.textViewText = "Okay, I got resources. Which borough's resources would you like? Queens, Brooklyn, Bronx, Manhattan, Staten Island or All?"
+                        self.textView.text = self.textViewText
                     }
                 
                 //} else if results == "Local service" || results == "Local services" {
@@ -151,28 +156,24 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                     }
                     
                 } else if self.level == 1 && self.isAlreadyPushed == false {
-                        let boroughsArr = [ "queens",
-                                            "brooklyn",
-                                            "bronx",
-                                            "manhatttan",
-                                            "staten island",
-                                            "all"]
+                        let boroughsArr = [ "Queens",
+                                            "Brooklyn",
+                                            "Bronx",
+                                            "Manhattan",
+                                            "Staten Island",
+                                            "All"]
                     for borough in boroughsArr {
-                        if results.lowercased().contains(borough) {
+                        if results.lowercased().contains(borough.lowercased()) {
                             self.urlComponents["borough"] = self.boroughsDict[borough]
+                            dump(self.urlComponents)
                             self.level += 1
-                            self.textViewText = "Which resources would you like? Aging, Counseling Support, Disabilities, Education, Health, Housing, Immigration, Job Training, Legal Services, Veterans, Victim Services, Youth Services?"
-                            self.textView.text = self.textViewText
-                            let myUtterance = AVSpeechUtterance(string: self.textViewText)
-                            myUtterance.rate = 0.50
-                            myUtterance.pitchMultiplier = 1.0
-                            myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
-                            self.synthesizer.speak(myUtterance)
-                            //self.audioEngine.stop()
-                            //self.recognitionRequest?.endAudio()
-                            //self.recordButton.isEnabled = false
-                            //self.recordButton.setTitle("Stopping", for: .disabled)
+                            self.audioEngine.stop()
+                            self.recognitionRequest?.endAudio()
+                            self.recordButton.isEnabled = false
+                            self.recordButton.setTitle("Stopping", for: .disabled)
                             self.isAlreadyPushed = true
+                            self.textViewText = "Okay! I got \(borough). Which resources would you like? Aging, Counseling Support, Disabilities, Education, Health, Housing, Immigration, Job Training, Legal Services, Veterans, Victim Services or Youth Services?"
+                            self.textView.text = self.textViewText
                         }
                     }
                 } else if self.level == 2 && self.isAlreadyPushed == false {
@@ -180,6 +181,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                     for category in categoryArr {
                         if results.lowercased().contains(category) {
                             self.urlComponents["category"] = self.catagoriesDict[category]
+                            dump(self.urlComponents)
                             let socialServicesTableViewController = SocialServicesTableViewController()
                             socialServicesTableViewController.urlComponents = self.urlComponents
                             self.navigationController?.pushViewController(socialServicesTableViewController, animated: true)
@@ -193,7 +195,6 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                 }
             }
             self.recordButton.isEnabled = true
-            self.isAlreadyPushed = false
             //print("isFinal \(self.isFinal) after resetting record button to true, suppose to be true")
             
             if error != nil || self.isFinal == true {
@@ -284,6 +285,22 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
             recordButton.isEnabled = false
             recordButton.setTitle("Stopping", for: .disabled)
         } else {
+//            if self.level == 0 {
+//                let synthesizer = AVSpeechSynthesizer()
+//                let myUtterance = AVSpeechUtterance(string: self.textViewText)
+//                myUtterance.rate = 0.50
+//                myUtterance.pitchMultiplier = 1.0
+//                myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
+//                synthesizer.speak(myUtterance)
+//            } else if self.level == 1 {
+//                let synthesizer = AVSpeechSynthesizer()
+//                let myUtterance = AVSpeechUtterance(string: self.textViewText)
+//                myUtterance.rate = 0.50
+//                myUtterance.pitchMultiplier = 1.0
+//                myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
+//                synthesizer.speak(myUtterance)
+//            }
+            
             try! startRecording()
             recordButton.setTitle("Stop recording", for: [])
         }
@@ -301,7 +318,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         let text = UITextView()
         //text.backgroundColor = .blue
         //text.font = UIFont(name: "system", size: 40.0)
-        text.font = UIFont.systemFont(ofSize: 30.0)
+        text.font = UIFont.systemFont(ofSize: 28.0)
         text.isUserInteractionEnabled = false
         return text
     }()
