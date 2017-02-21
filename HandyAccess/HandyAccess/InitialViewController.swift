@@ -48,13 +48,16 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                           "youth services" : "youth_services"]
     var urlComponents = ["borough": "Queens", "category": "aging"]
     
+    var textViewText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewHiearchy()
         configureConstraints()
         self.view.backgroundColor = .white
         recordButton.isEnabled = false
-        self.textView.text = "Welcome to Easy Access. Tap the Red record button to give you local services or resources"
+        self.textViewText = "Welcome to Easy Access. Tap the Red record button to give you local services or resources"
+        self.textView.text = self.textViewText
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,8 +124,9 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                 //if results == "Resources" || results == "Resource"{
                 if (results.lowercased().contains("resources") || results.lowercased().contains("resource")) && self.level == 0 {
                     if self.isAlreadyPushed == false {
-                        self.textView.text = "Which resources would you like? Queens, Brooklyn,Bronx, Manhatttan, Staten Island or All?"
-                        let myUtterance = AVSpeechUtterance(string: "Which resources would you like? Queens, Brooklyn,Bronx, Manhatttan, Staten Island or All?")
+                        self.textViewText = "Which resources would you like? Queens, Brooklyn,Bronx, Manhatttan, Staten Island or All?"
+                        self.textView.text = self.textViewText
+                        let myUtterance = AVSpeechUtterance(string: self.textViewText)
                         myUtterance.rate = 0.50
                         myUtterance.pitchMultiplier = 1.0
                         myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
@@ -157,8 +161,9 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                         if results.lowercased().contains(borough) {
                             self.urlComponents["borough"] = self.boroughsDict[borough]
                             self.level += 1
-                            let myUtterance = AVSpeechUtterance(string: "Which resources would you like? Aging, Counseling Support, Disabilities, Education, Health, Housing, Immigration, Job Training, Legal Services, Veterans, Victim Services, Youth Services")
-                            self.textView.text = "Which resources would you like? Aging, Counseling Support, Disabilities, Education, Health, Housing, Immigration, Job Training, Legal Services, Veterans, Victim Services, Youth Services"
+                            self.textViewText = "Which resources would you like? Aging, Counseling Support, Disabilities, Education, Health, Housing, Immigration, Job Training, Legal Services, Veterans, Victim Services, Youth Services?"
+                            self.textView.text = self.textViewText
+                            let myUtterance = AVSpeechUtterance(string: self.textViewText)
                             myUtterance.rate = 0.50
                             myUtterance.pitchMultiplier = 1.0
                             myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
@@ -212,7 +217,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         try audioEngine.start()
         
-        textView.text = "(Go ahead, I'm listening)"
+        textView.text = self.textViewText + "(Go ahead, I'm listening)"
         textView.font = UIFont.systemFont(ofSize: 30.0)
     }
     
