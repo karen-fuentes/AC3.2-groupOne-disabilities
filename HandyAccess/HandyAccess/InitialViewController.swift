@@ -22,6 +22,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     let audioEngine = AVAudioEngine()
     var isFinal = false
     var isAlreadyPushed = false
+    let color = ColorScheme()
     //var searchTerm = " "
     
     
@@ -61,9 +62,10 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         viewHiearchy()
         configureConstraints()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = color._50
         recordButton.isEnabled = false
         self.textViewText = "Welcome to Easy Access. Tap the Red record button to give you local services or resources"
         self.textView.text = self.textViewText
@@ -320,6 +322,7 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         //text.backgroundColor = .blue
         //text.font = UIFont(name: "system", size: 40.0)
         text.font = UIFont.systemFont(ofSize: 28.0)
+        text.backgroundColor = self.color._50
         text.isUserInteractionEnabled = false
         return text
     }()
