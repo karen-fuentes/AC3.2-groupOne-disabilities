@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mapVC = MapViewController()
         //let eventsVC = EventsViewController()
         let resourcesTVC = SocialServicesTableViewController()
+        let firstShowVC = FirstShowViewController()
         //let profileVc = ProfileFavoritesViewController()
     
         let firstNav = UINavigationController(rootViewController: initialVc)
@@ -60,7 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let navVC = UINavigationController(rootViewController: tabVC)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = tabVC
+        let firstShowNavVC = UINavigationController(rootViewController: firstShowVC)
+        self.window?.rootViewController = firstShowNavVC
         self.window?.makeKeyAndVisible()
         
         //--------For initial View Controller---------

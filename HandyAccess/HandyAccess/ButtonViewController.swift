@@ -28,11 +28,30 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
     }
     var wheelMapLocationsArr = [WheelMapLocations]()
 
-    
     var textSpoken = String()
     let data = [WheelMapLocations]()
     var effect: UIVisualEffect!
 
+    let boroughsDict = ["Queens":"Queens",
+                        "Brooklyn":"Brooklyn",
+                        "Bronx":"Bronx",
+                        "Manhatttan":"Manhattan",
+                        "Staten Island":"Staten_island",
+                        "All":"All" ]
+    let categoriesDict = ["aging" : "aging",
+                          "counseling support" : "counseling_support_groups",
+                          "disabilities" : "disabilities",
+                          "education" : "education",
+                          "health" : "health",
+                          "housing" : "housing",
+                          "immigration" : "immigration",
+                          "job training" : "employment_job_training",
+                          "legal services" : "legal_services",
+                          "veterans" : "veterans_military_families",
+                          "victim services" : "victim_services",
+                          "youth services" : "youth_services"]
+    var urlComponents = ["borough": " ", "category": " "]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -167,8 +186,9 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         resourcesScrollView.addSubview(healthButton)
         resourcesScrollView.addSubview(educationButton)
         resourcesScrollView.addSubview(employmentButton)
-        resourcesScrollView.addSubview(artsCultureButton)
+        resourcesScrollView.addSubview(verteransButton)
         resourcesScrollView.addSubview(disabilitiesButton)
+        resourcesScrollView.addSubview(goButton)
         
         speechOrButtonContainer.addSubview(speechOrClickLabel)
         speechOrButtonContainer.addSubview(speechButtonForContainer)
@@ -192,7 +212,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         })
         
         speechAndButtonContainer()
-        boroughContrainer()
+        setupContrainers()
         
 //        button1.snp.makeConstraints({ (view) in
 //            view.top.equalToSuperview().offset(50)
@@ -292,6 +312,34 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
 //        })
     }
     
+    func boroughButtonPressed(button: UIButton) {
+        guard let validButtonTitle = button.titleLabel?.text else { return }
+        guard let validBorough = self.boroughsDict[validButtonTitle] else { return }
+        self.urlComponents["borough"] = validBorough
+    }
+    
+    func resourcesCategoryButtonPressed(button: UIButton) {
+        guard let validResourcesCategoryTitle = button.titleLabel?.text else { return }
+        guard let validCategory = self.categoriesDict[validResourcesCategoryTitle.lowercased()] else { return }
+        self.urlComponents["category"] = validCategory
+    }
+    
+    func goButtonPressed(button: UIButton) {
+        dump(self.urlComponents)
+        for (key, value) in self.urlComponents {
+            if value == " " {
+                let alertController = UIAlertController(title: "Opps!", message: "Please select a borough and a category", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+                alertController.addAction(okayAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        dump(self.urlComponents)
+        let socialServicesTableViewController = SocialServicesTableViewController()
+        socialServicesTableViewController.urlComponents = self.urlComponents
+        self.navigationController?.pushViewController(socialServicesTableViewController, animated: true)
+    }
+    
     func buttonPressed(button: UIButton) {
         
         switch button {
@@ -382,7 +430,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
     }
     
     
-    func boroughContrainer() {
+    func setupContrainers() {
         self.edgesForExtendedLayout = []
         
         boroughContainer.snp.makeConstraints({ (view) in
@@ -481,7 +529,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
             view.height.equalTo(45)
         })
         
-        artsCultureButton.snp.makeConstraints({ (view) in
+        verteransButton.snp.makeConstraints({ (view) in
             view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
             view.top.equalTo(educationButton.snp.bottom).offset(20)
             view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
@@ -490,9 +538,16 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         
         healthButton.snp.makeConstraints({ (view) in
             view.trailing.equalTo(boroughContainer.snp.trailing).inset(20)
-            view.top.equalTo(artsCultureButton.snp.bottom).offset(20)
+            view.top.equalTo(verteransButton.snp.bottom).offset(20)
             view.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
             view.height.equalTo(45)
+        })
+        
+        goButton.snp.makeConstraints({(button) in
+            button.centerX.equalToSuperview()
+            button.top.equalTo(educationButton.snp.bottom).offset(20)
+            button.width.equalTo(boroughContainer.snp.width).multipliedBy(0.4)
+            button.height.equalTo(45)
         })
     }
     
@@ -684,7 +739,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Queens", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(boroughButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -693,7 +748,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Brooklyn", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(boroughButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -703,7 +758,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
         //        button.backgroundColor?.withAlphaComponent(0.5)
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(boroughButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -712,7 +767,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Staten Island", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(boroughButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -721,7 +776,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Manhattan", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(boroughButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -730,7 +785,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("All", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(boroughButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -754,16 +809,18 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Housing", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
         return button
     }()
     
     internal lazy var healthButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Health", for: .normal)
+        //button.setTitle("Health", for: .normal)
+        button.setTitle("Go", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(goButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -772,7 +829,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Education", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -781,16 +838,16 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Employment", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
         return button
     }()
     
-    internal lazy var artsCultureButton: UIButton = {
+    internal lazy var verteransButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Arts Culture", for: .normal)
+        button.setTitle("Veterans", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -799,11 +856,19 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.setTitle("Disabilities", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.layer.borderWidth = 0.8
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(resourcesCategoryButtonPressed), for: .touchUpInside)
         return button
     }()
     
 
+    internal lazy var goButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Go", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderWidth = 0.8
+        button.addTarget(self, action: #selector(goButtonPressed), for: .touchUpInside)
+        return button
+    }()
     
 //    internal lazy var speechButton: UIButton = {
 //        let button = UIButton()

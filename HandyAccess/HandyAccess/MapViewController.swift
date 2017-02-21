@@ -42,7 +42,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
 
         setupViewHierarchy()
         setupView()
-        showModal()
+        //showModal()
         
         // Remove current annotations
         annotationPointsMap()
@@ -108,11 +108,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     }
     
     func showModal() {
-        
-        let modalViewController = MapButtonViewController()
-        modalViewController.setMapController(map1: self)
+        let modalViewController = FirstShowViewController()
+        //let modalViewController = ButtonViewController()
+        //modalViewController.setMapController(map1: self)
         modalViewController.modalPresentationStyle = .overCurrentContext
-        present(modalViewController, animated: true, completion: nil)
+//        present(modalViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(modalViewController, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
