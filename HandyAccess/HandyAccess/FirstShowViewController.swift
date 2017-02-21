@@ -52,6 +52,7 @@ class FirstShowViewController: UIViewController {
     }
     
     func buttonPressed(button: UIButton) {
+        button.showsTouchWhenHighlighted = true
         switch button {
             //        case speechButtonForContainer:
         //            print("Speech Button pressed")
