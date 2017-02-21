@@ -11,6 +11,8 @@ import SnapKit
 
 class SocialServicesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    let colorScheme = ColorScheme()
+    
     var socialServices1 = [SocialService1]()
     let endpoint = "https://data.cityofnewyork.us/resource/386y-9exk.json?Queens=Y&aging=Y"
     //    var metaViews = [MetaView]()
@@ -18,44 +20,95 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
     //    let endpoint = "https://data.cityofnewyork.us/api/views/69bm-3bc2/rows.json?accessType=DOWNLOAD"
     
     var pickerSelections = [[String]]()
-    let boroughs = ["Queens", "Brooklyn", "Bronx", "Manhattan", "Staten_island", "All" ]
-    let catagories = ["aging",
+    let boroughsDict = ["Queens":"Queens",
+                        "Brooklyn":"Brooklyn",
+                        "Bronx":"Bronx",
+                        "Manhatttan":"Manhattan",
+                        "Staten Island":"Staten_island",
+                        "All":"All" ]
+    let categoriesDict = ["Aging" : "aging",
+                          "Counseling Support" : "counseling_support_groups",
+                          "Disabilities" : "disabilities",
+                          "Education" : "education",
+                          "Health" : "health",
+                          "Housing" : "housing",
+                          "Immigration" : "immigration",
+                          "Job Training" : "employment_job_training",
+                          "Legal Services" : "legal_services",
+                          "Veterans" : "veterans_military_families",
+                          "Victim Services" : "victim_services",
+                          "Youth Services" : "youth_services"]
+    /*
                       "anti_discrimination_human_rights",
                       "arts_culture",
                       "business",
                       "child_care_parent_information",
                       "community_service_volunteerism",
-                      "counseling_support_groups",
-                      "disabilities",
                       "domestic_violence",
-                      "education",
                       "employment_job_training",
-                      "health",
-                      "homelessness",
-                      "housing",
-                      "immigration",
-                      "legal_services",
+                      "Homelessness" : "homelessness",
                       "lesbian_gay_bisexual_and_or_transgender",
                       "new_york_city_agency",
+                      "Nonprofit" : "nonprofit",
                       "none_of_the_above",
-                      "nonprofit",
                       //??"nourl",
                       "other_government_organization",
                       "outsideloc",
                       "personal_finance_financial_education",
                       "professional_association",
-                      "veterans_military_families",
-                      "victim_services",
-                      "youth_services"]
-    var urlComponents = ["borough": "Queens", "category": "aging"]
+    */
+    var urlComponents = ["borough": "Queens", "category": "aging"] {
+        didSet {
+            let url = buildUrlWithComponent(self.urlComponents)
+            APIRequestManager.shared.getSocialServices1(endPoint: url) { (socialServices1: [SocialService1]?) in
+                guard let validSocialServices1 = socialServices1 else { return }
+                DispatchQueue.main.async {
+                    self.socialServices1 = validSocialServices1
+                    self.socialSourceTableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    var titleComponents : [String: String] {
+        get {
+            var titleBorough = ""
+            var titleCategory = ""
+            for (key, value) in categoriesDict {
+                if let category = urlComponents["category"], value == category {
+                    titleCategory = key
+                }
+            }
+            for (key, value) in boroughsDict {
+                if let borough = urlComponents["borough"], value == borough {
+                    titleBorough = key
+                }
+            }
+            return ["borough" : "\(titleBorough)", "category" : "\(titleCategory)"]
+        }
+    }
+    var catagoryKeys : [String] {
+        get  {
+            return self.categoriesDict.map{$0.key}.sorted(by: <)
+        }
+    }
+    var boroughKeys : [String] {
+        get {
+            return self.boroughsDict.map{$0.key}.sorted(by: >)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewHierarchy()
         configureConstraints()
         self.view.backgroundColor = UIColor.white
-        
-        APIRequestManager.shared.getSocialServices1(endPoint: self.endpoint) { (socialServices: [SocialService1]?) in
+        self.navigationController?.isNavigationBarHidden = false
+        if let category = titleComponents["category"], let borough = titleComponents["borough"] {
+            self.title = "\(borough) \(category)"
+        }
+        let url = buildUrlWithComponent(self.urlComponents)
+        APIRequestManager.shared.getSocialServices1(endPoint: url) { (socialServices: [SocialService1]?) in
             guard let validSocialServices = socialServices else { return }
             DispatchQueue.main.async {
                 self.socialServices1 = validSocialServices
@@ -66,20 +119,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         
         self.socialSourceTableView.register(SocialServiceTableViewCell.self, forCellReuseIdentifier: SocialServiceTableViewCell.cellIdentifier)
         
-        pickerSelections = [self.boroughs, self.catagories]
-        //        APIRequestManager.shared.getSocialServicesViews(endPoint: self.endpoint) { (metaViews: [MetaView]?) in
-        //            guard let validMetaViews = metaViews else { return }
-        //            DispatchQueue.main.async {
-        //                self.metaViews = validMetaViews
-        //            }
-        //        }
-        //        APIRequestManager.shared.getSocialServicesData(endPoint: self.endpoint, metaViews: self.metaViews) { (socialServices: [SocialService]?) in
-        //            guard let validSocialServices = socialServices else { return }
-        //            DispatchQueue.main.async {
-        //                self.socialServices = validSocialServices
-        //                self.tableView.reloadData()
-        //            }
-        //        }
+        pickerSelections = [self.boroughKeys, self.catagoryKeys]
     }
     
     private func setupViewHierarchy() {
@@ -88,13 +128,17 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
     }
     
     private func configureConstraints() {
+        self.filterPicker.backgroundColor = self.colorScheme._50
         self.filterPicker.snp.makeConstraints{ (view) in
-            view.top.leading.trailing.equalToSuperview()
+            view.top.equalTo(self.topLayoutGuide.snp.bottom)
+            view.leading.trailing.equalToSuperview()
+            view.height.equalToSuperview().multipliedBy(0.2)
         }
         
         self.socialSourceTableView.snp.makeConstraints { (view) in
             view.top.equalTo(self.filterPicker.snp.bottom)
-            view.bottom.leading.trailing.equalToSuperview()
+            view.leading.trailing.equalToSuperview()
+            view.bottom.equalTo(self.bottomLayoutGuide.snp.top)
         }
     }
     
@@ -119,6 +163,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
             let url = URL(string: urlString) {
             //Do Stuff
         }
+        cell.backgroundColor = self.colorScheme.colorSchemeArr[indexPath.row % self.colorScheme.colorSchemeArr.count]
         return cell
     }
     
@@ -153,15 +198,25 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         
         pickerLabel?.text = pickerSelections[component][row]
         
+        switch component {
+        case 0:
+            pickerLabel?.backgroundColor = self.colorScheme._100
+            //pickerLabel?.backgroundColor = self.colorScheme.colorSchemeArrPickerViewBorough[row % self.colorScheme.colorSchemeArrPickerViewBorough.count]
+        case 1:
+            pickerLabel?.backgroundColor = self.colorScheme._300
+             //pickerLabel?.backgroundColor = self.colorScheme.colorSchemeArrPickerViewCategories[row % self.colorScheme.colorSchemeArrPickerViewCategories.count]
+        default:
+            break
+        }
         return pickerLabel!
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            self.urlComponents["borough"] = self.boroughs[row]
+            self.urlComponents["borough"] = self.boroughsDict[self.boroughKeys[row]]
         case 1:
-            self.urlComponents["category"] = self.catagories[row]
+            self.urlComponents["category"] = self.categoriesDict[self.catagoryKeys[row]]
         default:
             break
         }
@@ -192,6 +247,11 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         return barButton
     }()
     
+    lazy var containerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     lazy var filterPicker: UIPickerView = {
         let pickerView = UIPickerView()
         pickerView.dataSource = self
@@ -207,50 +267,5 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         tableView.dataSource = self
         return tableView
     }()
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
