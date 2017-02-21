@@ -124,13 +124,12 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
         //let modalViewController = ButtonViewController()
         //modalViewController.setMapController(map1: self)
         modalViewController.modalPresentationStyle = .overCurrentContext
-<<<<<<< HEAD
+
         modalViewController.view.backgroundColor = .clear
         present(modalViewController, animated: true, completion: nil)
-=======
+
 //        present(modalViewController, animated: true, completion: nil)
         navigationController?.pushViewController(modalViewController, animated: true)
->>>>>>> 7cb95e97cf98fdbc47862e7973e865715788af34
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
