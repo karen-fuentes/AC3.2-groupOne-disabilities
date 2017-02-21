@@ -44,10 +44,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         setupView()
         showModal()
         
+        // Remove current annotations
         annotationPointsMap()
         
+
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(filterButtonBarButtonPressed))
+        
+//        let pointA = MyCustomPointAnnotation()
+//        pointA.coordinate = CLLocationCoordinate2D(latitude: 40.7420, longitude: -73.9354)
+//        pointA.title = "Stovepipe Wells"
+//        pointA.willUseImage = true
+//        
+//        let myPlaces = [pointA]
+//        mapView.addAnnotations(myPlaces)
+
     }
     
+    func filterButtonBarButtonPressed() {
+        let buttonViewController = ButtonViewController()
+        buttonViewController.setMapController(map1: self)
+        buttonViewController.modalPresentationStyle = .overCurrentContext
+        self.present(buttonViewController, animated: true, completion: nil)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         
     }
@@ -72,7 +92,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
 
     }
     
+    
     public func refresh(object1: [WheelMapLocations]) {
+        // Remove current annotations
+        for annotation in annotations {
+            self.mapView.removeAnnotation(annotation)
+        }
         wheelMapLocationsArr = object1
         annotationPointsMap()
     }

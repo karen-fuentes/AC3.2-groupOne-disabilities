@@ -57,10 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabVC.viewControllers = [firstNav,secondNav,/*thirdNav,*/ fourthNav, /*fifthNav*/]
         
-        let navVC = UINavigationController(rootViewController: tabVC)
+        //let navVC = UINavigationController(rootViewController: tabVC)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = navVC
+        self.window?.rootViewController = tabVC
         self.window?.makeKeyAndVisible()
         
         //--------For initial View Controller---------
