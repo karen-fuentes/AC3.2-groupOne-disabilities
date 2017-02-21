@@ -626,7 +626,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
     
     internal lazy var button5: UIButton = {
         let button = UIButton()
-        button.setTitle("Bank/Post Office", for: .normal)
+        button.setTitle("Banks", for: .normal)
         button.backgroundColor = UIColor.gray
 //        button.backgroundColor?.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
