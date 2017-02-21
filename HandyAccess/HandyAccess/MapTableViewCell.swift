@@ -9,7 +9,6 @@
 import UIKit
 
 class MapTableViewCell: UITableViewCell {
-
         
         static let cellIdentifier = "mapTableViewCellIdentifier"
         
