@@ -43,7 +43,6 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
         setupViewHierarchy()
         setupView()
         //showModal()
-        
         // Remove current annotations
         annotationPointsMap()
         
@@ -219,6 +218,8 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
     }
+    
+    
     
     func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
         
