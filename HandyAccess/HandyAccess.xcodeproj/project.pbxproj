@@ -13,6 +13,8 @@
 		520FA8201E59047D00AE4441 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520FA81F1E59047D00AE4441 /* MapTableViewCell.swift */; };
 		52C866441E58B5E900F0F7CE /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C866431E58B5E900F0F7CE /* Users.swift */; };
 		571B77591E596C870064EA76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 571B77581E596C870064EA76 /* Info.plist */; };
+		57499E791E5CA8D300B078F9 /* MapButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57499E781E5CA8D300B078F9 /* MapButtonViewController.swift */; };
+		57499E7B1E5CAE1600B078F9 /* FirstShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57499E7A1E5CAE1600B078F9 /* FirstShowViewController.swift */; };
 		578298371E58F91200957DFE /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */; };
 		578298391E58FDD800957DFE /* ButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578298381E58FDD800957DFE /* ButtonViewController.swift */; };
 		6C941DA6A184A6B3B8944084 /* Pods_HandyAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20E4356D11DCC426CCC9452F /* Pods_HandyAccess.framework */; };
@@ -48,6 +50,8 @@
 		520FA81F1E59047D00AE4441 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		52C866431E58B5E900F0F7CE /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		571B77581E596C870064EA76 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57499E781E5CA8D300B078F9 /* MapButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapButtonViewController.swift; sourceTree = "<group>"; };
+		57499E7A1E5CAE1600B078F9 /* FirstShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstShowViewController.swift; sourceTree = "<group>"; };
 		578298361E58F91200957DFE /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		578298381E58FDD800957DFE /* ButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonViewController.swift; sourceTree = "<group>"; };
 		5FA80A2FDEB6CAD81D5511EF /* Pods-HandyAccess.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandyAccess.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HandyAccess/Pods-HandyAccess.debug.xcconfig"; sourceTree = "<group>"; };
@@ -152,7 +156,9 @@
 				A78AB76D1E5968250024E9C6 /* SocialServicesDetailViewController.swift */,
 				A70CCD641E5A28BD00CDA655 /* SocialServicesMapViewController.swift */,
 				578298381E58FDD800957DFE /* ButtonViewController.swift */,
+				57499E781E5CA8D300B078F9 /* MapButtonViewController.swift */,
 				A7E4782E1E5CA89000CEA88B /* ResourcesButtonViewController.swift */,
+				57499E7A1E5CAE1600B078F9 /* FirstShowViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 				520FA8201E59047D00AE4441 /* MapTableViewCell.swift in Sources */,
 				A78AB75A1E58AF600024E9C6 /* EventsViewController.swift in Sources */,
 				A78AB7641E58AF600024E9C6 /* SocialServiceTableViewCell.swift in Sources */,
+				57499E791E5CA8D300B078F9 /* MapButtonViewController.swift in Sources */,
 				A78AB76C1E58D90D0024E9C6 /* EventTableViewCell.swift in Sources */,
 				A7E478291E5AC43100CEA88B /* String+Extension.swift in Sources */,
 				520FA81C1E58FDFF00AE4441 /* WheelMapLocations.swift in Sources */,
@@ -348,6 +355,7 @@
 				A78AB7601E58AF600024E9C6 /* ProfileFavoritesViewController.swift in Sources */,
 				A78AB76E1E5968250024E9C6 /* SocialServicesDetailViewController.swift in Sources */,
 				A78AB7621E58AF600024E9C6 /* SocialService.swift in Sources */,
+				57499E7B1E5CAE1600B078F9 /* FirstShowViewController.swift in Sources */,
 				9C44C1411E5A38C3002B1787 /* InitialViewController.swift in Sources */,
 				A78AB75B1E58AF600024E9C6 /* LoginViewController.swift in Sources */,
 				A78AB75E1E58AF600024E9C6 /* NYCEventCalendarModel.swift in Sources */,
