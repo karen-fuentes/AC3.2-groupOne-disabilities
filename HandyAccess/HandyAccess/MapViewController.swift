@@ -122,7 +122,16 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
         let modalViewController = MapButtonViewController()
         //modalViewController.mapView = self
         modalViewController.modalPresentationStyle = .overCurrentContext
+
+
+        modalViewController.view.backgroundColor = .clear
         present(modalViewController, animated: true, completion: nil)
+
+//        present(modalViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(modalViewController, animated: true)
+
+
+
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
