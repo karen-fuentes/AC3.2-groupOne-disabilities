@@ -50,7 +50,7 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         
         view.addSubview(blur)
         view.addSubview(boroughContainer)
-//        view.addSubview(speechOrButtonContainer)
+        view.addSubview(speechOrButtonContainer)
         view.addSubview(resourcesScrollView)
         
         boroughContainer.addSubview(boroughLabel)
@@ -70,9 +70,9 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         resourcesScrollView.addSubview(disabilitiesButton)
         resourcesScrollView.addSubview(goButton)
         
-//        speechOrButtonContainer.addSubview(speechOrClickLabel)
-//        speechOrButtonContainer.addSubview(speechButtonForContainer)
-//        speechOrButtonContainer.addSubview(clickButtonsForContainer)
+        speechOrButtonContainer.addSubview(speechOrClickLabel)
+        speechOrButtonContainer.addSubview(speechButtonForContainer)
+        speechOrButtonContainer.addSubview(clickButtonsForContainer)
 
     }
     

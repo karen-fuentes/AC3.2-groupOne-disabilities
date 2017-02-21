@@ -72,7 +72,8 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
     
     override func viewDidAppear(_ animated: Bool) {
         speechRecognizer.delegate = self
-        
+        effect = self.blur.effect
+        blur.effect = self.effect
         SFSpeechRecognizer.requestAuthorization { authStatus in
             /*
              The callback may not be called on the main thread. Add an

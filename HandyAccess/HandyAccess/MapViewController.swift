@@ -11,12 +11,13 @@ import Mapbox
 import SnapKit
 import CoreLocation
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapViewDelegate/*UICollectionViewDelegate, UICollectionViewDataSource*/ {
+class MapViewController: UIViewController,  UIViewControllerTransitioningDelegate, CLLocationManagerDelegate, MGLMapViewDelegate /*UICollectionViewDelegate, UICollectionViewDataSource*/ {
     class MyCustomPointAnnotation: MGLPointAnnotation {
         var willUseImage: Bool = false
     }
+    let vc = UIViewController.self
     var wheelMapLocationsArr = [WheelMapLocations]()
-    
+    var effect: UIVisualEffect!
     var annotations = [MGLAnnotation]()
     let locationManager: CLLocationManager = {
         let locMan: CLLocationManager = CLLocationManager()
@@ -33,7 +34,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager.delegate = self
         mapView.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -43,14 +43,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         setupViewHierarchy()
         setupView()
         //showModal()
-        
         // Remove current annotations
         annotationPointsMap()
         
 
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(filterButtonBarButtonPressed))
-        
 //        let pointA = MyCustomPointAnnotation()
 //        pointA.coordinate = CLLocationCoordinate2D(latitude: 40.7420, longitude: -73.9354)
 //        pointA.title = "Stovepipe Wells"
@@ -64,8 +62,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     func filterButtonBarButtonPressed() {
         let buttonViewController = MapButtonViewController()
         buttonViewController.setMapController(map1: self)
-        buttonViewController.modalPresentationStyle = .overCurrentContext
+        guard let annotations = mapView.annotations else { return print("Annotations Error") }
+        
+        if annotations.count != 0 {
+            for annotation in annotations {
+                mapView.removeAnnotation(annotation)
+            }
+        } else {
+            return
+        }
+        
+       
+        
         self.present(buttonViewController, animated: true, completion: nil)
+    
+       
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -202,6 +213,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         return true
     }
     
+    
+    
     func mapView(_ mapView: MGLMapView, leftCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
         
         
@@ -281,7 +294,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
         let mapView = MGLMapView()
         return mapView
     }()
-    
+    internal lazy var blur: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: UIBlurEffectStyle.light)
+        var blurEffectView = UIVisualEffectView(effect: blur)
+        return blurEffectView
+    }()
 //    internal lazy var buttonCategoriesCollectionView: UICollectionView = {
 //        let layout = UICollectionViewFlowLayout()
 //        layout.scrollDirection = .horizontal
