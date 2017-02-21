@@ -32,6 +32,18 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
     var urlComponents = ["borough": " ", "category": " "]
     let color = ColorScheme()
     
+    var allBoroughButtons: [UIButton] {
+        get {
+            return [queensButton, brooklynButton, bronxButton, statenIslandButton, manhattanButton, allButton]
+        }
+    }
+    
+    var allCategoryButtons: [UIButton] {
+        get {
+            return [housingButton, healthButton, educationButton, employmentButton, verteransButton, disabilitiesButton]
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -86,8 +98,19 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         setupContrainers()
     }
     
-    func boroughButtonPressed(button: UIButton){
+
+    func boroughButtonPressed(button: UIButton) {
+        
         button.showsTouchWhenHighlighted = true
+        
+        for b in self.allBoroughButtons {
+            if b == button {
+                b.backgroundColor = color._200
+            } else {
+                b.backgroundColor = color._50
+            }
+            
+        }
 
         guard let validButtonTitle = button.titleLabel?.text else { return }
         guard let validBorough = self.boroughsDict[validButtonTitle] else { return }
@@ -95,8 +118,18 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func resourcesCategoryButtonPressed(button: UIButton) {
+
         button.showsTouchWhenHighlighted = true
         
+
+        for b in self.allCategoryButtons {
+            if b == button {
+                b.backgroundColor = color._200
+            } else {
+                b.backgroundColor = color._50
+            }
+        }
+
         guard let validResourcesCategoryTitle = button.titleLabel?.text else { return }
         guard let validCategory = self.categoriesDict[validResourcesCategoryTitle.lowercased()] else { return }
         self.urlComponents["category"] = validCategory

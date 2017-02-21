@@ -265,6 +265,7 @@ class SocialServicesTableViewController: UIViewController, UITableViewDelegate, 
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = self.colorScheme._50
         return tableView
     }()
     
