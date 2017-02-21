@@ -43,9 +43,9 @@ class ResourcesButtonViewController: UIViewController, UIScrollViewDelegate {
         configureConstraints()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = true
-    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        navigationController?.isNavigationBarHidden = true
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

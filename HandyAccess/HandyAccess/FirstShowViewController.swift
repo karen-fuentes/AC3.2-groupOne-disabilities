@@ -64,6 +64,8 @@ class FirstShowViewController: UIViewController {
             self.navigationController?.pushViewController(initialVC, animated: true)
         case resoucesButton:
 //            fadeOutView(view: resourcesOrNearBy, hidden: true)
+            fadeOutView(view: resourcesOrNearBy, hidden: true)
+            fadeInView(view: speechOrButtonContainer, hidden: true)
 
             let resoucesButtonVC = ResourcesButtonViewController()
             
@@ -73,6 +75,8 @@ class FirstShowViewController: UIViewController {
 //            let mapButtonVC = MapButtonViewController()
 //            mapButtonVC.setMapController(map1: mapView)
 //            self.navigationController?.pushViewController(mapButtonVC, animated: true)
+            fadeOutView(view: resourcesOrNearBy, hidden: true)
+            fadeInView(view: speechOrButtonContainer, hidden: true)
             let mapVC = MapViewController()
             self.navigationController?.pushViewController(mapVC, animated: true)
             
