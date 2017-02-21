@@ -109,7 +109,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MGLMapView
     
     func showModal() {
         
-        let modalViewController = ButtonViewController()
+        let modalViewController = MapButtonViewController()
         modalViewController.setMapController(map1: self)
         modalViewController.modalPresentationStyle = .overCurrentContext
         present(modalViewController, animated: true, completion: nil)

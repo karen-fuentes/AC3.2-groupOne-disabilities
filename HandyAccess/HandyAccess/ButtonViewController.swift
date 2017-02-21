@@ -802,6 +802,7 @@ class ButtonViewController: UIViewController, SFSpeechRecognizerDelegate, UIScro
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         return button
     }()
+    
 
     
 //    internal lazy var speechButton: UIButton = {
