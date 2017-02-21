@@ -24,19 +24,44 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     var isAlreadyPushed = false
     //var searchTerm = " "
     
+    let synthesizer = AVSpeechSynthesizer()
+    
+    var level = 0
+    
+    let boroughsDict = ["queens":"Queens",
+                        "brooklyn":"Brooklyn",
+                        "bronx":"Bronx",
+                        "banhatttan":"Manhattan",
+                        "staten Island":"Staten_island",
+                        "all":"All" ]
+    let catagoriesDict = ["aging" : "aging",
+                          "counseling support" : "counseling_support_groups",
+                          "disabilities" : "disabilities",
+                          "education" : "education",
+                          "health" : "health",
+                          "housing" : "housing",
+                          "immigration" : "immigration",
+                          "job training" : "employment_job_training",
+                          "legal services" : "legal_services",
+                          "veterans" : "veterans_military_families",
+                          "victim services" : "victim_services",
+                          "youth services" : "youth_services"]
+    var urlComponents = ["borough": "Queens", "category": "aging"]
+    
+    var textViewText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewHiearchy()
         configureConstraints()
+        self.view.backgroundColor = .white
         recordButton.isEnabled = false
+        self.textViewText = "Welcome to Easy Access. Tap the Red record button to give you local services or resources"
+        self.textView.text = self.textViewText
     }
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         speechRecognizer.delegate = self
-        let synthesizer = AVSpeechSynthesizer()
         let myUtterance = AVSpeechUtterance(string: "Welcome to Easy Access. Tap the Red record button to give you local services or resources")
         myUtterance.rate = 0.50
         myUtterance.pitchMultiplier = 1.0
@@ -90,23 +115,32 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
             self.isFinal = false
-            print("isFinal \(self.isFinal) after entering the speechRecognizer; suppose to be false")
+            //print("isFinal \(self.isFinal) after entering the speechRecognizer; suppose to be false")
             if let result = result {
                 let results = result.bestTranscription.formattedString
                 self.textView.text = result.bestTranscription.formattedString
                 self.isFinal = result.isFinal
-                print("\(self.isFinal) when do self.isFinal = result.isFinal")
-                if results == "Resources" || results == "Resource"{
+                //print("\(self.isFinal) when do self.isFinal = result.isFinal")
+                //if results == "Resources" || results == "Resource"{
+                if (results.lowercased().contains("resources") || results.lowercased().contains("resource")) && self.level == 0 {
                     if self.isAlreadyPushed == false {
-                        self.navigationController?.pushViewController(SocialServicesTableViewController(), animated: true)
-                        self.audioEngine.stop()
-                        self.recognitionRequest?.endAudio()
-                        self.recordButton.isEnabled = false
-                        self.recordButton.setTitle("Stopping", for: .disabled)
+                        self.textViewText = "Which resources would you like? Queens, Brooklyn,Bronx, Manhatttan, Staten Island or All?"
+                        self.textView.text = self.textViewText
+                        let myUtterance = AVSpeechUtterance(string: self.textViewText)
+                        myUtterance.rate = 0.50
+                        myUtterance.pitchMultiplier = 1.0
+                        myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
+                        self.synthesizer.speak(myUtterance)
+                        //self.audioEngine.stop()
+                        //self.recognitionRequest?.endAudio()
+                        //self.recordButton.isEnabled = false
+                        //self.recordButton.setTitle("Stopping", for: .disabled)
                         self.isAlreadyPushed = true
+                        self.level += 1
                     }
                 
-                } else if results == "Local service" || results == "Local services" {
+                //} else if results == "Local service" || results == "Local services" {
+                } else if (results.lowercased().contains("local service") || results.lowercased().contains("local services")) && self.level == 0 {
                     if self.isAlreadyPushed == false {
                     self.navigationController?.pushViewController(MapViewController(), animated: true)
                         self.audioEngine.stop()
@@ -115,10 +149,52 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
                         self.recordButton.setTitle("Stopping", for: .disabled)
                         self.isAlreadyPushed = true
                     }
+                    
+                } else if self.level == 1 && self.isAlreadyPushed == false {
+                        let boroughsArr = [ "queens",
+                                            "brooklyn",
+                                            "bronx",
+                                            "manhatttan",
+                                            "staten island",
+                                            "all"]
+                    for borough in boroughsArr {
+                        if results.lowercased().contains(borough) {
+                            self.urlComponents["borough"] = self.boroughsDict[borough]
+                            self.level += 1
+                            self.textViewText = "Which resources would you like? Aging, Counseling Support, Disabilities, Education, Health, Housing, Immigration, Job Training, Legal Services, Veterans, Victim Services, Youth Services?"
+                            self.textView.text = self.textViewText
+                            let myUtterance = AVSpeechUtterance(string: self.textViewText)
+                            myUtterance.rate = 0.50
+                            myUtterance.pitchMultiplier = 1.0
+                            myUtterance.voice = AVSpeechSynthesisVoice.init(language: "en-US")
+                            self.synthesizer.speak(myUtterance)
+                            //self.audioEngine.stop()
+                            //self.recognitionRequest?.endAudio()
+                            //self.recordButton.isEnabled = false
+                            //self.recordButton.setTitle("Stopping", for: .disabled)
+                            self.isAlreadyPushed = true
+                        }
+                    }
+                } else if self.level == 2 && self.isAlreadyPushed == false {
+                    let categoryArr = ["aging", "counseling support", "disabilities", "education", "health", "housing", "immigration", "job training", "legal services", "veterans", "victim services", "youth services"]
+                    for category in categoryArr {
+                        if results.lowercased().contains(category) {
+                            self.urlComponents["category"] = self.catagoriesDict[category]
+                            let socialServicesTableViewController = SocialServicesTableViewController()
+                            socialServicesTableViewController.urlComponents = self.urlComponents
+                            self.navigationController?.pushViewController(socialServicesTableViewController, animated: true)
+                            self.audioEngine.stop()
+                            self.recognitionRequest?.endAudio()
+                            self.recordButton.isEnabled = false
+                            self.recordButton.setTitle("Stopping", for: .disabled)
+                            self.isAlreadyPushed = true
+                        }
+                    }
                 }
             }
             self.recordButton.isEnabled = true
-            print("isFinal \(self.isFinal) after resetting record button to true, suppose to be true")
+            self.isAlreadyPushed = false
+            //print("isFinal \(self.isFinal) after resetting record button to true, suppose to be true")
             
             if error != nil || self.isFinal == true {
                 
@@ -141,10 +217,9 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         
         try audioEngine.start()
         
-        textView.text = "(Go ahead, I'm listening)"
+        textView.text = self.textViewText + "(Go ahead, I'm listening)"
         textView.font = UIFont.systemFont(ofSize: 30.0)
     }
-    
     
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
@@ -160,40 +235,47 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
         self.edgesForExtendedLayout = []
         self.view.addSubview(textView)
         self.view.addSubview(recordButton)
-        //        self.view.addSubview(buttonContainer)
-        //        self.buttonContainer.addSubview(resourcesButton)
-        //        self.buttonContainer.addSubview(serviceButton)
+        //self.view.addSubview(textView)
+        //self.view.addSubview(buttonContainer)
+        //self.buttonContainer.addSubview(resourcesButton)
+        //self.buttonContainer.addSubview(serviceButton)
     }
     
     func configureConstraints() {
         textView.snp.makeConstraints { (view) in
             view.top.leading.trailing.equalToSuperview()
-            view.bottom.equalToSuperview().inset(50.0)
+            view.bottom.equalTo(self.recordButton.snp.top)
+            //view.bottom.equalToSuperview().inset(50.0)
             
         }
         recordButton.snp.makeConstraints { (button) in
             button.leading.trailing.bottom.equalToSuperview()
             button.top.equalTo(textView.snp.bottom)
         }
-        //        buttonContainer.snp.makeConstraints { (container) in
-        //            container.top.bottom.leading.trailing.equalToSuperview()
-        //        }
-        //        resourcesButton.snp.makeConstraints { (button) in
-        //            button.leading.trailing.top.equalToSuperview()
-        //            button.height.equalToSuperview().multipliedBy(0.4)
-        //        }
-        //        serviceButton.snp.makeConstraints { (button) in
-        //            button.leading.trailing.equalToSuperview()
-        //            button.bottom.equalToSuperview().inset(8.0)
-        //            button.height.equalToSuperview().multipliedBy(0.4)
-        //        }
+        //textView.snp.makeConstraints { (view) in
+        //    view.top.leading.trailing.equalToSuperview()
+        //    view.bottom.equalToSuperview().inset(50.0)
         //
+        //}
+        //buttonContainer.snp.makeConstraints { (container) in
+        //    container.top.bottom.leading.trailing.equalToSuperview()
+        //}
+        //resourcesButton.snp.makeConstraints { (button) in
+        //    button.leading.trailing.top.equalToSuperview()
+        //    button.height.equalToSuperview().multipliedBy(0.4)
+        //}
+        //serviceButton.snp.makeConstraints { (button) in
+        //    button.leading.trailing.equalToSuperview()
+        //    button.bottom.equalToSuperview().inset(8.0)
+        //    button.height.equalToSuperview().multipliedBy(0.4)
+        //}
+        
     }
     
     // MARK: - Button Function
     
     func recordButtonWasTapped() {
-        print("I'm trapped")
+        //print("I'm trapped")
         self.isAlreadyPushed = false
         
         if audioEngine.isRunning {
@@ -209,10 +291,17 @@ class InitialViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     
     // MARK: -  UI Objects
+    //lazy var siriSpeachLabel: UILabel = {
+    //   let label = UILabel()
+    //    label.numberOfLines = 0
+    //    return label
+    //}()
+    
     lazy var textView: UITextView = {
         let text = UITextView()
         //text.backgroundColor = .blue
-        text.font = UIFont(name: "system", size: 40.0)
+        //text.font = UIFont(name: "system", size: 40.0)
+        text.font = UIFont.systemFont(ofSize: 30.0)
         text.isUserInteractionEnabled = false
         return text
     }()
