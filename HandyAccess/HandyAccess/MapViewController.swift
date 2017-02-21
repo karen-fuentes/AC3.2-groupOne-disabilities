@@ -48,6 +48,7 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
         annotationPointsMap()
         
 
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(filterButtonBarButtonPressed))
 //        let pointA = MyCustomPointAnnotation()
 //        pointA.coordinate = CLLocationCoordinate2D(latitude: 40.7420, longitude: -73.9354)
@@ -56,6 +57,7 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
 //        
 //        let myPlaces = [pointA]
 //        mapView.addAnnotations(myPlaces)
+
     }
     
     func filterButtonBarButtonPressed() {
@@ -118,7 +120,6 @@ class MapViewController: UIViewController,  UIViewControllerTransitioningDelegat
     }
     
     func showModal() {
-        
         let modalViewController = ButtonViewController()
         modalViewController.setMapController(map1: self)
         modalViewController.modalPresentationStyle = .overCurrentContext
