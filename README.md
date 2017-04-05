@@ -6,8 +6,7 @@ This is an app that provides many services to Disabled people. It allows the use
 
 
 ## LoginViewController
-
-![LoginViewController](./Images/LoginViewController.jpeg)
+![alt text](https://github.com/karen-fuentes/AC3.2-groupOne-disabilities/blob/master/Images/NYC-HandyAccess_EventsVC.jpg)
 
 ## MapViewController
 
