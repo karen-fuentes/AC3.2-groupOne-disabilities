@@ -5,22 +5,3 @@ This is an app that provides many services to Disabled people. It allows the use
 <img src="https://github.com/karen-fuentes/AC3.2-groupOne-disabilities/blob/master/Images/navigation.gif" width="320" />
 
 
-## LoginViewController
-![alt text](https://github.com/karen-fuentes/AC3.2-groupOne-disabilities/blob/master/Images/NYC-HandyAccess_EventsVC.jpg)
-
-## MapViewController
-
-![MapViewController](./Images/MapViewController.jpeg)
-
-## EventsViewController
-
-![EventsViewController](./Images/EventViewController.jpeg)
-
-
-## ResourcesViewController
-
-![ResourcesViewController](./Images/ResourcesViewController.jpeg)
-
-## ProfileViewController
-
-![ProfileViewController](./Images/ProfileViewController.jpeg)
